@@ -19,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.zly.diycode.R;
 import com.zly.diycode.databinding.ActivityMainBinding;
@@ -66,7 +67,8 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView.Adapter mNewsAdapter = new RecyclerView.Adapter() {
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new NewViewHolder(getLayoutInflater().inflate(R.layout.item_topics, parent, false));
+            final ViewDataBinding inflate = DataBindingUtil.inflate(getLayoutInflater(), R.layout.item_topics, parent, false);
+            return new NewViewHolderDataBinding<>(inflate);
         }
 
         @Override
@@ -79,10 +81,17 @@ public class MainActivity extends AppCompatActivity
             return 20;
         }
 
-        class NewViewHolder extends RecyclerView.ViewHolder {
+        class NewViewHolderDataBinding<T extends ViewDataBinding> extends RecyclerView.ViewHolder {
 
-            public NewViewHolder(View itemView) {
-                super(itemView);
+            private T dataBinding;
+
+            public NewViewHolderDataBinding(T dataBinding) {
+                super(dataBinding.getRoot());
+                this.dataBinding = dataBinding;
+            }
+
+            public T getDataBinding() {
+                return dataBinding;
             }
         }
     };

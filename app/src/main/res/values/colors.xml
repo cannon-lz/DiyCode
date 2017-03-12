@@ -8,4 +8,5 @@
     <color name="textColorPrimary">@color/colorPrimaryDark</color>
     <color name="textColorFeeble">#666666</color>
     <color name="textColorPowerful">#000000</color>
+    <color name="itemPressedColor">#66000000</color>
 </resources>

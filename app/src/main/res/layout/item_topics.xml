@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="22dp">
+<layout>
 
-    <LinearLayout
-        android:id="@+id/ll"
-        android:layout_width="351dp"
+    <data>
+
+        <variable
+            name="topics"
+            type="com.zly.diycode.main.Topics" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:background="@drawable/item_background"
+        android:clickable="true"
+        android:padding="16dp">
+
 
         <TextView
             android:id="@+id/tv_user"
@@ -25,78 +28,56 @@
             android:text="zhangxiaoya"
             android:textColor="@color/textColorPrimary"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:textColor="@color/textColorPowerful" />
 
         <TextView
             android:id="@+id/tv_node"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="51dp"
-            android:layout_marginStart="51dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:text="android"
             android:textColor="@color/textColorFeeble"
-            app:layout_constraintLeft_toRightOf="@+id/tv_user"
-            app:layout_constraintTop_toTopOf="@+id/tv_user" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_user"
+            app:layout_constraintLeft_toRightOf="@+id/tv_user" />
 
         <TextView
             android:id="@+id/tv_pulish_time"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:gravity="end"
             android:text="24分钟前"
             android:textColor="@color/textColorFeeble"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_node" />
 
-    </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="16dp"
+            android:text="ContentContentContentContentContentContentContentContentContentContentContentContentContentContent"
+            android:textColor="@color/textColorPowerful"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_user"
+            app:layout_constraintTop_toBottomOf="@+id/tv_user" />
 
-    <TextView
-        android:id="@+id/tv_content"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:text="ContentContentContentContentContentContentContentContentContentContentContentContentContentContent"
-        android:textColor="@color/textColorPowerful"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="@+id/ll"
-        app:layout_constraintRight_toRightOf="@+id/ll"
-        app:layout_constraintTop_toBottomOf="@+id/ll" />
-
-    <ToggleButton
-        android:id="@+id/ib_collect"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/selector_collect"
-        android:textOff="@null"
-        android:textOn="@null"
-        app:layout_constraintRight_toRightOf="@+id/tv_content"
-        app:layout_constraintTop_toBottomOf="@+id/tv_stick" />
-
-    <ToggleButton
-        android:id="@+id/ib_favour"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:layout_marginEnd="26dp"
-        android:layout_marginRight="26dp"
-        android:background="@drawable/selector_favorite"
-        android:textOff="@null"
-        android:textOn="@null"
-        app:layout_constraintRight_toLeftOf="@+id/ib_collect"
-        app:layout_constraintTop_toTopOf="@+id/ib_collect" />
-
-    <TextView
-        android:id="@+id/tv_stick"
-        android:layout_width="351dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="27dp"
-        android:background="@drawable/shape_stroke_co"
-        android:padding="8dp"
-        android:text="TextView"
-        app:layout_constraintLeft_toLeftOf="@+id/tv_content"
-        app:layout_constraintTop_toBottomOf="@+id/tv_content" />
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_stick"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_stroke_co"
+            android:padding="8dp"
+            android:text="TextView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_content" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

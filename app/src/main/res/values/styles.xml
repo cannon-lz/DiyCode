@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="buttonStyle">@style/Button</item>
+        <item name="android:itemBackground">@drawable/item_background</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
