@@ -7,9 +7,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import com.zly.diycode.main.MainActivity;
 import com.zly.diycode.R;
-import com.zly.diycode.databinding.LoginActivityBinding;
+import com.zly.diycode.databinding.ActivityLoginBinding;
+import com.zly.diycode.main.MainActivity;
 
 /**
  * Created by zhangly on 2017/3/11.
@@ -17,12 +17,12 @@ import com.zly.diycode.databinding.LoginActivityBinding;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private LoginActivityBinding mDataBinding;
+    private ActivityLoginBinding mDataBinding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDataBinding = DataBindingUtil.setContentView(this, R.layout.login_activity);
+        mDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         mDataBinding.setClickHandler(new ClickHandler());
         mDataBinding.setUser(new User());
     }

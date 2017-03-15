@@ -1,5 +1,6 @@
 package com.zly.diycode.main;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -88,6 +89,12 @@ public class MainActivity extends AppCompatActivity
             public NewViewHolderDataBinding(T dataBinding) {
                 super(dataBinding.getRoot());
                 this.dataBinding = dataBinding;
+                dataBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(MainActivity.this, TopicsDetailActivity.class));
+                    }
+                });
             }
 
             public T getDataBinding() {
