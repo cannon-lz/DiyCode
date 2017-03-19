@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Html;
 import android.text.Spanned;
@@ -74,6 +75,9 @@ public class TopicsDetailActivity extends AppCompatActivity {
         }
         String content = setupWebContent(CONTENT, true, true, "");
         wvWebView.loadDataWithBaseURL("", content, "text/html", "UTF-8", "");
+        setSupportActionBar(mDataBinding.toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private static String setupWebContent(String content, boolean isShowHighlight,

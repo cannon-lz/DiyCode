@@ -1,31 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
         <variable
-            name="topics"
+            name="position"
+            type="Integer"/>
+
+        <variable
+            name="item"
             type="com.zly.diycode.main.Topics" />
+
+        <variable
+            name="presenter"
+            type="com.zly.diycode.main.TopicsFragment.OnItemClickListener" />
     </data>
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/item_background"
         android:clickable="true"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:onClick="@{() -> presenter.onItemClick(item, position)}">
 
 
         <TextView
             android:id="@+id/tv_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_menu_camera"
+            android:drawableLeft="@{item.userPhoto}"
             android:drawablePadding="12dp"
             android:gravity="center"
-            android:text="zhangxiaoya"
+            android:text="@{item.username}"
             android:textColor="@color/textColorPrimary"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,9 +48,9 @@
             android:id="@+id/tv_node"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="24dp"
             android:layout_marginStart="16dp"
-            android:text="android"
+            android:text="@{item.note}"
             android:textColor="@color/textColorFeeble"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_user"
             app:layout_constraintLeft_toRightOf="@+id/tv_user" />
@@ -46,9 +59,13 @@
             android:id="@+id/tv_pulish_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="0dp"
             android:gravity="end"
-            android:text="24分钟前"
+            android:text="@{item.pulishDate}"
             android:textColor="@color/textColorFeeble"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_node"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_node" />
 
@@ -59,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="16dp"
-            android:text="ContentContentContentContentContentContentContentContentContentContentContentContentContentContent"
+            android:text="@{item.content}"
             android:textColor="@color/textColorPowerful"
             android:textSize="16sp"
             app:layout_constraintLeft_toLeftOf="@+id/tv_user"
@@ -71,10 +88,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="0dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/shape_stroke_co"
             android:padding="8dp"
-            android:text="TextView"
+            android:text="@{item.subContent}"
+            android:visibility="@{TextUtils.isEmpty(item.subContent) ? View.GONE : View.VISIBLE}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_content" />
