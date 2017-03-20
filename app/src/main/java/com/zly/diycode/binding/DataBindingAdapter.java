@@ -5,6 +5,7 @@ import android.databinding.BindingAdapter;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -29,5 +30,11 @@ public class DataBindingAdapter {
                 textView.setCompoundDrawables(bitmapDrawable, compoundDrawables[1], compoundDrawables[2], compoundDrawables[3]);
             }
         });
+    }
+
+    @BindingAdapter({"app:adapter", "app:layoutManager"})
+    public static void setAdapterAndLayoutManager(RecyclerView recyclerView, RecyclerView.Adapter adapter, RecyclerView.LayoutManager manager) {
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(manager);
     }
 }

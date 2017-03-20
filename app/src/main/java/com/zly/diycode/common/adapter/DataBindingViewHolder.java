@@ -1,4 +1,4 @@
-package com.zly.diycode.common;
+package com.zly.diycode.common.adapter;
 
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;

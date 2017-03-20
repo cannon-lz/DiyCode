@@ -1,8 +1,7 @@
 package com.zly.diycode.main;
 
-import com.zly.diycode.BR;
 import com.zly.diycode.R;
-import com.zly.diycode.common.Item;
+import com.zly.diycode.common.adapter.Item;
 
 /**
  * Created by zhangly on 2017/3/18.

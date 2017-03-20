@@ -1,8 +1,7 @@
 package com.zly.diycode.main;
 
-import com.zly.diycode.BR;
 import com.zly.diycode.R;
-import com.zly.diycode.common.Item;
+import com.zly.diycode.common.adapter.Item;
 
 /**
  * Created by zhangly on 2017/3/12.
@@ -13,7 +12,7 @@ public class Topics implements Item {
     private String userPhoto;
     private String username;
     private String note;
-    private String pulishDate;
+    private String publishDate;
     private String content;
     private String id;
     private String subContent;
@@ -42,12 +41,12 @@ public class Topics implements Item {
         this.note = note;
     }
 
-    public String getPulishDate() {
-        return pulishDate;
+    public String getPublishDate() {
+        return publishDate;
     }
 
-    public void setPulishDate(String pulishDate) {
-        this.pulishDate = pulishDate;
+    public void setPublishDate(String publishDate) {
+        this.publishDate = publishDate;
     }
 
     public String getContent() {

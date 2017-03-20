@@ -63,7 +63,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="0dp"
             android:gravity="end"
-            android:text="@{item.pulishDate}"
+            android:text="@{item.publishDate}"
             android:textColor="@color/textColorFeeble"
             app:layout_constraintBottom_toBottomOf="@+id/tv_node"
             app:layout_constraintRight_toRightOf="parent"

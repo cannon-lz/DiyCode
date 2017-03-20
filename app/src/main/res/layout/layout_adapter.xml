@@ -5,7 +5,7 @@
 
         <variable
             name="presenter"
-            type="com.zly.diycode.common.BaseAdapter.Presenter" />
+            type="com.zly.diycode.common.adapter.BaseAdapter.Presenter" />
 
         <variable
             name="position"
@@ -13,7 +13,7 @@
 
         <variable
             name="item"
-            type="com.zly.diycode.common.Dummy" />
+            type="com.zly.diycode.common.adapter.Dummy" />
     </data>
 
     <android.support.v4.widget.Space

@@ -1,4 +1,4 @@
-package com.zly.diycode.common;
+package com.zly.diycode.common.adapter;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
