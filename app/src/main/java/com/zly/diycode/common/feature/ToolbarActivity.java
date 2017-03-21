@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ViewGroup;
 
 /**
  * Created by zhangluya on 2017/3/20.
@@ -26,7 +27,7 @@ public class ToolbarActivity<DB extends ViewDataBinding> extends AppCompatActivi
             mDataBinding = DataBindingUtil.setContentView(this, layoutRes);
         }
         if (isNeedInsertToolbar()) {
-            mToolbarHelper = ToolbarHelper.insert(this, findViewById(android.R.id.content));
+            mToolbarHelper = ToolbarHelper.insert(this, ((ViewGroup) getWindow().getDecorView()).getChildAt(0));
         }
         initData(savedInstanceState);
         initView(savedInstanceState);

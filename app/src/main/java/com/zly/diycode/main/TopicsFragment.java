@@ -1,20 +1,18 @@
 package com.zly.diycode.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.Toast;
 
 import com.zly.diycode.R;
+import com.zly.diycode.TestActivity;
 import com.zly.diycode.common.Navigation;
 import com.zly.diycode.common.adapter.BaseAdapter;
 import com.zly.diycode.common.adapter.Item;
-import com.zly.diycode.common.feature.BaseFragment;
-import com.zly.diycode.common.feature.VoidPresenter;
-import com.zly.diycode.databinding.RecyclerListBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +23,12 @@ import java.util.List;
 
 public class TopicsFragment extends AppListFragment {
 
-    private BaseAdapter mTopicsAdapter;
-
     public class OnItemClickListener implements BaseAdapter.Presenter {
 
 
         public void onItemClick(Topics topics, int position) {
             Navigation.getInstance().openDetails(getActivity(), String.valueOf(position));
+            //startActivity(new Intent(mHostActivity, TestActivity.class));
         }
 
         public void onItemClick(Value v, int position) {
@@ -42,8 +39,11 @@ public class TopicsFragment extends AppListFragment {
     @Override
     protected void initView(View root, @Nullable Bundle savedInstanceState) {
         super.initView(root, savedInstanceState);
-
+        DividerItemDecoration decoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+        decoration.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.item_margin));
+        mDataBinding.rcvList.addItemDecoration(decoration);
         mAdapter.setDataList(getDatas());
+
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.zly.diycode.main.TopicsDetailActivity;
+import com.zly.diycode.web.WebActivity;
 
 /**
  * Created by zhangluya on 2017/3/20.
@@ -23,9 +24,16 @@ public class Navigation {
         return INSTANCE;
     }
 
-    public void openDetails(@NonNull Context context, String newsId) {
+    public void openDetails(@NonNull Context context, @NonNull String newsId) {
         Intent intent = new Intent(context, TopicsDetailActivity.class);
         intent.putExtra("newsId", newsId);
+        context.startActivity(intent);
+    }
+
+    public void openWebBrowser(@NonNull Context context, @NonNull String url) {
+        Intent intent = new Intent(context, WebActivity.class);
+        intent.putExtra("url", url);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);
     }
 
@@ -45,6 +53,13 @@ public class Navigation {
         String getNewsId(@NonNull Activity activity) {
             Intent intent = activity.getIntent();
             return intent.getStringExtra("newsId");
+        }
+
+
+        public
+        @Nullable
+        String getUrl(@NonNull Activity activity) {
+            return activity.getIntent().getStringExtra("url");
         }
 
     }

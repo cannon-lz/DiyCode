@@ -19,26 +19,10 @@
                 app:logo="@mipmap/logo_small" />
 
             <android.support.design.widget.TabLayout
+                android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabSelectedTextColor="@color/colorAccent">
-
-                <android.support.design.widget.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="topics" />
-
-                <android.support.design.widget.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="news" />
-
-                <android.support.design.widget.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="kuzhan" />
-
-            </android.support.design.widget.TabLayout>
+                app:tabSelectedTextColor="@color/colorAccent" />
 
         </android.support.design.widget.AppBarLayout>
 

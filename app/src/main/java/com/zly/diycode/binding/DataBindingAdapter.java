@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -26,7 +27,7 @@ public class DataBindingAdapter {
             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                 final Drawable[] compoundDrawables = textView.getCompoundDrawables();
                 final BitmapDrawable bitmapDrawable = new BitmapDrawable(context.getResources(), resource);
-                bitmapDrawable.setBounds(0, 0, 100, 100);
+                bitmapDrawable.setBounds(0, 0, 70, 70);
                 textView.setCompoundDrawables(bitmapDrawable, compoundDrawables[1], compoundDrawables[2], compoundDrawables[3]);
             }
         });
@@ -36,5 +37,10 @@ public class DataBindingAdapter {
     public static void setAdapterAndLayoutManager(RecyclerView recyclerView, RecyclerView.Adapter adapter, RecyclerView.LayoutManager manager) {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(manager);
+    }
+
+    @BindingAdapter({"app:imageUrl"})
+    public static void setImageUrl(ImageView imageView, String url) {
+        Glide.with(imageView.getContext()).load(url).into(imageView);
     }
 }

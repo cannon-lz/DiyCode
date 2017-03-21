@@ -27,6 +27,10 @@
         <activity
             android:name=".main.TopicsDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".TestActivity" />
+        <activity
+            android:name=".web.WebActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

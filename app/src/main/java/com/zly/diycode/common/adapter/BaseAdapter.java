@@ -144,15 +144,14 @@ public class BaseAdapter extends RecyclerView.Adapter<DataBindingViewHolder> {
     @SuppressWarnings("unchecked")
     public
     @Nullable
-    <T extends Item> T getItemByType(int itemType) {
+    <T extends Item> T getItemByType(int itemType, int position) {
         List<Item> itemList = mDataList;
-        for (Item item : itemList) {
-            if (itemType == item.getItemViewType()) {
-                return (T) item;
-            }
+        Item item = itemList.get(position);
+        if (item.getItemViewType() != itemType) {
+            throw new NullPointerException("");
         }
 
-        return null;
+        return (T) item;
     }
 
     protected void convert(DataBindingViewHolder holder, Item data, int position) {

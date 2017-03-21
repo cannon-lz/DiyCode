@@ -9,10 +9,20 @@ import com.zly.diycode.common.adapter.Item;
 
 public class ArticleDetails implements Item {
 
+    private String photo;
     private String username;
     private String node;
     private String publishDate;
-    private String url;
+    private String title;
+    private String content;
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
     public String getUsername() {
         return username;
@@ -38,16 +48,26 @@ public class ArticleDetails implements Item {
         this.publishDate = publishDate;
     }
 
-    public String getUrl() {
-        return url;
+    public String getTitle() {
+        return title;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     @Override
     public int getItemViewType() {
         return R.layout.item_topics_detail;
     }
+
+
 }

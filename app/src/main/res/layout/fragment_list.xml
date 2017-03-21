@@ -17,12 +17,21 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rcv_list"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/srl_refresh_control"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:adapter="@{adapter}"
-            app:layoutManager="@{layoutManager}" />
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rcv_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:adapter="@{adapter}"
+                app:layoutManager="@{layoutManager}" />
+
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
 
         <TextView
             android:id="@+id/tv_enpty"

@@ -2,13 +2,34 @@
 <layout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <include
-            android:id="@+id/views"
-            layout="@layout/recycler_list" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/fab_margin"
+                app:layout_anchor="@id/recycler_view"
+                app:layout_anchorGravity="bottom|end"
+                app:layout_behavior="com.zly.diycode.widget.FABScrollBehavior"
+                app:srcCompat="@android:drawable/ic_dialog_email" />
+        </android.support.design.widget.CoordinatorLayout>
+
     </LinearLayout>
+
+
 </layout>

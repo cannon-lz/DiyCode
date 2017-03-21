@@ -6,7 +6,10 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.util.ArrayMap;
+import android.support.v4.util.SparseArrayCompat;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -33,6 +36,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
         Toolbar toolbar = mDataBinding.views.toolbar;
+        ViewCompat.setElevation(toolbar, 0);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         DrawerLayout drawer = mDataBinding.drawerLayout;
@@ -43,6 +47,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
 
         NavigationView navigationView = mDataBinding.navView;
         navigationView.setNavigationItemSelectedListener(this);
+        mDataBinding.views.tabLayout.setupWithViewPager(mDataBinding.views.flContent);
         mDataBinding.views.flContent.setAdapter(new ContentPagerAdapter(getSupportFragmentManager()));
     }
 
@@ -110,12 +115,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
 
     private class ContentPagerAdapter extends FragmentPagerAdapter {
 
-        private List<Fragment> mFragments = new ArrayList<>(3);
+        private ArrayMap<String, Fragment> mFragments = new ArrayMap<>(3);
 
         {
-            mFragments.add(new TopicsFragment());
-            mFragments.add(new TopicsFragment());
-            mFragments.add(new TopicsFragment());
+            mFragments.put("Topics", new TopicsFragment());
+            mFragments.put("News", new TopicsFragment());
+            mFragments.put("Sites", new TopicsFragment());
         }
 
         ContentPagerAdapter(FragmentManager fm) {
@@ -124,12 +129,17 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
 
         @Override
         public Fragment getItem(int position) {
-            return mFragments.get(position);
+            return mFragments.valueAt(position);
         }
 
         @Override
         public int getCount() {
             return mFragments.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragments.keyAt(position);
         }
     }
 }

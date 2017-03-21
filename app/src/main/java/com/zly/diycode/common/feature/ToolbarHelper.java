@@ -3,6 +3,7 @@ package com.zly.diycode.common.feature;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -77,6 +78,7 @@ public class ToolbarHelper {
         LayoutInflater inflater = LayoutInflater.from(context);
         ViewGroup rootViewGroup = (ViewGroup) contentView;
         View toolbarLayout = inflater.inflate(R.layout.layout_toolbar, rootViewGroup, false);
+        ViewCompat.setElevation(toolbarLayout, 12);
         ToolbarHelper toolbarHelper = new ToolbarHelper((AppCompatActivity) context, (Toolbar) toolbarLayout);
         int id = toolbarLayout.getId();
         if (id <= 0) {

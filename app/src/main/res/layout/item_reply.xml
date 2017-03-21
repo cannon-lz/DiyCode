@@ -3,9 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="java.lang.String" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="com.zly.diycode.main.Reply" />
+
+        <variable
+            name="position"
+            type="Integer" />
+    </data>
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_background"
+        android:paddingBottom="16dp">
 
         <TextView
             android:id="@+id/tv_reply_count"
@@ -14,39 +31,45 @@
             android:background="@color/gray"
             android:gravity="center_vertical"
             android:padding="12dp"
-            android:text="共收到13条回复"
+            android:text="@{String.format(@string/reply_count, item.count)}"
+            android:visibility="@{position == 1 ? View.VISIBLE : View.GONE}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/iv_user_photo"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginLeft="18dp"
             android:layout_marginStart="18dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="8dp"
+            app:imageUrl="@{item.photo}"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_floor"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_reply_count"
-            app:srcCompat="@drawable/btn_primary" />
+            app:layout_constraintTop_toTopOf="@+id/tv_user_name" />
 
         <TextView
             android:id="@+id/tv_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:text="jixoaohua"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{item.username}"
             app:layout_constraintLeft_toRightOf="@+id/iv_user_photo"
-            app:layout_constraintTop_toTopOf="@+id/iv_user_photo" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_reply_count" />
 
         <TextView
             android:id="@+id/tv_floor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1楼 24分钟前"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_user_photo"
-            app:layout_constraintLeft_toLeftOf="@+id/tv_user_name" />
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="0dp"
+            android:text="@{item.floor}"
+            app:layout_constraintLeft_toRightOf="@+id/iv_user_photo"
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
 
         <ToggleButton
             android:id="@+id/tbtn_shared"
@@ -57,38 +80,41 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="0dp"
             android:background="@null"
+            android:button="@drawable/selector_favorite"
             android:textOff="@null"
             android:textOn="@null"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_user_photo"
+            app:layout_constraintBottom_toBottomOf="@+id/tbtn_favour"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/iv_user_photo" />
+            app:layout_constraintTop_toTopOf="@+id/tbtn_favour" />
 
         <TextView
             android:id="@+id/tv_reply_content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
             android:layout_marginTop="24dp"
-            android:text="社区是一个全体成员的社区，每一个用户的价值取向都将决定整个社区的价值取向"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:text="@{item.content}"
             app:layout_constraintLeft_toLeftOf="@+id/iv_user_photo"
             app:layout_constraintRight_toRightOf="@+id/tbtn_shared"
-            app:layout_constraintTop_toBottomOf="@+id/iv_user_photo" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_floor" />
 
         <ToggleButton
             android:id="@+id/tbtn_favour"
             android:layout_width="28dp"
             android:layout_height="28dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="8dp"
             android:background="@null"
             android:button="@drawable/selector_favorite"
             android:textOff="@null"
             android:textOn="@null"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_user_photo"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_floor"
             app:layout_constraintRight_toLeftOf="@+id/tbtn_shared"
-            app:layout_constraintTop_toTopOf="@+id/iv_user_photo"
-            app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintTop_toTopOf="@+id/tv_user_name"
+            app:layout_constraintVertical_bias="0.0" />
 
     </android.support.constraint.ConstraintLayout>
 

@@ -1,7 +1,9 @@
 package com.zly.diycode.main;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -15,7 +17,7 @@ import com.zly.diycode.databinding.FragmentListBinding;
  * Created by zhangluya on 2017/3/20.
  */
 
-public class AppListFragment extends BaseFragment<FragmentListBinding, VoidPresenter> {
+public class AppListFragment extends BaseFragment<FragmentListBinding, VoidPresenter> implements SwipeRefreshLayout.OnRefreshListener {
 
     protected BaseAdapter mAdapter;
 
@@ -30,6 +32,8 @@ public class AppListFragment extends BaseFragment<FragmentListBinding, VoidPrese
         mAdapter = new BaseAdapter(getActivity());
         mAdapter.setPresenter(createOnItemClickListener());
         mDataBinding.setAdapter(mAdapter);
+        mDataBinding.srlRefreshControl.setOnRefreshListener(this);
+        onRefresh();
     }
 
     protected BaseAdapter.Presenter createOnItemClickListener() {
@@ -39,5 +43,15 @@ public class AppListFragment extends BaseFragment<FragmentListBinding, VoidPrese
     @Override
     protected boolean isNeedInsertToolbar() {
         return false;
+    }
+
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mDataBinding.srlRefreshControl.setRefreshing(false);
+            }
+        }, 2000);
     }
 }

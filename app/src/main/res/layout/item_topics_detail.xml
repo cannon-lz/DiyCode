@@ -4,22 +4,28 @@
     <data>
 
         <variable
-            name="artcleDetails"
+            name="item"
             type="com.zly.diycode.main.ArticleDetails" />
     </data>
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:background="@android:color/white">
 
         <TextView
             android:id="@+id/tv_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{artcleDetails.username}"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:drawableLeft="@{item.photo}"
+            android:drawablePadding="12dp"
+            android:gravity="center_vertical"
+            android:text="@{item.username}"
+            android:textColor="@color/textColorPowerful"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,7 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
-            android:text="@{artcleDetails.node}"
+            android:text="@{item.node}"
+            android:textColor="@color/textColorFeeble"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_user"
             app:layout_constraintLeft_toRightOf="@+id/tv_user" />
 
@@ -37,16 +44,32 @@
             android:id="@+id/tv_pulish_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{artcleDetails.publishDate}"
+            android:layout_marginRight="16dp"
+            android:text="@{item.publishDate}"
+            android:textColor="@color/textColorFeeble"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_nodes"
             app:layout_constraintRight_toRightOf="parent" />
 
-        <WebView
+        <com.zly.diycode.widget.AppWebView
+            android:id="@+id/web_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="12dp"
+            android:text="@{item.title}"
+            android:textColor="@color/textColorPowerful"
+            android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_user" />
