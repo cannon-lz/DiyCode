@@ -1,5 +1,6 @@
 package com.zly.diycode.topics;
 
+import com.zly.diycode.common.adapter.Item;
 import com.zly.diycode.common.feature.IPresenter;
 import com.zly.diycode.common.feature.IView;
 
@@ -11,19 +12,29 @@ import java.util.List;
 
 public interface TopicsContract {
 
-    interface Presenter extends IPresenter {
+    interface ListPresenter extends IPresenter {
 
         void getTopics();
 
         void nextPage();
     }
 
-    interface View extends IView {
+    interface ListView extends IView {
 
         void showTopics(List<EntitiesContract.Topics> datas);
 
         void addTopics(List<EntitiesContract.Topics> datas);
 
         void showEmptyView();
+    }
+
+    interface DetailsPresenter extends IPresenter {
+
+        void getDetailsAndReplies();
+    }
+
+    interface DetailsView extends IView {
+
+        void showDetails(List<Item> datas);
     }
 }

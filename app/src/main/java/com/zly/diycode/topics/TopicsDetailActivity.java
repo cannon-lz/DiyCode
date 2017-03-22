@@ -31,10 +31,14 @@ import java.util.Objects;
  * Created by zhangluya on 2017/3/13.
  */
 
-public class TopicsDetailActivity extends BaseActivity<ActivityTopicsDetailBinding, VoidPresenter> {
+public class TopicsDetailActivity extends BaseActivity<ActivityTopicsDetailBinding, TopicsDetailsPresenter> implements TopicsContract.DetailsView {
 
-    private static final String CONTENT = "";
     private BaseAdapter mAdapter;
+
+    @Override
+    protected TopicsDetailsPresenter createPresenter() {
+        return new TopicsDetailsPresenter(this, Navigation.IntentReceiver.getInstance().getNewsId(this));
+    }
 
     @Override
     protected int getLayoutRes() {
@@ -45,31 +49,7 @@ public class TopicsDetailActivity extends BaseActivity<ActivityTopicsDetailBindi
     protected void initData(@Nullable Bundle savedInstanceState) {
         String newsId = Navigation.IntentReceiver.getInstance().getNewsId(this);
         Log.i("NewsId", String.format("news id %s", newsId));
-        TopicsRemoteData.getInstance().getById(newsId, new Callback<EntitiesContract.Topics>() {
-            @Override
-            public void onSuccess(EntitiesContract.Topics topics) {
-                topics.setItemViewType(R.layout.item_topics_detail);
-                mAdapter.add(topics);
-                //mAdapter.setDataList(details);
-            }
-
-            @Override
-            public void onError(String messgae) {
-
-            }
-        });
-        Map<String, Object> p = new ArrayMap<>();
-        TopicsRemoteData.getInstance().getReplies(newsId, p, new Callback<List<EntitiesContract.Reply>>() {
-            @Override
-            public void onSuccess(List<EntitiesContract.Reply> replies) {
-                mAdapter.addAll(replies);
-            }
-
-            @Override
-            public void onError(String messgae) {
-
-            }
-        });
+        mPresenter.getDetailsAndReplies();
     }
 
     @Override
@@ -86,6 +66,11 @@ public class TopicsDetailActivity extends BaseActivity<ActivityTopicsDetailBindi
     }
 
     @Override
+    public void showDetails(List<Item> datas) {
+        mAdapter.setDataList(datas);
+    }
+
+    @Override
     protected void onDestroy() {
 
         ((BaseAdapter) mDataBinding.recyclerView.getAdapter()).removeAllConverters();
@@ -94,7 +79,7 @@ public class TopicsDetailActivity extends BaseActivity<ActivityTopicsDetailBindi
     }
 
     public void addReplyClick() {
-        PaperDetails paperDetails = ((BaseAdapter) mDataBinding.recyclerView.getAdapter()).getItemByType(R.layout.item_topics_detail, 0);
+        EntitiesContract.Topics paperDetails = ((BaseAdapter) mDataBinding.recyclerView.getAdapter()).getItemByType(R.layout.item_topics_detail, 0);
         Navigation.getInstance().openAddReply(this, paperDetails.getTitle());
     }
 

@@ -62,6 +62,7 @@ public class BaseAdapter extends RecyclerView.Adapter<DataBindingViewHolder> {
         dataBinding.setVariable(BR.item, data);
         dataBinding.setVariable(BR.presenter, mPresenter);
         dataBinding.setVariable(BR.position, position);
+        dataBinding.executePendingBindings();
         Converter converter = mConverters.get(data.getItemViewType());
         if (converter != null) {
             converter.convert(this, holder, data, position);
@@ -88,6 +89,14 @@ public class BaseAdapter extends RecyclerView.Adapter<DataBindingViewHolder> {
         mDataList.clear();
         mDataList.addAll(dataList);
         notifyDataSetChanged();
+    }
+
+    public void add(int position, Item data) {
+        if (mDataList == null) {
+            mDataList = new ArrayList<>();
+        }
+        mDataList.add(position, data);
+        notifyItemChanged(position);
     }
 
     public void add(Item data) {

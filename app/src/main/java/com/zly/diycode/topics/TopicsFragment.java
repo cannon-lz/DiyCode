@@ -16,7 +16,7 @@ import java.util.List;
  * Created by zhangly on 2017/3/18.
  */
 
-public class TopicsFragment extends AppListFragment<TopicsContract.Presenter> implements TopicsContract.View {
+public class TopicsFragment extends AppListFragment<TopicsContract.ListPresenter> implements TopicsContract.ListView {
 
     public class OnItemClickListener implements BaseAdapter.Presenter {
 
@@ -31,8 +31,8 @@ public class TopicsFragment extends AppListFragment<TopicsContract.Presenter> im
     }
 
     @Override
-    protected TopicsContract.Presenter createPresenter() {
-        return new TopicsPresenter(this);
+    protected TopicsContract.ListPresenter createPresenter() {
+        return new TopicsListPresenter(this);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class TopicsFragment extends AppListFragment<TopicsContract.Presenter> im
 
     @Override
     public void showTopics(List<EntitiesContract.Topics> datas) {
-        mDataBinding.rcvList.setItemViewCacheSize(View.VISIBLE);
+        mDataBinding.rcvList.setVisibility(View.VISIBLE);
         mDataBinding.tvEnpty.setVisibility(View.GONE);
         mDataBinding.srlRefreshControl.setRefreshing(false);
         mAdapter.setDataList(datas);
@@ -57,7 +57,7 @@ public class TopicsFragment extends AppListFragment<TopicsContract.Presenter> im
 
     @Override
     public void showEmptyView() {
-        mDataBinding.rcvList.setItemViewCacheSize(View.GONE);
+        mDataBinding.rcvList.setVisibility(View.GONE);
         mDataBinding.tvEnpty.setVisibility(View.VISIBLE);
     }
 

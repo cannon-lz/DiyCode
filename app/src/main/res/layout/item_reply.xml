@@ -6,7 +6,7 @@
     <data>
 
         <import type="java.lang.String" />
-
+        <import type="android.text.Html"/>
         <import type="android.view.View" />
 
         <variable
@@ -94,7 +94,7 @@
             android:layout_marginLeft="0dp"
             android:layout_marginRight="0dp"
             android:layout_marginTop="24dp"
-            android:text="@{item.content}"
+            android:text="@{Html.fromHtml(item.content)}"
             app:layout_constraintLeft_toLeftOf="@+id/iv_user_photo"
             app:layout_constraintRight_toRightOf="@+id/tbtn_shared"
             app:layout_constraintTop_toBottomOf="@+id/tv_floor" />

@@ -12,44 +12,45 @@ import static com.zly.diycode.topics.EntitiesContract.*;
  * Created by zhangluya on 2017/3/22.
  */
 
-public class TopicsPresenter implements TopicsContract.Presenter {
+public class TopicsListPresenter implements TopicsContract.ListPresenter {
 
-    private TopicsContract.View mView;
+    private TopicsContract.ListView mListView;
     private TopicsData mDataRe;
-    private int mPageNo = 1;
+    private int mOffset = 0;
 
-    public TopicsPresenter(TopicsContract.View view) {
+    public TopicsListPresenter(TopicsContract.ListView listView) {
         mDataRe = TopicsRemoteData.getInstance();
-        mView = view;
+        mListView = listView;
     }
 
     @Override
     public void getTopics() {
-        mDataRe.getTopics("", String.valueOf(mPageNo), new Callback<List<EntitiesContract.Topics>>() {
+        mDataRe.getTopics("", String.valueOf(mOffset), new Callback<List<EntitiesContract.Topics>>() {
             @Override
             public void onSuccess(List<Topics> topicses) {
-                mView.showTopics(topicses);
+                mOffset = topicses.size();
+                mListView.showTopics(topicses);
             }
 
             @Override
             public void onError(String messgae) {
-                mView.showEmptyView();
+                mListView.showEmptyView();
             }
         });
     }
 
     @Override
     public void nextPage() {
-        mPageNo++;
-        mDataRe.getTopics("", String.valueOf(mPageNo), new Callback<List<Topics>>() {
+        mDataRe.getTopics("", String.valueOf(mOffset), new Callback<List<Topics>>() {
             @Override
             public void onSuccess(List<Topics> topicses) {
-                mView.addTopics(topicses);
+                mOffset += topicses.size();
+                mListView.addTopics(topicses);
             }
 
             @Override
             public void onError(String messgae) {
-                mView.showEmptyView();
+                mListView.showEmptyView();
             }
         });
     }

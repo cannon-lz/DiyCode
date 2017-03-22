@@ -18,8 +18,8 @@ public class BaseActivity<DB extends ViewDataBinding, P extends IPresenter> exte
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         mPresenter = createPresenter();
+        super.onCreate(savedInstanceState);
     }
 
     @Override

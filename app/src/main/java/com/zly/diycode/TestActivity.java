@@ -42,7 +42,7 @@ public class TestActivity extends AppCompatActivity {
             "<code>data -&gt; view</code>的单向绑定</li>\n" +
             "<li>支持常用控件的绑定，同时增加了官方没有的<code>Adapter</code>绑定。支持<code>Header</code>和<code>上拉加载</code>\n" +
             "</li>\n" +
-            "<li>代码极其简洁, 无需实例化<code>View</code>, 也没有<code>Adapter</code>, 连<code>ViewHoler</code> 也没有。。。</li>\n" +
+            "<li>代码极其简洁, 无需实例化<code>ListView</code>, 也没有<code>Adapter</code>, 连<code>ViewHoler</code> 也没有。。。</li>\n" +
             "<li>支持绑定行为的自定义</li>\n" +
             "<li>配合 Rxjava + Lambda 简直上天</li>\n" +
             "</ul>\n" +
@@ -60,9 +60,9 @@ public class TestActivity extends AppCompatActivity {
             "dependencies {\n" +
             "        compile 'com.github.fashare2015:NoViewHolder:1.0.1'\n" +
             "}</code></pre>\n" +
-            "<h2 id=\"绑定 Data 和 View\">绑定 Data 和 View</h2>\n" +
+            "<h2 id=\"绑定 Data 和 ListView\">绑定 Data 和 ListView</h2>\n" +
             "<p>这一块和官方差不多，只是<code>xml</code>配置换成了<code>java注解</code>配置。</p>\n" +
-            "<h2 id=\"绑定单个 View\">绑定单个 View</h2>\n" +
+            "<h2 id=\"绑定单个 ListView\">绑定单个 ListView</h2>\n" +
             "<p>首先，你手头有一个<code>javabean</code>，就是你在图中看到的<code>妹子列表Item</code>如：</p>\n" +
             "<pre class=\"highlight java\"><code><span class=\"kd\">public</span> <span class=\"kd\">class</span> <span class=\"nc\">MeiZhi</span> <span class=\"o\">{</span>\n" +
             "    <span class=\"nd\">@BindImageView</span><span class=\"o\">(</span><span class=\"n\">id</span><span class=\"o\">=</span><span class=\"n\">R</span><span class=\"o\">.</span><span class=\"na\">id</span><span class=\"o\">.</span><span class=\"na\">iv_image</span><span class=\"o\">,</span> <span class=\"n\">placeHolder</span> <span class=\"o\">=</span> <span class=\"n\">R</span><span class=\"o\">.</span><span class=\"na\">mipmap</span><span class=\"o\">.</span><span class=\"na\">ic_launcher</span><span class=\"o\">)</span>\n" +
@@ -110,7 +110,7 @@ public class TestActivity extends AppCompatActivity {
             "<span class=\"o\">}</span></code></pre>\n" +
             "<h2 id=\"更新 UI\">更新 UI</h2>\n" +
             "<p>前面只是一系列绑定关系的配置，还需要一个接口触发他们：<br>\n" +
-            "- 初始化：根据 R.id.XXX 初始化相应的 View 和 Adapter，为后续<code>更新UI</code>做准备</p>\n" +
+            "- 初始化：根据 R.id.XXX 初始化相应的 ListView 和 Adapter，为后续<code>更新UI</code>做准备</p>\n" +
             "<pre class=\"highlight java\"><code><span class=\"n\">mNoViewHolder</span> <span class=\"o\">=</span> <span class=\"k\">new</span> <span class=\"n\">NoViewHolder</span><span class=\"o\">.</span><span class=\"na\">Builder</span><span class=\"o\">(</span><span class=\"k\">this</span><span class=\"o\">)</span>\n" +
             "                <span class=\"o\">.</span><span class=\"na\">initView</span><span class=\"o\">(</span><span class=\"k\">new</span> <span class=\"n\">HomeInfo</span><span class=\"o\">())</span> <span class=\"c1\">// 一定要提供`注解信息`的类，否则无法初始化。</span>\n" +
             "                <span class=\"o\">.</span><span class=\"na\">build</span><span class=\"o\">();</span></code></pre>\n" +
