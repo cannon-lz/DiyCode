@@ -1,8 +1,11 @@
 package com.zly.diycode.common.feature;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -94,6 +97,14 @@ public class ToolbarHelper {
                 secondChild.setLayoutParams(p);
             }
         }
+
+        if (rootViewGroup instanceof ConstraintLayout) {
+            ConstraintLayout.LayoutParams lp = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            lp.leftToRight = ConstraintLayout.LayoutParams.PARENT_ID;
+            lp.topToBottom = ConstraintLayout.LayoutParams.PARENT_ID;
+            toolbarLayout.setLayoutParams(lp);
+        }
+
         return toolbarHelper;
     }
 

@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".main.MainActivity"
             android:label="@string/app_name"
@@ -25,12 +25,14 @@
             android:name=".user.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".main.TopicsDetailActivity"
+            android:name=".topics.TopicsDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TestActivity" />
         <activity
             android:name=".web.WebActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".reply.AddReplyActivity" />
     </application>
 
 </manifest>

@@ -6,7 +6,8 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.zly.diycode.main.TopicsDetailActivity;
+import com.zly.diycode.reply.AddReplyActivity;
+import com.zly.diycode.topics.TopicsDetailActivity;
 import com.zly.diycode.web.WebActivity;
 
 /**
@@ -37,6 +38,12 @@ public class Navigation {
         context.startActivity(intent);
     }
 
+    public void openAddReply(@NonNull Context context, @NonNull String title) {
+        Intent intent = new Intent(context, AddReplyActivity.class);
+        intent.putExtra("title", title);
+        context.startActivity(intent);
+    }
+
     public static class IntentReceiver {
 
         private static final IntentReceiver INSTANCE = new IntentReceiver();
@@ -60,6 +67,12 @@ public class Navigation {
         @Nullable
         String getUrl(@NonNull Activity activity) {
             return activity.getIntent().getStringExtra("url");
+        }
+
+        public
+        @Nullable
+        String getTitle(@NonNull Activity activity) {
+            return activity.getIntent().getStringExtra("title");
         }
 
     }

@@ -4,6 +4,7 @@ import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.design.widget.Snackbar;
 import android.widget.Toast;
 
 /**
@@ -23,12 +24,12 @@ public class BaseActivity<DB extends ViewDataBinding, P extends IPresenter> exte
 
     @Override
     public void toast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Snackbar.make(getWindow().getDecorView(), message, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
     public void toast(@StringRes int stringRes) {
-        toast(getString(stringRes));
+        Snackbar.make(getWindow().getDecorView(), stringRes, Snackbar.LENGTH_SHORT).show();
     }
 
     protected P createPresenter() {

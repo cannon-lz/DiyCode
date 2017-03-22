@@ -7,7 +7,7 @@ import com.zly.diycode.common.adapter.Item;
  * Created by zhangluya on 2017/3/20.
  */
 
-public class ArticleDetails implements Item {
+public class PaperDetails implements Item {
 
     private String photo;
     private String username;

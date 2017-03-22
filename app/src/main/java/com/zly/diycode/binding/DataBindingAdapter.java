@@ -33,13 +33,13 @@ public class DataBindingAdapter {
         });
     }
 
-    @BindingAdapter({"app:adapter", "app:layoutManager"})
+    @BindingAdapter({"adapter", "layoutManager"})
     public static void setAdapterAndLayoutManager(RecyclerView recyclerView, RecyclerView.Adapter adapter, RecyclerView.LayoutManager manager) {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(manager);
     }
 
-    @BindingAdapter({"app:imageUrl"})
+    @BindingAdapter({"imageUrl"})
     public static void setImageUrl(ImageView imageView, String url) {
         Glide.with(imageView.getContext()).load(url).into(imageView);
     }

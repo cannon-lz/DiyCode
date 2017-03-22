@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.util.ArrayMap;
-import android.support.v4.util.SparseArrayCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -20,9 +19,7 @@ import com.zly.diycode.R;
 import com.zly.diycode.common.feature.BaseActivity;
 import com.zly.diycode.common.feature.VoidPresenter;
 import com.zly.diycode.databinding.ActivityMainBinding;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.zly.diycode.topics.TopicsFragment;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresenter>
         implements NavigationView.OnNavigationItemSelectedListener {

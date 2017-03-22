@@ -25,11 +25,17 @@ public class BaseAdapter extends RecyclerView.Adapter<DataBindingViewHolder> {
 
     }
 
-    private List<Item> mDataList;
-    private final Context mContext;
-    private final LayoutInflater mInflater;
+    public interface Converter<T extends Item> {
+
+        void convert(BaseAdapter adapter, DataBindingViewHolder viewHolder, T item, int position);
+    }
+
+    protected List<Item> mDataList;
+    protected final Context mContext;
+    protected final LayoutInflater mInflater;
     private Presenter mPresenter;
     private SparseArrayCompat<ViewDataBinding> mViewDataBindingList;
+    private SparseArrayCompat<Converter> mConverters = new SparseArrayCompat<>();
 
     public BaseAdapter(Context context) {
         this.mContext = context;
@@ -53,11 +59,13 @@ public class BaseAdapter extends RecyclerView.Adapter<DataBindingViewHolder> {
         }
         final Item data = mDataList.get(position);
         final ViewDataBinding dataBinding = holder.getDataBinding();
-        final View root = dataBinding.getRoot();
         dataBinding.setVariable(BR.item, data);
         dataBinding.setVariable(BR.presenter, mPresenter);
         dataBinding.setVariable(BR.position, position);
-        convert(holder, data, position);
+        Converter converter = mConverters.get(data.getItemViewType());
+        if (converter != null) {
+            converter.convert(this, holder, data, position);
+        }
     }
 
     @Override
@@ -73,7 +81,7 @@ public class BaseAdapter extends RecyclerView.Adapter<DataBindingViewHolder> {
         return mDataList.get(position).getItemViewType();
     }
 
-    public void setDataList(List<Item> dataList) {
+    public <T extends Item> void setDataList(List<T> dataList) {
         if (mDataList == null) {
             mDataList = new ArrayList<>();
         }
@@ -90,7 +98,7 @@ public class BaseAdapter extends RecyclerView.Adapter<DataBindingViewHolder> {
         notifyItemChanged(mDataList.size() - 1);
     }
 
-    public void addAll(List<Item> datas) {
+    public <T extends Item> void addAll(List<T> datas) {
         if (mDataList == null) {
             mDataList = new ArrayList<>();
         }
@@ -154,7 +162,14 @@ public class BaseAdapter extends RecyclerView.Adapter<DataBindingViewHolder> {
         return (T) item;
     }
 
-    protected void convert(DataBindingViewHolder holder, Item data, int position) {
+    public <T extends Item> void addConverter(int layoutType, Converter<T> binder) {
+        mConverters.put(layoutType, binder);
+    }
 
+    public void removeAllConverters() {
+        if (mConverters != null) {
+            mConverters.clear();
+            mConverters = null;
+        }
     }
 }

@@ -6,5 +6,4 @@ package com.zly.diycode.common.feature;
 
 public interface IPresenter {
 
-    void start();
 }

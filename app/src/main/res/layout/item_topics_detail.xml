@@ -5,7 +5,7 @@
 
         <variable
             name="item"
-            type="com.zly.diycode.main.ArticleDetails" />
+            type="com.zly.diycode.topics.EntitiesContract.Topics" />
     </data>
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:drawableLeft="@{item.photo}"
+            android:drawableLeft="@{item.userPhoto}"
             android:drawablePadding="12dp"
             android:gravity="center_vertical"
             android:text="@{item.username}"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
-            android:text="@{item.node}"
+            android:text="@{item.note}"
             android:textColor="@color/textColorFeeble"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_user"
             app:layout_constraintLeft_toRightOf="@+id/tv_user" />

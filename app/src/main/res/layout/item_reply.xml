@@ -11,7 +11,7 @@
 
         <variable
             name="item"
-            type="com.zly.diycode.main.Reply" />
+            type="com.zly.diycode.topics.EntitiesContract.Reply" />
 
         <variable
             name="position"

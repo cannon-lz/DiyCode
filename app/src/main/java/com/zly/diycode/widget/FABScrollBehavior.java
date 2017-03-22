@@ -1,5 +1,7 @@
 package com.zly.diycode.widget;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -18,17 +20,31 @@ public class FABScrollBehavior extends FloatingActionButton.Behavior {
     }
 
     @Override
-    public boolean onDependentViewChanged(CoordinatorLayout parent, FloatingActionButton child, View dependency) {
-        return true;
-    }
-
-    @Override
-    public void onNestedScroll(CoordinatorLayout coordinatorLayout, FloatingActionButton child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
-        super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
+    public void onNestedScroll(CoordinatorLayout coordinatorLayout, final FloatingActionButton child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
         if (dyConsumed > 0 && child.getVisibility() == View.VISIBLE) {
-            child.hide();
-        } else if (dyConsumed < 0 && child.getVisibility() == View.GONE) {
-            child.show();
+            child.animate().scaleX(0).scaleY(0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    child.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    child.setVisibility(View.INVISIBLE);
+                }
+            });
+        } else if (dyConsumed < 0 && child.getVisibility() != View.VISIBLE) {
+            child.animate().scaleX(1).scaleY(1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    child.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    child.setVisibility(View.VISIBLE);
+                }
+            });
         }
     }
 

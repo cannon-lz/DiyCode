@@ -1,25 +1,14 @@
 package com.zly.diycode;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.webkit.WebView;
 
-import com.zly.diycode.databinding.ItemReplyBinding;
-import com.zly.diycode.http.Art;
-import com.zly.diycode.http.UserApi;
 import com.zly.diycode.widget.AppWebView;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by zhangluya on 2017/3/17.
@@ -190,19 +179,19 @@ public class TestActivity extends AppCompatActivity {
         builder.baseUrl("https://diycode.cc/api/v3/");
         Retrofit build = builder.build();
         UserApi userApi = build.create(UserApi.class);
-        Call<Art> news = userApi.getNews("676");
-        news.enqueue(new Callback<Art>() {
+        Call<RespPaperDetails> news = userApi.getNews("676");
+        news.enqueue(new Callback<RespPaperDetails>() {
             @Override
-            public void onResponse(Call<Art> call, Response<Art> response) {
+            public void onResponse(Call<RespPaperDetails> call, Response<RespPaperDetails> response) {
                 if (response.isSuccessful()) {
-                    Art body = response.body();
+                    RespPaperDetails body = response.body();
                     String body_html = body.getBody_html();
                     webView.loadDataWithBaseURL(null, webView.addStyleAndHeader(body_html, null), "text/html", "utf-8", null);
                 }
             }
 
             @Override
-            public void onFailure(Call<Art> call, Throwable t) {
+            public void onFailure(Call<RespPaperDetails> call, Throwable t) {
                 t.printStackTrace();
             }
         });*/

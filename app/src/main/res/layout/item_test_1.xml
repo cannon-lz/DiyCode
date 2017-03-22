@@ -9,7 +9,7 @@
 
         <variable
             name="presenter"
-            type="com.zly.diycode.main.TopicsFragment.OnItemClickListener" />
+            type="com.zly.diycode.topics.TopicsFragment.OnItemClickListener" />
 
         <variable
             name="position"
