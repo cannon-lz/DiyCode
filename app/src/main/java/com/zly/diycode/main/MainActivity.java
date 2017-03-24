@@ -19,7 +19,7 @@ import com.zly.diycode.R;
 import com.zly.diycode.common.feature.BaseActivity;
 import com.zly.diycode.common.feature.VoidPresenter;
 import com.zly.diycode.databinding.ActivityMainBinding;
-import com.zly.diycode.topics.TopicsFragment;
+import com.zly.diycode.topics.list.TopicsFragment;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresenter>
         implements NavigationView.OnNavigationItemSelectedListener {

@@ -7,8 +7,6 @@ import com.zly.diycode.http.RetrofitCallback;
 import com.zly.diycode.http.TopicsApi;
 import com.zly.diycode.http.entities.RespPaper;
 import com.zly.diycode.http.entities.RespReply;
-import com.zly.diycode.http.entities.RespResult;
-import com.zly.diycode.topics.EntitiesContract;
 
 import java.util.List;
 import java.util.Map;
@@ -30,7 +28,7 @@ public class TopicsRemoteData implements TopicsData {
     }
 
     @Override
-    public void getTopics(Map<String, Object> params, Callback<List<EntitiesContract.Topics>> callback) {
+    public void getTopics(Map<String, Object> params, Callback<List<Topics>> callback) {
         TopicsApi api = ApiConfig.getInstance().getApi(TopicsApi.class);
         Call<List<RespPaper>> topics = api.getTopics(params);
         topics.enqueue(new RetrofitCallback<List<RespPaper>, List<Topics>>(callback));
@@ -60,10 +58,10 @@ public class TopicsRemoteData implements TopicsData {
     }
 
     @Override
-    public void getById(String id, Callback<EntitiesContract.Topics> callback) {
+    public void getById(String id, Callback<Topics> callback) {
         TopicsApi api = ApiConfig.getInstance().getApi(TopicsApi.class);
         Call<RespPaper> call = api.getById(id);
-        call.enqueue(new RetrofitCallback<RespPaper, EntitiesContract.Topics>(callback));
+        call.enqueue(new RetrofitCallback<RespPaper, Topics>(callback));
     }
 
     @Override
@@ -101,7 +99,12 @@ public class TopicsRemoteData implements TopicsData {
     }
 
     @Override
-    public void addReplies(String topicsId, String body, Callback<Boolean> callback) {
-
+    public void addReplies(String topicsId, String body, Callback<Reply> callback) {
+        TopicsApi api = ApiConfig.getInstance().getApi(TopicsApi.class);
+        Map<String, Object> params = new ArrayMap<>();
+        params.put("access_token", "0717b67273cb897ac2a9b7e5f0f4b78a2837cd14befc4bb3105516a8514275eb");
+        params.put("body", body);
+        Call<RespReply> call = api.addReplies(topicsId, params);
+        call.enqueue(new RetrofitCallback<RespReply, Reply>(callback));
     }
 }

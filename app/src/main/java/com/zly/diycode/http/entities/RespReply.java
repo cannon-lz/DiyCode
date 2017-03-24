@@ -1,5 +1,7 @@
 package com.zly.diycode.http.entities;
 
+import android.text.TextUtils;
+
 import com.google.gson.annotations.SerializedName;
 import com.zly.diycode.common.DateUtils;
 import com.zly.diycode.data.Mapper;
@@ -118,6 +120,7 @@ public class RespReply implements Mapper<EntitiesContract.Reply> {
         reply.setFloor("1");
         reply.setPublishDate(DateUtils.computePastTime(updatedAt));
         reply.setUsername(getUser().getName());
+        reply.setLoginName(getUser().getLogin());
         return reply;
     }
 }

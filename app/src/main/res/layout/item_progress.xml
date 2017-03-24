@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/progress_bar"
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="com.zly.diycode.topics.EntitiesContract.ItemProgress" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white" />
+        android:background="@android:color/white">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:visibility="@{item.loadComplete ? View.INVISIBLE : View.VISIBLE}" />
+
+        <TextView
+            android:id="@+id/tv_load_complete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/hint_load_complete"
+            android:visibility="@{item.loadComplete ? View.VISIBLE : View.INVISIBLE}" />
+
+    </FrameLayout>
+
+
 </layout>

@@ -60,5 +60,5 @@ public interface TopicsApi {
 
     @POST("topics/{id}/replies.json")
     @FormUrlEncoded
-    Call<RespResult> addReplies(@Path("id") String id, @Field("body") String body);
+    Call<RespReply> addReplies(@Path("id") String id, @FieldMap Map<String, Object> params);
 }

@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <import type="java.lang.String" />
+
+        <variable
+            name="reply"
+            type="com.zly.diycode.reply.ReplyMessage" />
+
+    </data>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -15,7 +25,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/white"
             android:padding="12dp"
-            android:text="TextView"
+            android:text="@{reply.topics.title}"
             android:textColor="@color/textColorPowerful"
             android:textSize="17sp" />
 
@@ -29,7 +39,8 @@
             android:gravity="top"
             android:inputType="textPersonName|textMultiLine"
             android:padding="12dp"
-            android:scrollHorizontally="false" />
+            android:scrollHorizontally="false"
+            android:text="@{reply.content}" />
 
     </LinearLayout>
 

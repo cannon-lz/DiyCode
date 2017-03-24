@@ -1,14 +1,14 @@
-package com.zly.diycode.topics;
+package com.zly.diycode.topics.list;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.Toast;
 
+import com.zly.diycode.R;
 import com.zly.diycode.common.Navigation;
 import com.zly.diycode.common.adapter.BaseAdapter;
 import com.zly.diycode.main.AppListFragment;
-import com.zly.diycode.main.Value;
+import com.zly.diycode.topics.EntitiesContract;
 
 import java.util.List;
 
@@ -16,19 +16,8 @@ import java.util.List;
  * Created by zhangly on 2017/3/18.
  */
 
-public class TopicsFragment extends AppListFragment<TopicsContract.ListPresenter> implements TopicsContract.ListView {
-
-    public class OnItemClickListener implements BaseAdapter.Presenter {
-
-
-        public void onItemClick(EntitiesContract.Topics topics, int position) {
-            Navigation.getInstance().openDetails(getActivity(), topics.getId());
-        }
-
-        public void onItemClick(Value v, int position) {
-            Toast.makeText(getActivity(), v.getValue() + " position " + position, Toast.LENGTH_LONG).show();
-        }
-    }
+public class TopicsFragment extends AppListFragment<TopicsContract.ListPresenter>
+        implements TopicsContract.ListView, BaseAdapter.Presenter {
 
     @Override
     protected TopicsContract.ListPresenter createPresenter() {
@@ -38,7 +27,7 @@ public class TopicsFragment extends AppListFragment<TopicsContract.ListPresenter
     @Override
     protected void initView(View root, @Nullable Bundle savedInstanceState) {
         super.initView(root, savedInstanceState);
-        mPresenter.getTopics();
+        onRefresh();
     }
 
     @Override
@@ -52,6 +41,7 @@ public class TopicsFragment extends AppListFragment<TopicsContract.ListPresenter
     @Override
     public void addTopics(List<EntitiesContract.Topics> datas) {
         mDataBinding.srlRefreshControl.setRefreshing(false);
+        setLoadMoreComplete();
         mAdapter.addAll(datas);
     }
 
@@ -62,17 +52,36 @@ public class TopicsFragment extends AppListFragment<TopicsContract.ListPresenter
     }
 
     @Override
+    public void loadMoreError() {
+        setLoadMoreComplete();
+        int lastPosition = mAdapter.getItemCount() - 1;
+        EntitiesContract.ItemProgress itemProgress = mAdapter.getItemByType(R.layout.item_progress, lastPosition);
+        itemProgress.setStatus(EntitiesContract.ItemProgress.STATUS_COMPLETE);
+        mAdapter.update(itemProgress, lastPosition);
+    }
+
+    @Override
     public void onRefresh() {
         mPresenter.getTopics();
     }
 
     @Override
     protected void onDragBottom() {
+        int lastPosition = mAdapter.getItemCount() - 1;
+        EntitiesContract.ItemProgress itemProgress = mAdapter.getItemByType(R.layout.item_progress, lastPosition);
+        if (itemProgress.isLoadComplete()) {
+            itemProgress.setStatus(EntitiesContract.ItemProgress.STATUS_LOADING);
+            mAdapter.update(itemProgress, lastPosition);
+        }
         mPresenter.nextPage();
     }
 
     @Override
     protected BaseAdapter.Presenter createOnItemClickListener() {
-        return new OnItemClickListener();
+        return this;
+    }
+
+    public void onItemClick(EntitiesContract.Topics topics, int position) {
+        Navigation.getInstance().openDetails(getActivity(), topics.getId());
     }
 }

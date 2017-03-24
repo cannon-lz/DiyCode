@@ -12,4 +12,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="hint_not_content">暂无内容</string>
     <string name="reply_count">共收到 %s 条回复</string>
+    <string name="reply_floor" formatted="false">%s 楼 . %s</string>
+    <string name="reply_who" formatted="false">#%s楼 @%s</string>
+    <string name="hint_load_complete">加载完啦</string>
 </resources>

@@ -19,7 +19,7 @@
 
         <variable
             name="presenter"
-            type="com.zly.diycode.topics.TopicsFragment.OnItemClickListener" />
+            type="com.zly.diycode.topics.list.TopicsFragment" />
     </data>
 
     <android.support.constraint.ConstraintLayout

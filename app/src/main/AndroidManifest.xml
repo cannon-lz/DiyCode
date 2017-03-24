@@ -25,7 +25,7 @@
             android:name=".user.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".topics.TopicsDetailActivity"
+            android:name=".topics.details.TopicsDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TestActivity" />
         <activity
@@ -33,6 +33,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity android:name=".reply.AddReplyActivity" />
+        <activity android:name=".topics.details.TopicsDetailsActivity" />
     </application>
 
 </manifest>

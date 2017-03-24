@@ -8,6 +8,10 @@ import android.support.annotation.StringRes;
 
 public interface IView {
 
+    void showLoading();
+
+    void dismissLoading();
+
     void toast(String message);
 
     void toast(@StringRes int stringRes);

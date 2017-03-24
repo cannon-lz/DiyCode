@@ -1,4 +1,4 @@
-package com.zly.diycode.topics;
+package com.zly.diycode.topics.list;
 
 import com.zly.diycode.data.Callback;
 import com.zly.diycode.data.TopicsData;
@@ -25,7 +25,7 @@ public class TopicsListPresenter implements TopicsContract.ListPresenter {
 
     @Override
     public void getTopics() {
-        mDataRe.getTopics("", String.valueOf(mOffset), new Callback<List<EntitiesContract.Topics>>() {
+        mDataRe.getTopics("", String.valueOf(mOffset), new Callback<List<Topics>>() {
             @Override
             public void onSuccess(List<Topics> topicses) {
                 mOffset = topicses.size();
@@ -44,13 +44,18 @@ public class TopicsListPresenter implements TopicsContract.ListPresenter {
         mDataRe.getTopics("", String.valueOf(mOffset), new Callback<List<Topics>>() {
             @Override
             public void onSuccess(List<Topics> topicses) {
-                mOffset += topicses.size();
-                mListView.addTopics(topicses);
+                int size = topicses.size();
+                if (size <= 0) {
+                    mListView.loadMoreError();
+                } else {
+                    mOffset += size;
+                    mListView.addTopics(topicses);
+                }
             }
 
             @Override
             public void onError(String messgae) {
-                mListView.showEmptyView();
+                mListView.loadMoreError();
             }
         });
     }

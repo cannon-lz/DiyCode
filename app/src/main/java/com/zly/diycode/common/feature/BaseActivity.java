@@ -23,6 +23,16 @@ public class BaseActivity<DB extends ViewDataBinding, P extends IPresenter> exte
     }
 
     @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void dismissLoading() {
+
+    }
+
+    @Override
     public void toast(String message) {
         Snackbar.make(getWindow().getDecorView(), message, Snackbar.LENGTH_SHORT).show();
     }

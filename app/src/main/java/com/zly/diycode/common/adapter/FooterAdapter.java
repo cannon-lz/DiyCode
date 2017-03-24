@@ -3,8 +3,6 @@ package com.zly.diycode.common.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.zly.diycode.common.feature.BaseActivity;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,11 +25,9 @@ public class FooterAdapter extends BaseAdapter {
 
     @Override
     public <T extends Item> void setDataList(List<T> dataList) {
-        if (mRealDatas != null) {
-            mDataList.remove(mRealDatas);
-        }
-        mDataList.addAll(mDataList.size() - 1, dataList);
-        mRealDatas = dataList;
+        mDataList.clear();
+        mDataList.addAll(dataList);
+        mDataList.add(mFooter);
         notifyDataSetChanged();
     }
 

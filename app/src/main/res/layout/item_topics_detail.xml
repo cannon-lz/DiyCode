@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <import type="android.view.View" />
+
+        <import type="java.lang.Integer" />
+
+        <import type="android.text.TextUtils" />
 
         <variable
             name="item"
             type="com.zly.diycode.topics.EntitiesContract.Topics" />
     </data>
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
         android:background="@android:color/white">
 
         <TextView
@@ -73,5 +78,20 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_user" />
+
+        <TextView
+            android:id="@+id/tv_reply_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/gray"
+            android:padding="8dp"
+            android:text="@{String.format(@string/reply_count, item.replyCount)}"
+            android:visibility="@{Integer.parseInt(item.replyCount) == 0 ? View.GONE : View.VISIBLE}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/web_view" />
     </android.support.constraint.ConstraintLayout>
 </layout>

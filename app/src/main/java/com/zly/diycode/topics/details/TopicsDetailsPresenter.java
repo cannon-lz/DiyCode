@@ -1,4 +1,4 @@
-package com.zly.diycode.topics;
+package com.zly.diycode.topics.details;
 
 import android.support.v4.util.ArrayMap;
 
@@ -7,11 +7,12 @@ import com.zly.diycode.common.adapter.Item;
 import com.zly.diycode.data.Callback;
 import com.zly.diycode.data.TopicsData;
 import com.zly.diycode.data.TopicsRemoteData;
+import com.zly.diycode.topics.EntitiesContract;
+import com.zly.diycode.topics.list.TopicsContract;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Created by zhangly on 2017/3/22.
@@ -32,6 +33,7 @@ public class TopicsDetailsPresenter implements TopicsContract.DetailsPresenter {
 
     @Override
     public void getDetailsAndReplies() {
+        mDetailsAndReplies.clear();
         getDetails();
         getReplies();
     }

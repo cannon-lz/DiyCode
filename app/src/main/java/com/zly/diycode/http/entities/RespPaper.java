@@ -3,9 +3,6 @@ package com.zly.diycode.http.entities;
 import com.google.gson.annotations.SerializedName;
 import com.zly.diycode.common.DateUtils;
 import com.zly.diycode.data.Mapper;
-import com.zly.diycode.topics.EntitiesContract;
-
-import java.util.Date;
 
 import static com.zly.diycode.topics.EntitiesContract.*;
 
@@ -13,7 +10,7 @@ import static com.zly.diycode.topics.EntitiesContract.*;
  * Created by zhangluya on 2017/3/22.
  */
 
-public class RespPaper implements Mapper<EntitiesContract.Topics> {
+public class RespPaper implements Mapper<Topics> {
 
 
     /**
@@ -254,6 +251,7 @@ public class RespPaper implements Mapper<EntitiesContract.Topics> {
         topics.setId(String.valueOf(id));
         topics.setUserPhoto(getUser().getUserPhoto());
         topics.setContent(bodyHtml);
+        topics.setReplyCount(String.valueOf(repliesCount));
         return topics;
     }
 }

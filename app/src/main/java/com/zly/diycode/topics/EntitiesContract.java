@@ -1,5 +1,8 @@
 package com.zly.diycode.topics;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.zly.diycode.R;
 import com.zly.diycode.common.adapter.Item;
 
@@ -9,11 +12,64 @@ import com.zly.diycode.common.adapter.Item;
 
 public interface EntitiesContract {
 
-    class Reply implements Item {
+    class Reply implements Item, Parcelable {
 
         private String username;
+        private String loginName;
         private String photo;
         private int count;
+        private String floor;
+        private String publishDate;
+        private String content;
+
+        public Reply() {
+        }
+
+        protected Reply(Parcel in) {
+            username = in.readString();
+            loginName = in.readString();
+            photo = in.readString();
+            count = in.readInt();
+            floor = in.readString();
+            publishDate = in.readString();
+            content = in.readString();
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(username);
+            dest.writeString(loginName);
+            dest.writeString(photo);
+            dest.writeInt(count);
+            dest.writeString(floor);
+            dest.writeString(publishDate);
+            dest.writeString(content);
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        public static final Creator<Reply> CREATOR = new Creator<Reply>() {
+            @Override
+            public Reply createFromParcel(Parcel in) {
+                return new Reply(in);
+            }
+
+            @Override
+            public Reply[] newArray(int size) {
+                return new Reply[size];
+            }
+        };
+
+        public String getLoginName() {
+            return loginName;
+        }
+
+        public void setLoginName(String loginName) {
+            this.loginName = loginName;
+        }
 
         public String getUsername() {
             return username;
@@ -22,11 +78,6 @@ public interface EntitiesContract {
         public void setUsername(String username) {
             this.username = username;
         }
-
-        private String floor;
-        private String publishDate;
-        private String content;
-
 
         public String getPhoto() {
             return photo;
@@ -77,13 +128,30 @@ public interface EntitiesContract {
 
     class ItemProgress implements Item {
 
+        public static final int STATUS_LOADING = -1;
+        public static final int STATUS_COMPLETE = -2;
+
+        private int status;
+
+        public int getStatus() {
+            return status;
+        }
+
+        public void setStatus(int status) {
+            this.status = status;
+        }
+
+        public boolean isLoadComplete() {
+            return status == STATUS_COMPLETE;
+        }
+
         @Override
         public int getItemViewType() {
             return R.layout.item_progress;
         }
     }
 
-    class Topics implements Item {
+    class Topics implements Item, Parcelable {
 
         private int mItemLayoutType;
 
@@ -95,6 +163,54 @@ public interface EntitiesContract {
         private String id;
         private String subTitle;
         private String content;
+        private String replyCount;
+
+        public Topics() {
+        }
+
+        protected Topics(Parcel in) {
+            mItemLayoutType = in.readInt();
+            userPhoto = in.readString();
+            username = in.readString();
+            note = in.readString();
+            publishDate = in.readString();
+            title = in.readString();
+            id = in.readString();
+            subTitle = in.readString();
+            content = in.readString();
+            replyCount = in.readString();
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(mItemLayoutType);
+            dest.writeString(userPhoto);
+            dest.writeString(username);
+            dest.writeString(note);
+            dest.writeString(publishDate);
+            dest.writeString(title);
+            dest.writeString(id);
+            dest.writeString(subTitle);
+            dest.writeString(content);
+            dest.writeString(replyCount);
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        public static final Creator<Topics> CREATOR = new Creator<Topics>() {
+            @Override
+            public Topics createFromParcel(Parcel in) {
+                return new Topics(in);
+            }
+
+            @Override
+            public Topics[] newArray(int size) {
+                return new Topics[size];
+            }
+        };
 
         public String getContent() {
             return content;
@@ -158,6 +274,14 @@ public interface EntitiesContract {
 
         public void setSubTitle(String subTitle) {
             this.subTitle = subTitle;
+        }
+
+        public String getReplyCount() {
+            return replyCount;
+        }
+
+        public void setReplyCount(String replyCount) {
+            this.replyCount = replyCount;
         }
 
         @Override

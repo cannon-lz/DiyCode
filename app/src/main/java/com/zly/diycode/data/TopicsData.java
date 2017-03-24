@@ -1,8 +1,6 @@
 package com.zly.diycode.data;
 
 
-import com.zly.diycode.topics.EntitiesContract;
-
 import java.util.List;
 import java.util.Map;
 
@@ -14,9 +12,9 @@ import static com.zly.diycode.topics.EntitiesContract.*;
 
 public interface TopicsData {
 
-    void getTopics(Map<String, Object> params, Callback<List<EntitiesContract.Topics>> callback);
+    void getTopics(Map<String, Object> params, Callback<List<Topics>> callback);
 
-    void getTopics(String nodeId, String limit, Callback<List<EntitiesContract.Topics>> callback);
+    void getTopics(String nodeId, String limit, Callback<List<Topics>> callback);
 
     void create(Map<String, Object> params, Callback<Topics> callback);
 
@@ -24,7 +22,7 @@ public interface TopicsData {
 
     void delete(String id, Callback<Boolean> callback);
 
-    void getById(String id, Callback<EntitiesContract.Topics> callback);
+    void getById(String id, Callback<Topics> callback);
 
     void ban(String id, Callback<Boolean> callback);
 
@@ -38,5 +36,5 @@ public interface TopicsData {
 
     void getReplies(String id, Map<String, Object> params, Callback<List<Reply>> callback);
 
-    void addReplies(String topicsId, String body, Callback<Boolean> callback);
+    void addReplies(String topicsId, String body, Callback<Reply> callback);
 }

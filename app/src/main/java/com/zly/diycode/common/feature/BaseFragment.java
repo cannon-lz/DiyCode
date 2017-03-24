@@ -30,6 +30,16 @@ public class BaseFragment<DB extends ViewDataBinding, P extends IPresenter> exte
     }
 
     @Override
+    public void showLoading() {
+        mHostActivity.showLoading();
+    }
+
+    @Override
+    public void dismissLoading() {
+        mHostActivity.dismissLoading();
+    }
+
+    @Override
     public void toast(String message) {
         mHostActivity.toast(message);
     }

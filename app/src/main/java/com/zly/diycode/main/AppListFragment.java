@@ -1,7 +1,6 @@
 package com.zly.diycode.main;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +13,6 @@ import com.zly.diycode.common.adapter.BaseAdapter;
 import com.zly.diycode.common.adapter.FooterAdapter;
 import com.zly.diycode.common.feature.BaseFragment;
 import com.zly.diycode.common.feature.IPresenter;
-import com.zly.diycode.common.feature.VoidPresenter;
 import com.zly.diycode.databinding.FragmentListBinding;
 import com.zly.diycode.topics.EntitiesContract;
 
@@ -26,6 +24,7 @@ public class AppListFragment<Presenter extends IPresenter> extends BaseFragment<
         implements SwipeRefreshLayout.OnRefreshListener {
 
     protected BaseAdapter mAdapter;
+    private boolean mIsLoadingMore;
 
     @Override
     protected int getLayoutRes() {
@@ -35,7 +34,9 @@ public class AppListFragment<Presenter extends IPresenter> extends BaseFragment<
     @Override
     protected void initView(View root, @Nullable Bundle savedInstanceState) {
         mDataBinding.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new FooterAdapter(getActivity(), new EntitiesContract.ItemProgress());
+        EntitiesContract.ItemProgress itemProgress = new EntitiesContract.ItemProgress();
+        itemProgress.setStatus(EntitiesContract.ItemProgress.STATUS_LOADING);
+        mAdapter = new FooterAdapter(getActivity(), itemProgress);
         mAdapter.setPresenter(createOnItemClickListener());
         mDataBinding.setAdapter(mAdapter);
         mDataBinding.srlRefreshControl.setOnRefreshListener(this);
@@ -60,6 +61,13 @@ public class AppListFragment<Presenter extends IPresenter> extends BaseFragment<
 
     }
 
+    /**
+     * call this load complete.
+     */
+    public void setLoadMoreComplete() {
+        mIsLoadingMore = false;
+    }
+
     private class OnBottomScrollListener extends RecyclerView.OnScrollListener {
 
         @Override
@@ -72,7 +80,11 @@ public class AppListFragment<Presenter extends IPresenter> extends BaseFragment<
             int visibleItemPosition = manager.findLastCompletelyVisibleItemPosition();
             RecyclerView.Adapter adapter = recyclerView.getAdapter();
             if (visibleItemPosition == adapter.getItemCount() - 1 && newState == RecyclerView.SCROLL_STATE_IDLE) {
+                if (mIsLoadingMore) {
+                    return;
+                }
                 Log.i("RecyclerViewScroll", "Bottom");
+                mIsLoadingMore = true;
                 onDragBottom();
             }
         }
