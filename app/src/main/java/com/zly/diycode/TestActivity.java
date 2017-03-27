@@ -1,9 +1,12 @@
 package com.zly.diycode;
 
+import android.databinding.BindingAdapter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
+import com.zly.diycode.binding.DataBindingAdapter;
 import com.zly.diycode.widget.AppWebView;
 
 import java.io.IOException;
@@ -159,19 +162,10 @@ public class TestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final AppWebView webView = new AppWebView(this);
-        String c = null;
-        try {
-            InputStream open = getAssets().open("content.txt");
-            Scanner scanner = new Scanner(open);
-            scanner.useDelimiter("\\A");
-            c = scanner.next();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        webView.loadDataWithBaseURL(null, webView.addStyleAndHeader(content, null), "text/html", "utf-8", null);
 
-        setContentView(webView);
+        final TextView textView = new TextView(this);
+        DataBindingAdapter.setHtmlWithImage(textView, "<p>不错，赞一个！</p> <p>试用了一下，发现了两处问题：</p> <p>一个是文字显示不全，界面布局的问题；</p> <p>还有个是通知里的内容，每点进去一次查看详情，再返回该页面，会重复增加一个相同的消息</p> <p><img src=\"https://diycode.b0.upaiyun.com/photo/2017/f68df71ee7849e20da78b9483621c047.png\" width=\"216px\" height=\"384px\" alt=\"\"></p> <p><img src=\"https://diycode.b0.upaiyun.com/photo/2017/559442d7f84c345a646d0d1b69377c0f.png\" width=\"216px\" height=\"384px\" alt=\"\"></p> <p>不过还是很 nice 啊，继续加油~！</p>");
+        setContentView(textView);
 
 
         /*Retrofit.Builder builder = new Retrofit.Builder();

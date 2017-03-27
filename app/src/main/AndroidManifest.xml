@@ -25,10 +25,6 @@
             android:name=".user.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".topics.details.TopicsDetailActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".TestActivity" />
-        <activity
             android:name=".web.WebActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 

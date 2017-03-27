@@ -25,6 +25,7 @@ public class TopicsListPresenter implements TopicsContract.ListPresenter {
 
     @Override
     public void getTopics() {
+        mOffset = 0;
         mDataRe.getTopics("", String.valueOf(mOffset), new Callback<List<Topics>>() {
             @Override
             public void onSuccess(List<Topics> topicses) {
