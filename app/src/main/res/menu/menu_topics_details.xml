@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_collection"
-        android:title="collection"
+        android:id="@+id/action_favorite"
+        android:title="@string/favorite"
         app:actionLayout="@layout/menu_action_favorite"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/action_fov"
-        android:title="fov"
-        app:actionLayout="@layout/layout_action"
-        app:showAsAction="always" />
+        android:id="@+id/action_collection"
+        android:title="@string/collection"
+        app:actionLayout="@layout/menu_action_collection"
+        app:showAsAction="ifRoom" />
 </menu>

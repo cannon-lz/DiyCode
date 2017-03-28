@@ -2,14 +2,14 @@ package com.zly.diycode.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.databinding.DataBindingUtil;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
+import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.zly.diycode.R;
-import com.zly.diycode.databinding.LayoutActionBinding;
 
 /**
  * Created by zhangly on 2017/3/27.
@@ -17,9 +17,8 @@ import com.zly.diycode.databinding.LayoutActionBinding;
 
 public class ToggleActionLayout extends RelativeLayout {
 
-    private LayoutActionBinding mLayoutBinding;
-
-    private Drawable mToggleDrawable;
+    private ToggleButton mBtnToggle;
+    private TextView mTvBadger;
 
     public ToggleActionLayout(Context context) {
         this(context, null);
@@ -31,24 +30,21 @@ public class ToggleActionLayout extends RelativeLayout {
 
     public ToggleActionLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mLayoutBinding = LayoutActionBinding.bind(this);
-
+        inflate(context, R.layout.layout_action, this);
+        mTvBadger = (TextView) findViewById(R.id.badger);
+        mBtnToggle = (ToggleButton) findViewById(R.id.toggle);
         final TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.ToggleActionLayout, 0, 0);
-        mToggleDrawable = ta.getDrawable(R.styleable.ToggleActionLayout_toggleDrawable);
-
-        mLayoutBinding.toggle.setButtonDrawable(mToggleDrawable);
+        Drawable toggleDrawable = ta.getDrawable(R.styleable.ToggleActionLayout_toggleDrawable);
+        mBtnToggle.setButtonDrawable(toggleDrawable);
+        setBadger(ta.getString(R.styleable.ToggleActionLayout_badger));
         ta.recycle();
     }
 
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-
-
-    }
-
     public void setBadger(String badger) {
-        mLayoutBinding.badger.setText(badger);
+        mTvBadger.setText(badger);
     }
 
+    public void setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener listener) {
+        mBtnToggle.setOnCheckedChangeListener(listener);
+    }
 }

@@ -44,7 +44,7 @@ public class TopicsDetailsPresenter implements TopicsContract.DetailsPresenter {
             public void onSuccess(EntitiesContract.Topics topics) {
                 topics.setItemViewType(R.layout.item_topics_detail);
                 mDetailsAndReplies.add(0, topics);
-                mView.showDetails(mDetailsAndReplies);
+                mView.showDetails(mDetailsAndReplies, true);
             }
 
             @Override
@@ -61,7 +61,7 @@ public class TopicsDetailsPresenter implements TopicsContract.DetailsPresenter {
             @Override
             public void onSuccess(List<EntitiesContract.Reply> replies) {
                 mDetailsAndReplies.addAll(replies);
-                mView.showDetails(mDetailsAndReplies);
+                mView.showDetails(mDetailsAndReplies, false);
             }
 
             @Override

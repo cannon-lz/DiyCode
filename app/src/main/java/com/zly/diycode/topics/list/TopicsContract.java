@@ -34,10 +34,11 @@ public interface TopicsContract {
     interface DetailsPresenter extends IPresenter {
 
         void getDetailsAndReplies();
+
     }
 
     interface DetailsView extends IView {
 
-        void showDetails(List<Item> datas);
+        void showDetails(List<Item> datas, boolean isHeaderLoadComplete);
     }
 }

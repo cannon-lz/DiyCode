@@ -15,4 +15,6 @@
     <string name="reply_floor" formatted="false">%s 楼 . %s</string>
     <string name="reply_who" formatted="false">#%s楼 @%s</string>
     <string name="hint_load_complete">加载完啦</string>
+    <string name="favorite">favorite</string>
+    <string name="collection">collection</string>
 </resources>

@@ -2,5 +2,6 @@
 <resources>
     <declare-styleable name="ToggleActionLayout">
         <attr name="toggleDrawable" format="reference" />
+        <attr name="badger" format="string" />
     </declare-styleable>
 </resources>

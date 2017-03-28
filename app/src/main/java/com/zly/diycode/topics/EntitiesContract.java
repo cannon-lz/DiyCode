@@ -154,7 +154,6 @@ public interface EntitiesContract {
     class Topics implements Item, Parcelable {
 
         private int mItemLayoutType;
-
         private String userPhoto;
         private String username;
         private String note;
@@ -164,6 +163,7 @@ public interface EntitiesContract {
         private String subTitle;
         private String content;
         private String replyCount;
+        private String likeCount;
 
         public Topics() {
         }
@@ -179,6 +179,7 @@ public interface EntitiesContract {
             subTitle = in.readString();
             content = in.readString();
             replyCount = in.readString();
+            likeCount = in.readString();
         }
 
         @Override
@@ -193,6 +194,7 @@ public interface EntitiesContract {
             dest.writeString(subTitle);
             dest.writeString(content);
             dest.writeString(replyCount);
+            dest.writeString(likeCount);
         }
 
         @Override
@@ -282,6 +284,14 @@ public interface EntitiesContract {
 
         public void setReplyCount(String replyCount) {
             this.replyCount = replyCount;
+        }
+
+        public String getLikeCount() {
+            return likeCount;
+        }
+
+        public void setLikeCount(String likeCount) {
+            this.likeCount = likeCount;
         }
 
         @Override

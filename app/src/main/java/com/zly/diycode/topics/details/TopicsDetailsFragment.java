@@ -31,6 +31,17 @@ import static android.app.Activity.RESULT_OK;
 public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresenter>
         implements TopicsContract.DetailsView, BaseAdapter.Presenter {
 
+    public interface OnLoadDataCompleteListener {
+
+        void onComplete(EntitiesContract.Topics topics);
+    }
+
+    private OnLoadDataCompleteListener mCompleteListener;
+
+    public void setOnLoadCompleteListener(OnLoadDataCompleteListener completeListener) {
+        this.mCompleteListener = completeListener;
+    }
+
     @Override
     protected TopicsDetailsPresenter createPresenter() {
         return new TopicsDetailsPresenter(this, Navigation.IntentReceiver.getInstance().getNewsId((TopicsDetailsActivity) getActivity()));
@@ -51,10 +62,14 @@ public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresente
     }
 
     @Override
-    public void showDetails(List<Item> datas) {
+    public void showDetails(List<Item> datas, boolean isHeaderLoadComplete) {
         mDataBinding.srlRefreshControl.setRefreshing(false);
         mAdapter.setDataList(datas);
         setItemProgress();
+        if (mCompleteListener != null && isHeaderLoadComplete) {
+            EntitiesContract.Topics topics = mAdapter.getItemByType(R.layout.item_topics_detail, 0);
+            mCompleteListener.onComplete(topics);
+        }
     }
 
     @Override

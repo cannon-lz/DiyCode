@@ -252,6 +252,7 @@ public class RespPaper implements Mapper<Topics> {
         topics.setUserPhoto(getUser().getUserPhoto());
         topics.setContent(bodyHtml);
         topics.setReplyCount(String.valueOf(repliesCount));
+        topics.setLikeCount(String.valueOf(likeCount));
         return topics;
     }
 }
