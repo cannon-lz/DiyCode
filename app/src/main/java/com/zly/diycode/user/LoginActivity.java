@@ -44,8 +44,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, VoidPresen
             @Override
             public void onSuccess(User user) {
                 dismissLoading();
-                finish();
                 setResult(RESULT_OK);
+                finish();
             }
 
             @Override
