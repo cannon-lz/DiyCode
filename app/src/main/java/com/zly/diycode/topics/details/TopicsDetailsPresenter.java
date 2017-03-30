@@ -5,8 +5,8 @@ import android.support.v4.util.ArrayMap;
 import com.zly.diycode.R;
 import com.zly.diycode.common.adapter.Item;
 import com.zly.diycode.data.Callback;
-import com.zly.diycode.data.TopicsData;
-import com.zly.diycode.data.TopicsRemoteData;
+import com.zly.diycode.data.topics.TopicsData;
+import com.zly.diycode.data.topics.TopicsRemoteData;
 import com.zly.diycode.topics.EntitiesContract;
 import com.zly.diycode.topics.list.TopicsContract;
 
@@ -23,6 +23,7 @@ public class TopicsDetailsPresenter implements TopicsContract.DetailsPresenter {
     private TopicsData mData;
     private TopicsContract.DetailsView mView;
     private String mTopicsId;
+    private int mOffset;
     private List<Item> mDetailsAndReplies = new ArrayList<>();
 
     public TopicsDetailsPresenter(TopicsContract.DetailsView view, String topicsId) {
@@ -34,8 +35,85 @@ public class TopicsDetailsPresenter implements TopicsContract.DetailsPresenter {
     @Override
     public void getDetailsAndReplies() {
         mDetailsAndReplies.clear();
+        mOffset = 0;
         getDetails();
         getReplies();
+    }
+
+    @Override
+    public void follow() {
+        mView.showLoading();
+        mData.follow(mTopicsId, new Callback<Boolean>() {
+            @Override
+            public void onSuccess(Boolean success) {
+                mView.dismissLoading();
+                mView.toast("关注成功");
+                mView.setFollowChecked(true);
+            }
+
+            @Override
+            public void onError(String messgae) {
+                mView.dismissLoading();
+                mView.toast("网络错误");
+            }
+        });
+    }
+
+    @Override
+    public void unFollow() {
+        mView.showLoading();
+        mData.unFollow(mTopicsId, new Callback<Boolean>() {
+            @Override
+            public void onSuccess(Boolean success) {
+                mView.dismissLoading();
+                mView.toast("取消关注");
+                mView.setFollowChecked(false);
+            }
+
+            @Override
+            public void onError(String messgae) {
+                mView.dismissLoading();
+                mView.toast("网络错误");
+            }
+        });
+    }
+
+    @Override
+    public void favorite() {
+        mView.showLoading();
+        mData.favorite(mTopicsId, new Callback<Boolean>() {
+            @Override
+            public void onSuccess(Boolean success) {
+                mView.dismissLoading();
+                mView.toast("收藏成功");
+                mView.setFavoriteChecked(true);
+            }
+
+            @Override
+            public void onError(String messgae) {
+                mView.dismissLoading();
+                mView.toast("网络错误");
+            }
+        });
+    }
+
+    @Override
+    public void unFavorite() {
+        mView.showLoading();
+        mData.unFavorite(mTopicsId, new Callback<Boolean>() {
+            @Override
+            public void onSuccess(Boolean success) {
+                mView.dismissLoading();
+                mView.toast("取消收藏");
+                mView.setFavoriteChecked(false);
+            }
+
+            @Override
+            public void onError(String messgae) {
+                mView.dismissLoading();
+                mView.toast("网络错误");
+            }
+        });
     }
 
     private void getDetails() {
@@ -56,10 +134,11 @@ public class TopicsDetailsPresenter implements TopicsContract.DetailsPresenter {
 
     private void getReplies() {
         Map<String, Object> params = new ArrayMap<>();
-        mData.getReplies(mTopicsId, params, new Callback<List<EntitiesContract.Reply>>() {
+        mData.getReplies(mTopicsId, mOffset, new Callback<List<EntitiesContract.Reply>>() {
 
             @Override
             public void onSuccess(List<EntitiesContract.Reply> replies) {
+                mOffset += replies.size();
                 mDetailsAndReplies.addAll(replies);
                 mView.showDetails(mDetailsAndReplies, false);
             }

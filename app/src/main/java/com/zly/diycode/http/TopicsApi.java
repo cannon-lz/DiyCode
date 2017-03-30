@@ -46,7 +46,7 @@ public interface TopicsApi {
     @POST("topics/{id}/favorite.json")
     Call<RespResult> favorite(@Path("id") String id);
 
-    @POST("topics/:id/unfavorite.json")
+    @POST("topics/{id}/unfavorite.json")
     Call<RespResult> unFavorite(@Path("id") String id);
 
     @POST("topics/{id}/follow.json")

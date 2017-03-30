@@ -1,12 +1,14 @@
-package com.zly.diycode.data;
+package com.zly.diycode.data.topics;
 
 import android.support.v4.util.ArrayMap;
 
+import com.zly.diycode.data.Callback;
 import com.zly.diycode.http.ApiConfig;
 import com.zly.diycode.http.RetrofitCallback;
 import com.zly.diycode.http.TopicsApi;
 import com.zly.diycode.http.entities.RespPaper;
 import com.zly.diycode.http.entities.RespReply;
+import com.zly.diycode.http.entities.RespResult;
 
 import java.util.List;
 import java.util.Map;
@@ -71,38 +73,52 @@ public class TopicsRemoteData implements TopicsData {
 
     @Override
     public void favorite(String id, Callback<Boolean> callback) {
-
+        TopicsApi api = ApiConfig.getInstance().getApi(TopicsApi.class);
+        Call<RespResult> call = api.favorite(id);
+        call.enqueue(new RetrofitCallback<RespResult, Boolean>(callback));
     }
 
     @Override
     public void unFavorite(String id, Callback<Boolean> callback) {
-
+        TopicsApi api = ApiConfig.getInstance().getApi(TopicsApi.class);
+        Call<RespResult> call = api.unFavorite(id);
+        call.enqueue(new RetrofitCallback<RespResult, Boolean>(callback));
     }
 
     @Override
     public void follow(String id, Callback<Boolean> callback) {
-
+        TopicsApi api = ApiConfig.getInstance().getApi(TopicsApi.class);
+        Call<RespResult> call = api.follow(id);
+        call.enqueue(new RetrofitCallback<RespResult, Boolean>(callback));
     }
 
     @Override
     public void unFollow(String id, Callback<Boolean> callback) {
-
+        TopicsApi api = ApiConfig.getInstance().getApi(TopicsApi.class);
+        Call<RespResult> call = api.unFollow(id);
+        call.enqueue(new RetrofitCallback<RespResult, Boolean>(callback));
     }
 
     @Override
     public void getReplies(String id, Map<String, Object> params, Callback<List<Reply>> callback) {
         TopicsApi api = ApiConfig.getInstance().getApi(TopicsApi.class);
-        Map<String, Object> p = new ArrayMap<>();
-        Call<List<RespReply>> call = api.getReplies(id, p);
+        Call<List<RespReply>> call = api.getReplies(id, params);
         call.enqueue(new RetrofitCallback<List<RespReply>, List<Reply>>(callback));
+    }
 
+    @Override
+    public void getReplies(String id, int offset, Callback<List<Reply>> callback) {
+        TopicsApi api = ApiConfig.getInstance().getApi(TopicsApi.class);
+        Map<String, Object> params = new ArrayMap<>();
+        params.put("offset", offset);
+        Call<List<RespReply>> call = api.getReplies(id, params);
+        call.enqueue(new RetrofitCallback<List<RespReply>, List<Reply>>(callback));
     }
 
     @Override
     public void addReplies(String topicsId, String body, Callback<Reply> callback) {
         TopicsApi api = ApiConfig.getInstance().getApi(TopicsApi.class);
         Map<String, Object> params = new ArrayMap<>();
-        params.put("access_token", "0717b67273cb897ac2a9b7e5f0f4b78a2837cd14befc4bb3105516a8514275eb");
         params.put("body", body);
         Call<RespReply> call = api.addReplies(topicsId, params);
         call.enqueue(new RetrofitCallback<RespReply, Reply>(callback));

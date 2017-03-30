@@ -1,38 +1,64 @@
 package com.zly.diycode.user;
 
-import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
+import android.text.TextUtils;
 
 import com.zly.diycode.R;
+import com.zly.diycode.common.feature.BaseActivity;
+import com.zly.diycode.common.feature.VoidPresenter;
+import com.zly.diycode.data.Callback;
+import com.zly.diycode.data.user.UserRemoteData;
 import com.zly.diycode.databinding.ActivityLoginBinding;
-import com.zly.diycode.main.MainActivity;
+import com.zly.diycode.http.Config;
 
 /**
  * Created by zhangly on 2017/3/11.
  */
 
-public class LoginActivity extends AppCompatActivity {
-
-    private ActivityLoginBinding mDataBinding;
+public class LoginActivity extends BaseActivity<ActivityLoginBinding, VoidPresenter> {
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-        mDataBinding.setClickHandler(new ClickHandler());
+    protected int getLayoutRes() {
+        return R.layout.activity_login;
+    }
+
+    @Override
+    protected void initView(@Nullable Bundle savedInstanceState) {
+        mDataBinding.setClickHandler(this);
         mDataBinding.setUser(new User());
     }
 
-    public class ClickHandler {
+    @Override
+    protected boolean isNeedInsertToolbar() {
+        return false;
+    }
 
-        public void clickLogin(String username, String password) {
-            Toast.makeText(LoginActivity.this, "username " + username + "password " + password, Toast.LENGTH_LONG).show();
-
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+    public void clickLogin(String username, String password) {
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
+            toast("帐号或密码不能为空");
+            return;
         }
+        showLoading();
+        UserRemoteData.getInstance().login(Config.GRANT_TYPE_PASSWORD, username, password, new Callback<User>() {
+            @Override
+            public void onSuccess(User user) {
+                dismissLoading();
+                finish();
+                setResult(RESULT_OK);
+            }
+
+            @Override
+            public void onError(String messgae) {
+                dismissLoading();
+                toast("帐号或密码错误");
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setResult(RESULT_CANCELED);
     }
 }
