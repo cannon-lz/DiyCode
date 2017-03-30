@@ -53,7 +53,7 @@ public class AppWebView extends WebView {
                                           boolean isShowImagePreview, String css) {
         if (isEmpty(content) || isEmpty(content.trim())) return "";
 
-        content = content.replaceAll("(<img[^>]*?)\\s+width\\s*=\\s*\\S+", "$1");
+        /*content = content.replaceAll("(<img[^>]*?)\\s+width\\s*=\\s*\\S+", "$1");
         content = content.replaceAll("(<img[^>]*?)\\s+height\\s*=\\s*\\S+", "$1");
 
         // 添加点击图片放大支持
@@ -62,13 +62,13 @@ public class AppWebView extends WebView {
             content = content.replaceAll("<img[^>]+src=\"([^\"\'\\s]+)\"[^>]*>",
                     "<img src=\"$1\" onClick=\"javascript:mWebViewImageListener.showImagePreview('$1')\"/>");
             content = content.replaceAll(
-                    "<a\\s+[^<>]*href=[\"\']([^\"\']+)[\"\'][^<>]*>\\s*<img\\s+src=\"([^\"\']+)\"[^<>]*/>\\s*</a>",
+                    "<a\\s+[^<>]*href=[\"\']([^\"\']+)[\"\'][^<>]*>\\s*<img\\s+src=\"([^\"\']+)\"[^<>]*//*>\\s*</a>",
                     "<a href=\"$1\"><img src=\"$2\"/></a>");
         }
 
         content = content.replaceAll("(<table[^>]*?)\\s+border\\s*=\\s*\\S+", "$1");
         content = content.replaceAll("(<table[^>]*?)\\s+cellspacing\\s*=\\s*\\S+", "$1");
-        content = content.replaceAll("(<table[^>]*?)\\s+cellpadding\\s*=\\s*\\S+", "$1");
+        content = content.replaceAll("(<table[^>]*?)\\s+cellpadding\\s*=\\s*\\S+", "$1");*/
 
         return String.format("<!DOCTYPE html>"
                 + "<html><head>"

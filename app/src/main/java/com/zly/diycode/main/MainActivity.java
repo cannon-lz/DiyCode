@@ -87,7 +87,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@Nullable MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -110,7 +110,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
         return true;
     }
 
-    private class ContentPagerAdapter extends FragmentPagerAdapter {
+    private static class ContentPagerAdapter extends FragmentPagerAdapter {
 
         private ArrayMap<String, Fragment> mFragments = new ArrayMap<>(3);
 

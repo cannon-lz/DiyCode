@@ -21,6 +21,7 @@ public class RetrofitCallback<T, R> implements Callback<T> {
         this.mCallback = callback;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void onResponse(Call<T> call, Response<T> response) {
         if (response.isSuccessful()) {
