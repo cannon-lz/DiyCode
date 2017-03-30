@@ -2,14 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_favorite"
+        android:id="@+id/action_follow"
         android:title="@string/favorite"
-        app:actionLayout="@layout/menu_action_favorite"
+        app:actionLayout="@layout/menu_action_follow"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/action_collection"
+        android:id="@+id/action_favorite"
         android:title="@string/collection"
-        app:actionLayout="@layout/menu_action_collection"
+        app:actionLayout="@layout/menu_action_favorite"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_shared"
+        android:title="@string/shared"
+        app:actionLayout="@layout/menu_action_shared"
         app:showAsAction="ifRoom" />
 </menu>

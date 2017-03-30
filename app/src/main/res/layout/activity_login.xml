@@ -6,7 +6,7 @@
 
         <variable
             name="clickHandler"
-            type="com.zly.diycode.user.LoginActivity.ClickHandler" />
+            type="com.zly.diycode.user.LoginActivity" />
 
         <variable
             name="user"
@@ -24,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:onClick="@{() -> clickHandler.onBackPressed()}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@mipmap/icon_close" />
@@ -51,6 +52,7 @@
                 android:id="@+id/et_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
                 android:hint="@string/hint_account"
                 android:text="@={user.username}" />
         </android.support.design.widget.TextInputLayout>
@@ -70,6 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_password"
+                android:inputType="textPassword"
                 android:text="@={user.password}" />
         </android.support.design.widget.TextInputLayout>
 

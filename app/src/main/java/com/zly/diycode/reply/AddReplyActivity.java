@@ -14,7 +14,7 @@ import com.zly.diycode.common.Navigation;
 import com.zly.diycode.common.feature.BaseActivity;
 import com.zly.diycode.common.feature.VoidPresenter;
 import com.zly.diycode.data.Callback;
-import com.zly.diycode.data.TopicsRemoteData;
+import com.zly.diycode.data.topics.TopicsRemoteData;
 import com.zly.diycode.databinding.ActivityAddReplyBinding;
 import com.zly.diycode.topics.EntitiesContract;
 

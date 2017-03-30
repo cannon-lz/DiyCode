@@ -46,7 +46,7 @@ public class ApiConfig {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLogger());
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        builder.addInterceptor(interceptor);
+        builder.addInterceptor(interceptor).addInterceptor(new TokenInterceptor());
         return builder.build();
     }
 }

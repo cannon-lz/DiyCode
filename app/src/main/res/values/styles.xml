@@ -27,5 +27,20 @@
 
     <style name="ToolbarStyle" parent="Base.Widget.AppCompat.Toolbar">
         <item name="android:background">@android:color/white</item>
+        <item name="titleTextAppearance">@style/TextAppearance.Widget.AppCompat.Toolbar.Title.Gray
+        </item>
     </style>
+
+    <style name="TextAppearance.Widget.AppCompat.Toolbar.Title.Gray">
+        <item name="android:textColor">@color/textColorFeeble</item>
+    </style>
+
+    <style name="DialogNoTitle">
+        <item name="android:windowBackground">@drawable/shape_circre</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
 </resources>

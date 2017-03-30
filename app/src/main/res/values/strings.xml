@@ -17,4 +17,5 @@
     <string name="hint_load_complete">加载完啦</string>
     <string name="favorite">favorite</string>
     <string name="collection">collection</string>
+    <string name="shared">shared</string>
 </resources>

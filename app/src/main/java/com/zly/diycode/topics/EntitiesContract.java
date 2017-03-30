@@ -164,9 +164,13 @@ public interface EntitiesContract {
         private String content;
         private String replyCount;
         private String likeCount;
+        private boolean followed;
+        private boolean favorited;
+        private boolean liked;
 
         public Topics() {
         }
+
 
         protected Topics(Parcel in) {
             mItemLayoutType = in.readInt();
@@ -180,6 +184,9 @@ public interface EntitiesContract {
             content = in.readString();
             replyCount = in.readString();
             likeCount = in.readString();
+            followed = in.readByte() != 0;
+            favorited = in.readByte() != 0;
+            liked = in.readByte() != 0;
         }
 
         @Override
@@ -195,6 +202,9 @@ public interface EntitiesContract {
             dest.writeString(content);
             dest.writeString(replyCount);
             dest.writeString(likeCount);
+            dest.writeByte((byte) (followed ? 1 : 0));
+            dest.writeByte((byte) (favorited ? 1 : 0));
+            dest.writeByte((byte) (liked ? 1 : 0));
         }
 
         @Override
@@ -292,6 +302,30 @@ public interface EntitiesContract {
 
         public void setLikeCount(String likeCount) {
             this.likeCount = likeCount;
+        }
+
+        public boolean isFollowed() {
+            return followed;
+        }
+
+        public void setFollowed(boolean followed) {
+            this.followed = followed;
+        }
+
+        public boolean isFavorited() {
+            return favorited;
+        }
+
+        public void setFavorited(boolean favorited) {
+            this.favorited = favorited;
+        }
+
+        public boolean isLiked() {
+            return liked;
+        }
+
+        public void setLiked(boolean liked) {
+            this.liked = liked;
         }
 
         @Override

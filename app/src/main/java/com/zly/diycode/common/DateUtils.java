@@ -1,5 +1,6 @@
 package com.zly.diycode.common;
 
+import android.text.format.DateFormat;
 import android.util.Log;
 
 import java.text.ParseException;
@@ -12,6 +13,9 @@ import java.util.Locale;
  */
 
 public class DateUtils {
+
+    private static final String DATE_SIMPLE = "yyyy-MM-dd HH:mm:ss";
+    private static final String DATE_IN_SIMPLE = "HH:mm";
 
     public static String computePastTime(String time) {
         String result = "刚刚";
@@ -42,5 +46,13 @@ public class DateUtils {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static String format(long data) {
+        return DateFormat.format(DATE_SIMPLE, data).toString();
+    }
+
+    public static String formatIn(long data) {
+        return DateFormat.format(DATE_IN_SIMPLE, data).toString();
     }
 }

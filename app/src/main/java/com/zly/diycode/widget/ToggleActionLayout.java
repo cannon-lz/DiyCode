@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -40,8 +41,21 @@ public class ToggleActionLayout extends RelativeLayout {
         ta.recycle();
     }
 
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return true;
+    }
+
     public void setBadger(String badger) {
         mTvBadger.setText(badger);
+    }
+
+    public void setChecked(boolean checked) {
+        mBtnToggle.setChecked(checked);
+    }
+
+    public boolean isChecked() {
+        return mBtnToggle.isChecked();
     }
 
     public void setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener listener) {

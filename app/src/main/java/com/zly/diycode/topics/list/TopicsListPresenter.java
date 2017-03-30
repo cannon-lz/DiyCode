@@ -1,8 +1,8 @@
 package com.zly.diycode.topics.list;
 
 import com.zly.diycode.data.Callback;
-import com.zly.diycode.data.TopicsData;
-import com.zly.diycode.data.TopicsRemoteData;
+import com.zly.diycode.data.topics.TopicsData;
+import com.zly.diycode.data.topics.TopicsRemoteData;
 
 import java.util.List;
 

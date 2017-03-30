@@ -60,9 +60,9 @@ public class RespPaper implements Mapper<Topics> {
     private int likeCount;
     @SerializedName("suggested_at")
     private Object suggestedAt;
-    private Object followed;
-    private Object liked;
-    private Object favorited;
+    private boolean followed;
+    private boolean liked;
+    private boolean favorited;
 
     public int getId() {
         return id;
@@ -208,27 +208,27 @@ public class RespPaper implements Mapper<Topics> {
         this.suggestedAt = suggestedAt;
     }
 
-    public Object getFollowed() {
+    public boolean getFollowed() {
         return followed;
     }
 
-    public void setFollowed(Object followed) {
+    public void setFollowed(boolean followed) {
         this.followed = followed;
     }
 
-    public Object getLiked() {
+    public boolean getLiked() {
         return liked;
     }
 
-    public void setLiked(Object liked) {
+    public void setLiked(boolean liked) {
         this.liked = liked;
     }
 
-    public Object getFavorited() {
+    public boolean getFavorited() {
         return favorited;
     }
 
-    public void setFavorited(Object favorited) {
+    public void setFavorited(boolean favorited) {
         this.favorited = favorited;
     }
 
@@ -253,6 +253,9 @@ public class RespPaper implements Mapper<Topics> {
         topics.setContent(bodyHtml);
         topics.setReplyCount(String.valueOf(repliesCount));
         topics.setLikeCount(String.valueOf(likeCount));
+        topics.setFollowed(followed);
+        topics.setFavorited(favorited);
+        topics.setLiked(liked);
         return topics;
     }
 }

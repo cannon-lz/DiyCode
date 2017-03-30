@@ -11,6 +11,7 @@ import com.zly.diycode.reply.AddReplyActivity;
 import com.zly.diycode.reply.ReplyMessage;
 import com.zly.diycode.topics.EntitiesContract;
 import com.zly.diycode.topics.details.TopicsDetailsActivity;
+import com.zly.diycode.user.LoginActivity;
 import com.zly.diycode.web.WebActivity;
 
 /**
@@ -20,6 +21,7 @@ import com.zly.diycode.web.WebActivity;
 public class Navigation {
 
     public static final int REQ_CODE_ADD_REPLY = 1;
+    public static final int REQ_CODE_LOGIN = 2;
 
     private static final Navigation INSTANCE = new Navigation();
 
@@ -55,6 +57,18 @@ public class Navigation {
         Intent intent = new Intent(fragment.getActivity(), AddReplyActivity.class);
         intent.putExtra("replyMessage", replyMessage);
         fragment.startActivityForResult(intent, REQ_CODE_ADD_REPLY);
+    }
+
+    public void openLogin(@NonNull Context context) {
+        Intent intent = new Intent(context, LoginActivity.class);
+        if (context instanceof Activity) {
+            ((Activity) context).startActivityForResult(intent, REQ_CODE_LOGIN);
+        }
+    }
+
+    public void openLogin(@NonNull Fragment fragment) {
+        Intent intent = new Intent(fragment.getActivity(), LoginActivity.class);
+        fragment.startActivityForResult(intent, REQ_CODE_LOGIN);
     }
 
     public static class IntentReceiver {

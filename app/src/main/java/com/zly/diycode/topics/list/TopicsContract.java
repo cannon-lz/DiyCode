@@ -35,10 +35,22 @@ public interface TopicsContract {
 
         void getDetailsAndReplies();
 
+        void follow();
+
+        void unFollow();
+
+        void favorite();
+
+        void unFavorite();
+
     }
 
     interface DetailsView extends IView {
 
         void showDetails(List<Item> datas, boolean isHeaderLoadComplete);
+
+        void setFollowChecked(boolean checked);
+
+        void setFavoriteChecked(boolean checked);
     }
 }

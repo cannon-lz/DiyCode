@@ -7,5 +7,5 @@
         android:layout_height="50dp"
         android:padding="6dp"
         app:badger="@null"
-        app:toggleDrawable="@drawable/selector_collection" />
+        app:toggleDrawable="@drawable/ic_action_shared" />
 </layout>

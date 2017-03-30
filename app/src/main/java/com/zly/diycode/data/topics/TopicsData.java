@@ -1,5 +1,7 @@
-package com.zly.diycode.data;
+package com.zly.diycode.data.topics;
 
+
+import com.zly.diycode.data.Callback;
 
 import java.util.List;
 import java.util.Map;
@@ -35,6 +37,8 @@ public interface TopicsData {
     void unFollow(String id, Callback<Boolean> callback);
 
     void getReplies(String id, Map<String, Object> params, Callback<List<Reply>> callback);
+
+    void getReplies(String id, int offset, Callback<List<Reply>> callback);
 
     void addReplies(String topicsId, String body, Callback<Reply> callback);
 }

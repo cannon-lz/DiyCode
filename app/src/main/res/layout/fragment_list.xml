@@ -12,7 +12,7 @@
             type="com.zly.diycode.common.adapter.BaseAdapter" />
     </data>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -41,5 +41,5 @@
             android:text="@string/hint_not_content"
             android:textSize="20sp"
             android:visibility="gone" />
-    </FrameLayout>
+    </LinearLayout>
 </layout>
