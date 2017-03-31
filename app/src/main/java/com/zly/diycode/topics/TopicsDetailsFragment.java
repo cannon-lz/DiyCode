@@ -17,7 +17,7 @@ import com.zly.diycode.common.adapter.BaseAdapter;
 import com.zly.diycode.common.adapter.DataBindingViewHolder;
 import com.zly.diycode.common.adapter.Item;
 import com.zly.diycode.databinding.ItemTopicsDetailBinding;
-import com.zly.diycode.main.base.AppListFragment;
+import com.zly.diycode.list.AppListFragment;
 import com.zly.diycode.editor.EditRequester;
 import com.zly.diycode.widget.AppWebView;
 import com.zly.diycode.widget.ToggleActionLayout;

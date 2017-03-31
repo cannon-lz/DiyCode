@@ -1,4 +1,4 @@
-package com.zly.diycode.main.base;
+package com.zly.diycode.list;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

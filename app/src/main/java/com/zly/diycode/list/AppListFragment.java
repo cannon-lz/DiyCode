@@ -1,7 +1,5 @@
-package com.zly.diycode.main.base;
+package com.zly.diycode.list;
 
-import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;

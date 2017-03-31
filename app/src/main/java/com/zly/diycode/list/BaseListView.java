@@ -1,7 +1,6 @@
-package com.zly.diycode.main.base;
+package com.zly.diycode.list;
 
 import com.zly.diycode.common.feature.IView;
-import com.zly.diycode.topics.EntitiesContract;
 
 import java.util.List;
 

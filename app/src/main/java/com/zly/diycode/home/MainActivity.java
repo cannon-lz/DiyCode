@@ -1,4 +1,4 @@
-package com.zly.diycode.main.base;
+package com.zly.diycode.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,18 +16,25 @@ import android.view.MenuItem;
 
 import com.zly.diycode.R;
 import com.zly.diycode.common.Navigation;
+import com.zly.diycode.common.UserManager;
 import com.zly.diycode.common.feature.BaseActivity;
 import com.zly.diycode.common.feature.VoidPresenter;
+import com.zly.diycode.data.Callback;
+import com.zly.diycode.data.user.UserData;
+import com.zly.diycode.data.user.UserRemoteData;
 import com.zly.diycode.databinding.ActivityMainBinding;
+import com.zly.diycode.databinding.NavHeaderDrawerBinding;
 import com.zly.diycode.editor.EditRequester;
-import com.zly.diycode.main.NewsFragment;
-import com.zly.diycode.main.TopicsFragment;
+import com.zly.diycode.home.NewsFragment;
+import com.zly.diycode.home.TopicsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresenter>
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private NavHeaderDrawerBinding mNavHeaderDrawerBinding;
 
     @Override
     protected int getLayoutRes() {
@@ -42,16 +49,22 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
         ViewCompat.setElevation(toolbar, 0);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        DrawerLayout drawer = mDataBinding.drawerLayout;
+        final DrawerLayout drawer = mDataBinding.drawerLayout;
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        mNavHeaderDrawerBinding = NavHeaderDrawerBinding.inflate(getLayoutInflater());
+        mDataBinding.navView.addHeaderView(mNavHeaderDrawerBinding.getRoot());
+
+
         NavigationView navigationView = mDataBinding.navView;
         navigationView.setNavigationItemSelectedListener(this);
         mDataBinding.views.tabLayout.setupWithViewPager(mDataBinding.views.flContent);
         mDataBinding.views.flContent.setAdapter(new ContentPagerAdapter(getSupportFragmentManager()));
+
+        getMeInfo();
     }
 
     @Override
@@ -71,19 +84,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -94,20 +101,25 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@Nullable MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
+        if (id == R.id.nav_topics || id == R.id.nav_favorite
+                || id == R.id.nav_replies || id == R.id.action_shared) {
+            if (!checkLogin(null)) {
+                return false;
+            }
+        }
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_topics) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_favorite) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_replies) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_shared) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_abort) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_setting) {
 
         }
 
@@ -120,6 +132,22 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
         EditRequester editRequester = new EditRequester();
         editRequester.setType(EditRequester.TYPE_CREATE_PAPER);
         Navigation.getInstance().openEditor(this, editRequester);
+    }
+
+    private void getMeInfo() {
+        if (UserManager.getInstance().isLogin()) {
+            UserRemoteData.getInstance().getMeInfo(new Callback<MeModel>() {
+                @Override
+                public void onSuccess(MeModel meModel) {
+                    mNavHeaderDrawerBinding.setMe(meModel);
+                }
+
+                @Override
+                public void onError(String messgae) {
+
+                }
+            });
+        }
     }
 
     private static class ContentPagerAdapter extends FragmentPagerAdapter {

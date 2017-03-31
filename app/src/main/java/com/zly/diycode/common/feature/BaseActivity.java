@@ -89,7 +89,7 @@ public class BaseActivity<DB extends ViewDataBinding, P extends IPresenter> exte
             Navigation.getInstance().openLogin(this);
             return false;
         }
-
+        mCheckLoginCallback.onSuccess(null);
         return true;
     }
 

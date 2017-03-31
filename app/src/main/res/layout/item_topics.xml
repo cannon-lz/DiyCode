@@ -19,7 +19,7 @@
 
         <variable
             name="presenter"
-            type="com.zly.diycode.main.base.BaseListFragment" />
+            type="com.zly.diycode.list.BaseListFragment" />
     </data>
 
     <android.support.constraint.ConstraintLayout

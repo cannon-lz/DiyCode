@@ -6,7 +6,7 @@
     <data>
         <variable
             name="presenter"
-            type="com.zly.diycode.main.base.MainActivity"/>
+            type="com.zly.diycode.home.MainActivity"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout

@@ -1,9 +1,9 @@
-package com.zly.diycode.main;
+package com.zly.diycode.home;
 
 import com.zly.diycode.common.Navigation;
 import com.zly.diycode.data.topics.TopicsRemoteData;
-import com.zly.diycode.main.base.BaseListFragment;
-import com.zly.diycode.main.base.BaseListPresenter;
+import com.zly.diycode.list.BaseListFragment;
+import com.zly.diycode.list.BaseListPresenter;
 import com.zly.diycode.topics.EntitiesContract;
 
 /**

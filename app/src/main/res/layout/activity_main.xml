@@ -5,7 +5,7 @@
 
         <variable
             name="presenter"
-            type="com.zly.diycode.main.base.MainActivity" />
+            type="com.zly.diycode.home.MainActivity" />
     </data>
 
     <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -30,7 +30,6 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
-            app:headerLayout="@layout/nav_header_drawer"
             app:menu="@menu/activity_drawer_drawer" />
 
     </android.support.v4.widget.DrawerLayout>
