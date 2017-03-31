@@ -18,4 +18,7 @@
     <string name="favorite">favorite</string>
     <string name="collection">collection</string>
     <string name="shared">shared</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="hint_input_title">请输入标题</string>
+    <string name="hint_input_content">请输入正文</string>
 </resources>

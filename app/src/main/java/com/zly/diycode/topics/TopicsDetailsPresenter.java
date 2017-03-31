@@ -1,4 +1,4 @@
-package com.zly.diycode.topics.details;
+package com.zly.diycode.topics;
 
 import android.support.v4.util.ArrayMap;
 
@@ -8,7 +8,7 @@ import com.zly.diycode.data.Callback;
 import com.zly.diycode.data.topics.TopicsData;
 import com.zly.diycode.data.topics.TopicsRemoteData;
 import com.zly.diycode.topics.EntitiesContract;
-import com.zly.diycode.topics.list.TopicsContract;
+import com.zly.diycode.topics.TopicsDetailsContract;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,15 +18,15 @@ import java.util.Map;
  * Created by zhangly on 2017/3/22.
  */
 
-public class TopicsDetailsPresenter implements TopicsContract.DetailsPresenter {
+public class TopicsDetailsPresenter implements TopicsDetailsContract.Presenter {
 
     private TopicsData mData;
-    private TopicsContract.DetailsView mView;
+    private TopicsDetailsContract.View mView;
     private String mTopicsId;
     private int mOffset;
     private List<Item> mDetailsAndReplies = new ArrayList<>();
 
-    public TopicsDetailsPresenter(TopicsContract.DetailsView view, String topicsId) {
+    public TopicsDetailsPresenter(TopicsDetailsContract.View view, String topicsId) {
         this.mView = view;
         mTopicsId = topicsId;
         mData = TopicsRemoteData.getInstance();

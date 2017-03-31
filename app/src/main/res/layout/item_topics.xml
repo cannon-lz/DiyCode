@@ -19,13 +19,12 @@
 
         <variable
             name="presenter"
-            type="com.zly.diycode.topics.list.TopicsFragment" />
+            type="com.zly.diycode.main.base.BaseListFragment" />
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:background="@drawable/item_background"
         android:clickable="true"
         android:onClick="@{() -> presenter.onItemClick(item, position)}"

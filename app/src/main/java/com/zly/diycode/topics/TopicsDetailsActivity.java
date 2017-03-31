@@ -1,18 +1,12 @@
-package com.zly.diycode.topics.details;
+package com.zly.diycode.topics;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.CompoundButton;
 
 import com.zly.diycode.R;
 import com.zly.diycode.common.feature.BaseActivity;
 import com.zly.diycode.common.feature.VoidPresenter;
 import com.zly.diycode.databinding.ActivityTopicsDetalsBinding;
-import com.zly.diycode.topics.EntitiesContract;
-import com.zly.diycode.widget.ToggleActionLayout;
 
 /**
  * Created by zhangluya on 2017/3/23.
@@ -33,8 +27,12 @@ public class TopicsDetailsActivity extends BaseActivity<ActivityTopicsDetalsBind
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
         super.initView(savedInstanceState);
+        mDataBinding.setPresenter(this);
         getSupportFragmentManager().beginTransaction().add(R.id.ll_topics_host, new TopicsDetailsFragment()).commit();
     }
 
-
+    public void newReply() {
+        TopicsDetailsFragment f = (TopicsDetailsFragment) getSupportFragmentManager().getFragments().get(0);
+        f.reply(new EntitiesContract.Reply(), 0);
+    }
 }

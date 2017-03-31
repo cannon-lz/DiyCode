@@ -1,4 +1,4 @@
-package com.zly.diycode.topics.list;
+package com.zly.diycode.topics;
 
 import com.zly.diycode.common.adapter.Item;
 import com.zly.diycode.common.feature.IPresenter;
@@ -11,27 +11,9 @@ import java.util.List;
  * Created by zhangluya on 2017/3/22.
  */
 
-public interface TopicsContract {
+public interface TopicsDetailsContract {
 
-    interface ListPresenter extends IPresenter {
-
-        void getTopics();
-
-        void nextPage();
-    }
-
-    interface ListView extends IView {
-
-        void showTopics(List<EntitiesContract.Topics> datas);
-
-        void addTopics(List<EntitiesContract.Topics> datas);
-
-        void showEmptyView();
-
-        void loadMoreError();
-    }
-
-    interface DetailsPresenter extends IPresenter {
+    interface Presenter extends IPresenter {
 
         void getDetailsAndReplies();
 
@@ -45,7 +27,7 @@ public interface TopicsContract {
 
     }
 
-    interface DetailsView extends IView {
+    interface View extends IView {
 
         void showDetails(List<Item> datas, boolean isHeaderLoadComplete);
 

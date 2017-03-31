@@ -1,13 +1,11 @@
-package com.zly.diycode.topics.list;
+package com.zly.diycode.main.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.zly.diycode.R;
-import com.zly.diycode.common.Navigation;
 import com.zly.diycode.common.adapter.BaseAdapter;
-import com.zly.diycode.main.AppListFragment;
 import com.zly.diycode.topics.EntitiesContract;
 
 import java.util.List;
@@ -16,13 +14,8 @@ import java.util.List;
  * Created by zhangly on 2017/3/18.
  */
 
-public class TopicsFragment extends AppListFragment<TopicsContract.ListPresenter>
-        implements TopicsContract.ListView, BaseAdapter.Presenter {
-
-    @Override
-    protected TopicsContract.ListPresenter createPresenter() {
-        return new TopicsListPresenter(this);
-    }
+public class BaseListFragment extends AppListFragment<BaseListPresenter>
+        implements BaseListView<EntitiesContract.Topics>, BaseAdapter.Presenter {
 
     @Override
     protected void initView(View root, @Nullable Bundle savedInstanceState) {
@@ -82,6 +75,5 @@ public class TopicsFragment extends AppListFragment<TopicsContract.ListPresenter
     }
 
     public void onItemClick(EntitiesContract.Topics topics, int position) {
-        Navigation.getInstance().openDetails(getActivity(), topics.getId());
     }
 }

@@ -2,6 +2,7 @@ package com.zly.diycode.data.topics;
 
 import android.support.v4.util.ArrayMap;
 
+import com.zly.diycode.data.AbsListData;
 import com.zly.diycode.data.Callback;
 import com.zly.diycode.http.ApiConfig;
 import com.zly.diycode.http.RetrofitCallback;
@@ -9,6 +10,7 @@ import com.zly.diycode.http.TopicsApi;
 import com.zly.diycode.http.entities.RespPaper;
 import com.zly.diycode.http.entities.RespReply;
 import com.zly.diycode.http.entities.RespResult;
+import com.zly.diycode.topics.EntitiesContract;
 
 import java.util.List;
 import java.util.Map;
@@ -21,11 +23,11 @@ import static com.zly.diycode.topics.EntitiesContract.*;
  * Created by zhangluya on 2017/3/22.
  */
 
-public class TopicsRemoteData implements TopicsData {
+public class TopicsRemoteData implements TopicsData, AbsListData<Topics> {
 
     private static TopicsRemoteData sRemoteData = new TopicsRemoteData();
 
-    public static TopicsData getInstance() {
+    public static TopicsRemoteData getInstance() {
         return sRemoteData;
     }
 
@@ -122,5 +124,10 @@ public class TopicsRemoteData implements TopicsData {
         params.put("body", body);
         Call<RespReply> call = api.addReplies(topicsId, params);
         call.enqueue(new RetrofitCallback<RespReply, Reply>(callback));
+    }
+
+    @Override
+    public void getList(String nodeId, int offset, Callback<List<Topics>> callback) {
+        getTopics(nodeId, String.valueOf(offset), callback);
     }
 }

@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".main.MainActivity"
+            android:name=".main.base.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -29,9 +29,12 @@
         <activity
             android:name=".web.WebActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".reply.AddReplyActivity" />
-        <activity android:name=".topics.details.TopicsDetailsActivity" />
+        <activity android:name=".editor.EditorActivity" />
+        <activity android:name=".topics.TopicsDetailsActivity" />
+        <activity
+            android:name=".ScrollingActivity"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

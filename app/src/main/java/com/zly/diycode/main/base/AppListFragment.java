@@ -1,8 +1,12 @@
-package com.zly.diycode.main;
+package com.zly.diycode.main.base;
 
+import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -25,6 +29,7 @@ public class AppListFragment<Presenter extends IPresenter> extends BaseFragment<
 
     protected BaseAdapter mAdapter;
     private boolean mIsLoadingMore;
+    private DividerItemDecoration mItemDecoration;
 
     @Override
     protected int getLayoutRes() {
@@ -33,6 +38,9 @@ public class AppListFragment<Presenter extends IPresenter> extends BaseFragment<
 
     @Override
     protected void initView(View root, @Nullable Bundle savedInstanceState) {
+        mItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+        mItemDecoration.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.item_margin));
+        mDataBinding.rcvList.addItemDecoration(mItemDecoration);
         mDataBinding.setLayoutManager(new LinearLayoutManager(getActivity()));
         EntitiesContract.ItemProgress itemProgress = new EntitiesContract.ItemProgress();
         itemProgress.setStatus(EntitiesContract.ItemProgress.STATUS_LOADING);
@@ -59,6 +67,10 @@ public class AppListFragment<Presenter extends IPresenter> extends BaseFragment<
 
     protected void onDragBottom() {
 
+    }
+
+    public DividerItemDecoration getDefaultDividerItemDecoration() {
+        return mItemDecoration;
     }
 
     /**

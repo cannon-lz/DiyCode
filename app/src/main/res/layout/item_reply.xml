@@ -21,7 +21,7 @@
 
         <variable
             name="presenter"
-            type="com.zly.diycode.topics.details.TopicsDetailsFragment" />
+            type="com.zly.diycode.topics.TopicsDetailsFragment" />
     </data>
 
     <android.support.constraint.ConstraintLayout

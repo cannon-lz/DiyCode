@@ -1,4 +1,4 @@
-package com.zly.diycode.main;
+package com.zly.diycode.main.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,7 +6,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.util.ArrayMap;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,10 +15,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.zly.diycode.R;
+import com.zly.diycode.common.Navigation;
 import com.zly.diycode.common.feature.BaseActivity;
 import com.zly.diycode.common.feature.VoidPresenter;
 import com.zly.diycode.databinding.ActivityMainBinding;
-import com.zly.diycode.topics.list.TopicsFragment;
+import com.zly.diycode.editor.EditRequester;
+import com.zly.diycode.main.NewsFragment;
+import com.zly.diycode.main.TopicsFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresenter>
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,6 +37,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
 
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
+        mDataBinding.setPresenter(this);
         Toolbar toolbar = mDataBinding.views.toolbar;
         ViewCompat.setElevation(toolbar, 0);
         setSupportActionBar(toolbar);
@@ -110,14 +116,20 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
         return true;
     }
 
+    public void createPaper() {
+        EditRequester editRequester = new EditRequester();
+        editRequester.setType(EditRequester.TYPE_CREATE_PAPER);
+        Navigation.getInstance().openEditor(this, editRequester);
+    }
+
     private static class ContentPagerAdapter extends FragmentPagerAdapter {
 
-        private ArrayMap<String, Fragment> mFragments = new ArrayMap<>(3);
+        private List<Content> mFragments = new ArrayList<>(3);
 
         {
-            mFragments.put("Topics", new TopicsFragment());
-            mFragments.put("News", new TopicsFragment());
-            mFragments.put("Sites", new TopicsFragment());
+            mFragments.add(new Content("社区", new TopicsFragment()));
+            mFragments.add(new Content("新闻", new NewsFragment()));
+            mFragments.add(new Content("酷站", new TopicsFragment()));
         }
 
         ContentPagerAdapter(FragmentManager fm) {
@@ -126,7 +138,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
 
         @Override
         public Fragment getItem(int position) {
-            return mFragments.valueAt(position);
+            return mFragments.get(position).fragment;
         }
 
         @Override
@@ -136,7 +148,18 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return mFragments.keyAt(position);
+            return mFragments.get(position).title;
+        }
+
+        private class Content {
+
+            String title;
+            Fragment fragment;
+
+            public Content(String title, Fragment fragment) {
+                this.title = title;
+                this.fragment = fragment;
+            }
         }
     }
 }

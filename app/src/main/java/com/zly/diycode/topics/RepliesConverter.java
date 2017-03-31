@@ -1,4 +1,4 @@
-package com.zly.diycode.topics.details;
+package com.zly.diycode.topics;
 
 import android.text.Spannable;
 import android.text.Spanned;

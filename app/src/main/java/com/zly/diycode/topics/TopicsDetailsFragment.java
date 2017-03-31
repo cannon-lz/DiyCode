@@ -1,4 +1,4 @@
-package com.zly.diycode.topics.details;
+package com.zly.diycode.topics;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.webkit.WebView;
 
 import com.zly.diycode.R;
@@ -18,10 +17,8 @@ import com.zly.diycode.common.adapter.BaseAdapter;
 import com.zly.diycode.common.adapter.DataBindingViewHolder;
 import com.zly.diycode.common.adapter.Item;
 import com.zly.diycode.databinding.ItemTopicsDetailBinding;
-import com.zly.diycode.main.AppListFragment;
-import com.zly.diycode.reply.ReplyMessage;
-import com.zly.diycode.topics.EntitiesContract;
-import com.zly.diycode.topics.list.TopicsContract;
+import com.zly.diycode.main.base.AppListFragment;
+import com.zly.diycode.editor.EditRequester;
 import com.zly.diycode.widget.AppWebView;
 import com.zly.diycode.widget.ToggleActionLayout;
 
@@ -34,7 +31,7 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresenter>
-        implements TopicsContract.DetailsView, BaseAdapter.Presenter {
+        implements TopicsDetailsContract.View, BaseAdapter.Presenter {
 
     private ToggleActionLayout mTalFollow;
     private ToggleActionLayout mTalFavorite;
@@ -45,7 +42,7 @@ public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresente
     }
 
     @Override
-    protected void initView(View root, @Nullable Bundle savedInstanceState) {
+    protected void initView(android.view.View root, @Nullable Bundle savedInstanceState) {
         super.initView(root, savedInstanceState);
         setHasOptionsMenu(true);
         ActionBar actionBar = mHostActivity.getSupportActionBar();
@@ -54,6 +51,7 @@ public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresente
             actionBar.setDisplayShowHomeEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        mDataBinding.rcvList.removeItemDecoration(getDefaultDividerItemDecoration());
         mDataBinding.rcvList.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         mAdapter.addConverter(R.layout.item_topics_detail, new TopicsDetailsConverter());
         mAdapter.addConverter(R.layout.item_reply, new RepliesConverter());
@@ -83,11 +81,11 @@ public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresente
         mTalFavorite = (ToggleActionLayout) menu.findItem(R.id.action_favorite).getActionView();
         for (int i = 0; i < size; i++) {
             final MenuItem menuItem = menu.getItem(i);
-            View actionView = menuItem.getActionView();
+            android.view.View actionView = menuItem.getActionView();
             if (actionView != null) {
-                actionView.setOnClickListener(new View.OnClickListener() {
+                actionView.setOnClickListener(new android.view.View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(android.view.View v) {
                         onOptionsItemSelected(menuItem);
                     }
                 });
@@ -130,9 +128,10 @@ public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresente
         mAdapter.setDataList(datas);
         setItemProgress();
         EntitiesContract.Topics topics = mAdapter.getItemByType(R.layout.item_topics_detail, 0);
-        mTalFavorite.setChecked(topics.isFavorited());
-        mTalFollow.setChecked(topics.isFollowed());
-
+        if (topics != null) {
+            mTalFavorite.setChecked(topics.isFavorited());
+            mTalFollow.setChecked(topics.isFollowed());
+        }
     }
 
     @Override
@@ -159,11 +158,13 @@ public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresente
         Log.i("Reply", "click reply");
         if (checkLogin(null)) {
             EntitiesContract.Topics topics = mAdapter.getItemByType(R.layout.item_topics_detail, 0);
-            ReplyMessage replyMessage = new ReplyMessage();
-            replyMessage.setReply(reply);
-            replyMessage.setTopics(topics);
-            replyMessage.setFloor(String.valueOf(position));
-            Navigation.getInstance().openAddReply(this, replyMessage);
+            EditRequester editRequester = new EditRequester();
+            editRequester.setType(EditRequester.TYPE_REPLY);
+            editRequester.setPaperTitle(topics.getTitle());
+            editRequester.setPaperId(topics.getId());
+            editRequester.setFloor(String.valueOf(position));
+            editRequester.setLoginName(reply.getLoginName());
+            Navigation.getInstance().openEditor(this, editRequester);
         }
     }
 

@@ -160,6 +160,7 @@ public interface EntitiesContract {
         private String publishDate;
         private String title;
         private String id;
+        private String address;
         private String subTitle;
         private String content;
         private String replyCount;
@@ -180,6 +181,7 @@ public interface EntitiesContract {
             publishDate = in.readString();
             title = in.readString();
             id = in.readString();
+            address = in.readString();
             subTitle = in.readString();
             content = in.readString();
             replyCount = in.readString();
@@ -198,6 +200,7 @@ public interface EntitiesContract {
             dest.writeString(publishDate);
             dest.writeString(title);
             dest.writeString(id);
+            dest.writeString(address);
             dest.writeString(subTitle);
             dest.writeString(content);
             dest.writeString(replyCount);
@@ -278,6 +281,14 @@ public interface EntitiesContract {
 
         public void setId(String id) {
             this.id = id;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
         }
 
         public String getSubTitle() {

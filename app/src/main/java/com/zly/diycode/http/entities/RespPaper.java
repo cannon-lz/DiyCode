@@ -1,8 +1,15 @@
 package com.zly.diycode.http.entities;
 
+import android.text.TextUtils;
+
 import com.google.gson.annotations.SerializedName;
 import com.zly.diycode.common.DateUtils;
 import com.zly.diycode.data.Mapper;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import okhttp3.HttpUrl;
 
 import static com.zly.diycode.topics.EntitiesContract.*;
 
@@ -63,6 +70,15 @@ public class RespPaper implements Mapper<Topics> {
     private boolean followed;
     private boolean liked;
     private boolean favorited;
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public int getId() {
         return id;
@@ -256,6 +272,15 @@ public class RespPaper implements Mapper<Topics> {
         topics.setFollowed(followed);
         topics.setFavorited(favorited);
         topics.setLiked(liked);
+        if (!TextUtils.isEmpty(address)) {
+            topics.setAddress(address);
+            try {
+                URL url = new URL(address);
+                topics.setSubTitle(url.getHost());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
         return topics;
     }
 }

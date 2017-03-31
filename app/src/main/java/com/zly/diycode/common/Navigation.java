@@ -7,10 +7,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-import com.zly.diycode.reply.AddReplyActivity;
-import com.zly.diycode.reply.ReplyMessage;
+import com.zly.diycode.editor.EditorActivity;
+import com.zly.diycode.editor.EditRequester;
 import com.zly.diycode.topics.EntitiesContract;
-import com.zly.diycode.topics.details.TopicsDetailsActivity;
+import com.zly.diycode.topics.TopicsDetailsActivity;
 import com.zly.diycode.user.LoginActivity;
 import com.zly.diycode.web.WebActivity;
 
@@ -45,17 +45,17 @@ public class Navigation {
         context.startActivity(intent);
     }
 
-    public void openAddReply(@NonNull Context context, @NonNull ReplyMessage replyMessage) {
-        Intent intent = new Intent(context, AddReplyActivity.class);
-        intent.putExtra("replyMessage", replyMessage);
+    public void openAddReply(@NonNull Context context, @NonNull EditRequester editRequester) {
+        Intent intent = new Intent(context, EditorActivity.class);
+        intent.putExtra("editRequester", editRequester);
         if (context instanceof Activity) {
             ((Activity) context).startActivityForResult(intent, REQ_CODE_ADD_REPLY);
         }
     }
 
-    public void openAddReply(@NonNull Fragment fragment, @NonNull ReplyMessage replyMessage) {
-        Intent intent = new Intent(fragment.getActivity(), AddReplyActivity.class);
-        intent.putExtra("replyMessage", replyMessage);
+    public void openAddReply(@NonNull Fragment fragment, @NonNull EditRequester editRequester) {
+        Intent intent = new Intent(fragment.getActivity(), EditorActivity.class);
+        intent.putExtra("editRequester", editRequester);
         fragment.startActivityForResult(intent, REQ_CODE_ADD_REPLY);
     }
 
@@ -69,6 +69,18 @@ public class Navigation {
     public void openLogin(@NonNull Fragment fragment) {
         Intent intent = new Intent(fragment.getActivity(), LoginActivity.class);
         fragment.startActivityForResult(intent, REQ_CODE_LOGIN);
+    }
+
+    public void openEditor(Context context, EditRequester message) {
+        Intent intent = new Intent(context, EditorActivity.class);
+        intent.putExtra("requester", message);
+        context.startActivity(intent);
+    }
+
+    public void openEditor(Fragment context, EditRequester message) {
+        Intent intent = new Intent(context.getActivity(), EditorActivity.class);
+        intent.putExtra("requester", message);
+        context.startActivity(intent);
     }
 
     public static class IntentReceiver {
@@ -98,17 +110,17 @@ public class Navigation {
 
         public
         @Nullable
-        String getTitle(@NonNull AddReplyActivity activity) {
+        String getTitle(@NonNull EditorActivity activity) {
             return activity.getIntent().getStringExtra("title");
         }
 
         public
         @Nullable
-        ReplyMessage getCreateReplyMessage(@NonNull AddReplyActivity activity) {
+        EditRequester getCreateReplyMessage(@NonNull EditorActivity activity) {
             return activity.getIntent().getParcelableExtra("replyMessage");
         }
 
-        public void setReplyResult(@NonNull AddReplyActivity context, EntitiesContract.Reply topics) {
+        public void setReplyResult(@NonNull EditorActivity context, EntitiesContract.Reply topics) {
             Intent intent = new Intent();
             intent.putExtra("replyResult", topics);
             context.setResult(Activity.RESULT_OK, intent);
@@ -116,6 +128,10 @@ public class Navigation {
 
         public EntitiesContract.Reply getReplyResult(@NonNull Intent intent) {
             return intent.getParcelableExtra("replyResult");
+        }
+
+        public EditRequester getEditorType(EditorActivity intent) {
+            return intent.getIntent().getParcelableExtra("requester");
         }
     }
 }

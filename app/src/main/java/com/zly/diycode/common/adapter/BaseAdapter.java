@@ -165,7 +165,7 @@ public class BaseAdapter extends RecyclerView.Adapter<DataBindingViewHolder> {
         List<Item> itemList = mDataList;
         Item item = itemList.get(position);
         if (item.getItemViewType() != itemType) {
-            throw new NullPointerException("");
+            return null;
         }
 
         return (T) item;

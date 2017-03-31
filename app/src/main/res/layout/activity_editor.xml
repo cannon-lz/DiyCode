@@ -7,7 +7,7 @@
 
         <variable
             name="reply"
-            type="com.zly.diycode.reply.ReplyMessage" />
+            type="com.zly.diycode.editor.EditRequester" />
 
     </data>
 
@@ -15,32 +15,40 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray"
-        android:orientation="vertical">
+        android:background="@android:color/white"
+        android:divider="@drawable/shape_divider_imaginary"
+        android:layerType="software"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:showDividers="middle">
 
 
-        <TextView
-            android:id="@+id/tv_tile"
+        <EditText
+            android:id="@+id/ev_tile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            android:padding="12dp"
-            android:text="@{reply.topics.title}"
+            android:hint="@string/hint_input_title"
+            android:paddingBottom="16dp"
+            android:text="@{reply.paperTitle}"
             android:textColor="@color/textColorPowerful"
-            android:textSize="17sp" />
+            android:textSize="21sp" />
 
 
         <EditText
             android:id="@+id/et_reply"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="12dp"
+            android:layout_height="match_parent"
             android:background="@android:color/white"
             android:gravity="top"
+            android:hint="@string/hint_input_content"
             android:inputType="textPersonName|textMultiLine"
-            android:padding="12dp"
+            android:paddingTop="16dp"
             android:scrollHorizontally="false"
-            android:text="@{reply.content}" />
+            android:text="@{reply.content}">
+
+            <requestFocus />
+        </EditText>
 
     </LinearLayout>
 

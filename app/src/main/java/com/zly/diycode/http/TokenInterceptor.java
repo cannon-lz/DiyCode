@@ -27,23 +27,27 @@ class TokenInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        Request request = chain.request();
-        RequestBody body = request.body();
-        String accessToken = UserManager.getInstance().getToken();
-        if (TextUtils.isEmpty(accessToken)) {
+        try {
+            Request request = chain.request();
+            RequestBody body = request.body();
+            String accessToken = UserManager.getInstance().getToken();
+            if (TextUtils.isEmpty(accessToken)) {
+                return chain.proceed(request);
+            }
+            if (body != null) {
+                Buffer buffer = new Buffer();
+                body.writeTo(buffer);
+                String requestBody = buffer.readString(UTF_8);
+                requestBody += "&access_token=" + accessToken;
+                Log.i("TokenInterceptor", String.format("request body %s", requestBody));
+                return chain.proceed(request.newBuilder().method(request.method(), RequestBody.create(MEDIA_TYPE, requestBody)).build());
+            } else if (TextUtils.equals(request.method(), "GET")) {
+                HttpUrl httpUrl = request.url().newBuilder().addQueryParameter("access_token", accessToken).build();
+                return chain.proceed(request.newBuilder().url(httpUrl).build());
+            }
             return chain.proceed(request);
+        } catch (Exception e) {
+            throw new IOException(e.getMessage());
         }
-        if (body != null) {
-            Buffer buffer = new Buffer();
-            body.writeTo(buffer);
-            String requestBody = buffer.readString(UTF_8);
-            requestBody += "&access_token=" + accessToken;
-            Log.i("TokenInterceptor", String.format("request body %s", requestBody));
-            return chain.proceed(request.newBuilder().method(request.method(), RequestBody.create(MEDIA_TYPE, requestBody)).build());
-        } else if (TextUtils.equals(request.method(), "GET")) {
-            HttpUrl httpUrl = request.url().newBuilder().addQueryParameter("access_token", accessToken).build();
-            return chain.proceed(request.newBuilder().url(httpUrl).build());
-        }
-        return chain.proceed(request);
     }
 }
