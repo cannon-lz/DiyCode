@@ -71,6 +71,10 @@ public class RespPaper implements Mapper<Topics> {
     private boolean liked;
     private boolean favorited;
     private String address;
+    @SerializedName("topic_title")
+    private String topicTitle;
+    @SerializedName("topic_id")
+    private String topicsId;
 
     public String getAddress() {
         return address;
@@ -256,6 +260,34 @@ public class RespPaper implements Mapper<Topics> {
         this.abilities = abilities;
     }
 
+    public String getTopicTitle() {
+        return topicTitle;
+    }
+
+    public void setTopicTitle(String topicTitle) {
+        this.topicTitle = topicTitle;
+    }
+
+    public boolean isFollowed() {
+        return followed;
+    }
+
+    public boolean isLiked() {
+        return liked;
+    }
+
+    public boolean isFavorited() {
+        return favorited;
+    }
+
+    public String getTopicsId() {
+        return topicsId;
+    }
+
+    public void setTopicsId(String topicsId) {
+        this.topicsId = topicsId;
+    }
+
     @Override
     public Topics map() {
         Topics topics = new Topics();
@@ -272,6 +304,8 @@ public class RespPaper implements Mapper<Topics> {
         topics.setFollowed(followed);
         topics.setFavorited(favorited);
         topics.setLiked(liked);
+        topics.setTopicsTitle(topicTitle);
+        topics.setTopicsId(topicsId);
         if (!TextUtils.isEmpty(address)) {
             topics.setAddress(address);
             try {

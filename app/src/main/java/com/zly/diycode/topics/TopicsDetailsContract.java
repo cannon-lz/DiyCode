@@ -34,5 +34,9 @@ public interface TopicsDetailsContract {
         void setFollowChecked(boolean checked);
 
         void setFavoriteChecked(boolean checked);
+
+        void showEmptyView();
+
+        void loadedComplete();
     }
 }

@@ -32,9 +32,9 @@
         <activity android:name=".editor.EditorActivity" />
         <activity android:name=".topics.TopicsDetailsActivity" />
         <activity
-            android:name=".ScrollingActivity"
+            android:name=".user.MeListActivity"
             android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

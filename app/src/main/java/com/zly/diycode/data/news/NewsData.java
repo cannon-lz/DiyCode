@@ -11,5 +11,5 @@ import java.util.List;
 
 public interface NewsData {
 
-    void getTopics(String nodeId, String limit, Callback<List<EntitiesContract.Topics>> callback);
+    void getNews(String nodeId, String limit, Callback<List<EntitiesContract.Topics>> callback);
 }

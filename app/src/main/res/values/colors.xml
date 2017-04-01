@@ -10,4 +10,5 @@
     <color name="textColorPowerful">#000000</color>
     <color name="itemPressedColor">#66000000</color>
     <color name="gray">#CCCCCC</color>
+    <color name="gray_light">#E9E9E9</color>
 </resources>

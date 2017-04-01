@@ -12,6 +12,8 @@ import com.zly.diycode.http.RetrofitCallback;
 import com.zly.diycode.http.UserApi;
 import com.zly.diycode.http.entities.RespLogin;
 import com.zly.diycode.http.entities.RespMe;
+import com.zly.diycode.http.entities.RespPaper;
+import com.zly.diycode.http.entities.UserBean;
 import com.zly.diycode.topics.EntitiesContract;
 import com.zly.diycode.user.User;
 
@@ -58,8 +60,23 @@ public class UserRemoteData implements UserData {
     }
 
     @Override
-    public void favorites(String login, String offset, Callback<List<EntitiesContract.Topics>> callback) {
+    public void topics(String login, String order, String offset, Callback<List<EntitiesContract.Topics>> callback) {
+        final UserApi api = ApiConfig.getInstance().getApi(UserApi.class);
+        Map<String, Object> params = new ArrayMap<>();
+        params.put("orders", order);
+        params.put("offset", offset);
+        Call<List<RespPaper>> topics = api.topics(login, params);
+        topics.enqueue(new RetrofitCallback<List<RespPaper>, List<EntitiesContract.Topics>>(callback));
+    }
 
+
+    @Override
+    public void favorites(String login, String offset, Callback<List<EntitiesContract.Topics>> callback) {
+        final UserApi api = ApiConfig.getInstance().getApi(UserApi.class);
+        Map<String, Object> params = new ArrayMap<>();
+        params.put("offset", offset);
+        Call<List<RespPaper>> favorites = api.favorites(login, params);
+        favorites.enqueue(new RetrofitCallback<List<RespPaper>, List<EntitiesContract.Topics>>(callback));
     }
 
     @Override
@@ -67,5 +84,14 @@ public class UserRemoteData implements UserData {
         final UserApi api = ApiConfig.getInstance().getApi(UserApi.class);
         final Call<RespMe> me = api.getMe();
         me.enqueue(new RetrofitCallback<RespMe, MeModel>(callback));
+    }
+
+    @Override
+    public void replies(String login, String order, String offset, Callback<List<EntitiesContract.Topics>> callback) {
+        final UserApi api = ApiConfig.getInstance().getApi(UserApi.class);
+        Map<String, Object> params = new ArrayMap<>();
+        params.put("offset", offset);
+        Call<List<RespPaper>> replies = api.replies(login, params);
+        replies.enqueue(new RetrofitCallback<List<RespPaper>, List<EntitiesContract.Topics>>(callback));
     }
 }

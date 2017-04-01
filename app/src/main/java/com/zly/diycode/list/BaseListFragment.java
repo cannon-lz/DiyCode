@@ -29,6 +29,7 @@ public class BaseListFragment extends AppListFragment<BaseListPresenter>
         mDataBinding.tvEnpty.setVisibility(View.GONE);
         mDataBinding.srlRefreshControl.setRefreshing(false);
         mAdapter.setDataList(datas);
+        loadMoreComplete();
     }
 
     @Override
@@ -36,16 +37,18 @@ public class BaseListFragment extends AppListFragment<BaseListPresenter>
         mDataBinding.srlRefreshControl.setRefreshing(false);
         setLoadMoreComplete();
         mAdapter.addAll(datas);
+        loadMoreComplete();
     }
 
     @Override
     public void showEmptyView() {
+        mDataBinding.srlRefreshControl.setRefreshing(false);
         mDataBinding.rcvList.setVisibility(View.GONE);
         mDataBinding.tvEnpty.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void loadMoreError() {
+    public void loadMoreComplete() {
         setLoadMoreComplete();
         int lastPosition = mAdapter.getItemCount() - 1;
         EntitiesContract.ItemProgress itemProgress = mAdapter.getItemByType(R.layout.item_progress, lastPosition);

@@ -1,6 +1,7 @@
 package com.zly.diycode.topics;
 
 import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
@@ -23,10 +24,10 @@ public class RepliesConverter implements BaseAdapter.Converter<EntitiesContract.
 
     @Override
     public void convert(BaseAdapter adapter, DataBindingViewHolder viewHolder, EntitiesContract.Reply item, int position) {
-        ItemReplyBinding replyBinding = adapter.getDataBindingByItemType(item.getItemViewType());
+        /*ItemReplyBinding replyBinding = adapter.getDataBindingByItemType(item.getItemViewType());
         TextView tvReplyContent = replyBinding.tvReplyContent;
         CharSequence text = tvReplyContent.getText();
-        if (text instanceof Spannable) {
+        if (text instanceof SpannableString) {
             Spannable spannable = (Spannable) text;
             final String realUrl = findHttpLinkBySpan(spannable);
             if (!TextUtils.isEmpty(realUrl)) {
@@ -39,7 +40,7 @@ public class RepliesConverter implements BaseAdapter.Converter<EntitiesContract.
                 tvReplyContent.setText(spannable);
                 tvReplyContent.setMovementMethod(LinkMovementMethod.getInstance());
             }
-        }
+        }*/
     }
 
     private String findHttpLinkBySpan(Spannable spannable) {

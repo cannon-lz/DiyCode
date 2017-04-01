@@ -28,17 +28,18 @@ public class NewsRemoteData implements NewsData, AbsListData<EntitiesContract.To
     }
 
     @Override
-    public void getList(String nodeId, int offset, Callback<List<EntitiesContract.Topics>> callback) {
-        getTopics(nodeId, String.valueOf(offset), callback);
-    }
-
-    @Override
-    public void getTopics(String nodeId, String limit, Callback<List<EntitiesContract.Topics>> callback) {
+    public void getNews(String nodeId, String offset, Callback<List<EntitiesContract.Topics>> callback) {
         NewsApi api = ApiConfig.getInstance().getApi(NewsApi.class);
         Map<String, Object> params = new ArrayMap<>();
         params.put("node_id", nodeId);
-        params.put("offset", limit);
+        params.put("offset", offset);
         Call<List<RespPaper>> news = api.getNews(params);
         news.enqueue(new RetrofitCallback<List<RespPaper>, List<EntitiesContract.Topics>>(callback));
+    }
+
+    @Override
+    public void getList(int offset, Callback<List<EntitiesContract.Topics>> callback, Map<String, Object> params) {
+        String nodeId = String.valueOf(params.get("node_id"));
+        getNews(nodeId, String.valueOf(offset), callback);
     }
 }

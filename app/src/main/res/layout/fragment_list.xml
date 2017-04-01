@@ -22,24 +22,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rcv_list"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:adapter="@{adapter}"
-                app:layoutManager="@{layoutManager}" />
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rcv_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    app:adapter="@{adapter}"
+                    app:layoutManager="@{layoutManager}" />
+
+                <TextView
+                    android:id="@+id/tv_enpty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/hint_not_content"
+                    android:textSize="20sp"
+                    android:visibility="gone" />
+
+            </FrameLayout>
 
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
-
-        <TextView
-            android:id="@+id/tv_enpty"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/hint_not_content"
-            android:textSize="20sp"
-            android:visibility="gone" />
     </LinearLayout>
 </layout>

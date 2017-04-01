@@ -127,7 +127,7 @@ public class TopicsDetailsPresenter implements TopicsDetailsContract.Presenter {
 
             @Override
             public void onError(String messgae) {
-
+                mView.showEmptyView();
             }
         });
     }
@@ -145,7 +145,7 @@ public class TopicsDetailsPresenter implements TopicsDetailsContract.Presenter {
 
             @Override
             public void onError(String messgae) {
-
+                mView.loadedComplete();
             }
         });
     }

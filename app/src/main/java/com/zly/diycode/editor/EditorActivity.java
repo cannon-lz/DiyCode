@@ -54,6 +54,11 @@ public class EditorActivity extends BaseActivity<ActivityEditorBinding, EditorCo
     }
 
     @Override
+    public void setInitData(Object o) {
+        mViewHelper.handleInitData(o);
+    }
+
+    @Override
     public void success(Object o) {
         if (o instanceof EntitiesContract.Reply) {
             Navigation.IntentReceiver.getInstance().setReplyResult(this, (EntitiesContract.Reply) o);

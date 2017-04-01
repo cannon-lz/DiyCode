@@ -4,31 +4,31 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_topics"
-            android:icon="@mipmap/ic_post"
+            android:icon="@drawable/ic_nav_post"
             android:title="我的帖子" />
         <item
             android:id="@+id/nav_favorite"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_action_collection_off"
             android:title="我的收藏" />
         <item
             android:id="@+id/nav_replies"
-            android:icon="@mipmap/ic_reply"
+            android:icon="@drawable/ic_nav_reply"
             android:title="我的评论" />
         <item
             android:id="@+id/nav_shared"
-            android:icon="@mipmap/ic_shared"
+            android:icon="@drawable/ic_action_shared"
             android:title="我的分享" />
     </group>
 
-    <item>
+    <item android:title="@null">
         <menu>
             <item
                 android:id="@+id/nav_abort"
-                android:icon="@mipmap/ic_abort"
+                android:icon="@drawable/ic_bav_abort"
                 android:title="关于我们" />
             <item
                 android:id="@+id/nav_setting"
-                android:icon="@mipmap/ic_setting"
+                android:icon="@drawable/ic_nav_setting"
                 android:title="软件设置" />
         </menu>
 

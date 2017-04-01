@@ -9,6 +9,14 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.util.Linkify;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +29,8 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.target.ViewTarget;
+import com.zly.diycode.common.HtmlUtils;
+import com.zly.diycode.common.Navigation;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -61,7 +71,7 @@ public class DataBindingAdapter {
 
     @BindingAdapter({"html"})
     public static void setHtmlWithImage(final TextView textView, final String html) {
-        textView.setText(Html.fromHtml(html, new Html.ImageGetter() {
+        Spannable spanned = (Spannable) Html.fromHtml(html, new Html.ImageGetter() {
             @Override
             public Drawable getDrawable(String source) {
                 final UrlDrawable urlDrawable = new UrlDrawable();
@@ -81,7 +91,19 @@ public class DataBindingAdapter {
                 });
                 return urlDrawable;
             }
-        }, null));
+        }, null);
+        final String link = HtmlUtils.findHttpLinkBySpan(spanned);
+        if (link != null) {
+            textView.setAutoLinkMask(Linkify.WEB_URLS);
+            spanned.setSpan(new ClickableSpan() {
+                @Override
+                public void onClick(View widget) {
+                    Navigation.getInstance().openWebBrowser(widget.getContext(), link);
+                }
+            }, spanned.toString().lastIndexOf(link), spanned.toString().lastIndexOf(link) + link.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+            textView.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+        textView.setText(spanned);
     }
 
     static final class UrlDrawable extends Drawable implements Drawable.Callback {

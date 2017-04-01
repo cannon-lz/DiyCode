@@ -162,6 +162,8 @@ public interface EntitiesContract {
         private String id;
         private String address;
         private String subTitle;
+        private String topicsTitle;
+        private String topicsId;
         private String content;
         private String replyCount;
         private String likeCount;
@@ -183,6 +185,8 @@ public interface EntitiesContract {
             id = in.readString();
             address = in.readString();
             subTitle = in.readString();
+            topicsTitle = in.readString();
+            topicsId = in.readString();
             content = in.readString();
             replyCount = in.readString();
             likeCount = in.readString();
@@ -202,6 +206,8 @@ public interface EntitiesContract {
             dest.writeString(id);
             dest.writeString(address);
             dest.writeString(subTitle);
+            dest.writeString(topicsTitle);
+            dest.writeString(topicsId);
             dest.writeString(content);
             dest.writeString(replyCount);
             dest.writeString(likeCount);
@@ -337,6 +343,22 @@ public interface EntitiesContract {
 
         public void setLiked(boolean liked) {
             this.liked = liked;
+        }
+
+        public String getTopicsTitle() {
+            return topicsTitle;
+        }
+
+        public void setTopicsTitle(String topicsTitle) {
+            this.topicsTitle = topicsTitle;
+        }
+
+        public String getTopicsId() {
+            return topicsId;
+        }
+
+        public void setTopicsId(String topicsId) {
+            this.topicsId = topicsId;
         }
 
         @Override

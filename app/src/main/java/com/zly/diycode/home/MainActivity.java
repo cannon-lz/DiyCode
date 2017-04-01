@@ -20,13 +20,10 @@ import com.zly.diycode.common.UserManager;
 import com.zly.diycode.common.feature.BaseActivity;
 import com.zly.diycode.common.feature.VoidPresenter;
 import com.zly.diycode.data.Callback;
-import com.zly.diycode.data.user.UserData;
 import com.zly.diycode.data.user.UserRemoteData;
 import com.zly.diycode.databinding.ActivityMainBinding;
 import com.zly.diycode.databinding.NavHeaderDrawerBinding;
 import com.zly.diycode.editor.EditRequester;
-import com.zly.diycode.home.NewsFragment;
-import com.zly.diycode.home.TopicsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +60,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
         navigationView.setNavigationItemSelectedListener(this);
         mDataBinding.views.tabLayout.setupWithViewPager(mDataBinding.views.flContent);
         mDataBinding.views.flContent.setAdapter(new ContentPagerAdapter(getSupportFragmentManager()));
-
         getMeInfo();
     }
 
@@ -110,11 +106,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
         }
 
         if (id == R.id.nav_topics) {
-            // Handle the camera action
+            Navigation.getInstance().openMeTopics(this, mNavHeaderDrawerBinding.getMe().getLogin());
         } else if (id == R.id.nav_favorite) {
-
+            Navigation.getInstance().openMeFavorites(this, mNavHeaderDrawerBinding.getMe().getLogin());
         } else if (id == R.id.nav_replies) {
-
+            Navigation.getInstance().openMeReplies(this, mNavHeaderDrawerBinding.getMe().getLogin());
         } else if (id == R.id.nav_shared) {
 
         } else if (id == R.id.nav_abort) {

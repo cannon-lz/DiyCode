@@ -1,5 +1,6 @@
 package com.zly.diycode.http;
 
+import com.zly.diycode.http.entities.RespNode;
 import com.zly.diycode.http.entities.RespReply;
 import com.zly.diycode.http.entities.RespResult;
 import com.zly.diycode.http.entities.RespPaper;
@@ -61,4 +62,8 @@ public interface TopicsApi {
     @POST("topics/{id}/replies.json")
     @FormUrlEncoded
     Call<RespReply> addReplies(@Path("id") String id, @FieldMap Map<String, Object> params);
+
+    @GET("nodes.json")
+    Call<List<RespNode>> getNodes();
+
 }

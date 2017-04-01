@@ -9,5 +9,5 @@ import java.util.Map;
 
 public interface AbsListData<T> {
 
-    void getList(String nodeId, int offset, Callback<List<T>> callback);
+    void getList(int offset, Callback<List<T>> callback, Map<String, Object> params);
 }

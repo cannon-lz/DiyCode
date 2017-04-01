@@ -22,4 +22,6 @@ public abstract class AbsEditorDataBindingHelper<Data> {
 
     protected abstract void send();
 
+    protected abstract void handleInitData(Object object);
+
 }

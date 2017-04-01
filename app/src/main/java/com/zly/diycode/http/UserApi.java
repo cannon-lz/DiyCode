@@ -29,7 +29,7 @@ public interface UserApi {
     Call<RespLogin> login(@FieldMap Map<String, Object> params);
 
     @GET("users/{login}/favorites.json")
-    Call<RespPaper> favorites(@Path("login") String login, @QueryMap Map<String, Object> params);
+    Call<List<RespPaper>> favorites(@Path("login") String login, @QueryMap Map<String, Object> params);
 
     @POST("users/{login}/follow.json")
     Call<RespResult> follow(@Path("login") String login);
@@ -44,7 +44,7 @@ public interface UserApi {
     Call<List<RespPaper>> replies(@Path("login") String login, @QueryMap Map<String, Object> params);
 
     @GET("users/{login}/topics.json")
-    Call<List<UserBean>> topics(@Path("login") String login, @QueryMap Map<String, Object> params);
+    Call<List<RespPaper>> topics(@Path("login") String login, @QueryMap Map<String, Object> params);
 
     @GET("users/me.json")
     Call<RespMe> getMe();

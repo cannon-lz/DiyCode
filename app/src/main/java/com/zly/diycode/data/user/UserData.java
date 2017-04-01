@@ -16,7 +16,11 @@ public interface UserData {
 
     void login(@Config.GrantType String grantType, String username, String password, Callback<User> callback);
 
+    void topics(String login, String order, String offset, Callback<List<EntitiesContract.Topics>> callback);
+
     void favorites(String login, String offset, Callback<List<EntitiesContract.Topics>> callback);
+
+    void replies(String login, String order, String offset, Callback<List<EntitiesContract.Topics>> callback);
 
     void getMeInfo(Callback<MeModel> callback);
 }

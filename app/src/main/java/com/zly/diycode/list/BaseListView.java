@@ -16,6 +16,6 @@ public interface BaseListView<T> extends IView {
 
     void showEmptyView();
 
-    void loadMoreError();
+    void loadMoreComplete();
 
 }

@@ -56,6 +56,17 @@ public class WebActivity extends BaseActivity<ActivityWebBinding, VoidPresenter>
     }
 
     @Override
+    public void onBackPressed() {
+        AppWebView webView = mDataBinding.webView;
+        if (webView.canGoBack()) {
+            webView.goBack();
+        } else {
+            super.onBackPressed();
+        }
+
+    }
+
+    @Override
     protected void onDestroy() {
 
         mDataBinding.webView.destroy();

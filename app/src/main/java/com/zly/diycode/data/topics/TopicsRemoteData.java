@@ -4,9 +4,11 @@ import android.support.v4.util.ArrayMap;
 
 import com.zly.diycode.data.AbsListData;
 import com.zly.diycode.data.Callback;
+import com.zly.diycode.editor.Node;
 import com.zly.diycode.http.ApiConfig;
 import com.zly.diycode.http.RetrofitCallback;
 import com.zly.diycode.http.TopicsApi;
+import com.zly.diycode.http.entities.RespNode;
 import com.zly.diycode.http.entities.RespPaper;
 import com.zly.diycode.http.entities.RespReply;
 import com.zly.diycode.http.entities.RespResult;
@@ -49,6 +51,17 @@ public class TopicsRemoteData implements TopicsData, AbsListData<Topics> {
     @Override
     public void create(Map<String, Object> params, Callback<Topics> callback) {
 
+    }
+
+    @Override
+    public void create(String nodeId, String title, String body, Callback<Topics> callback) {
+        Map<String, Object> params = new ArrayMap<>();
+        params.put("node_id", nodeId);
+        params.put("title", title);
+        params.put("body", body);
+        TopicsApi api = ApiConfig.getInstance().getApi(TopicsApi.class);
+        Call<RespPaper> call = api.create(params);
+        call.enqueue(new RetrofitCallback<RespPaper, Topics>(callback));
     }
 
     @Override
@@ -127,7 +140,15 @@ public class TopicsRemoteData implements TopicsData, AbsListData<Topics> {
     }
 
     @Override
-    public void getList(String nodeId, int offset, Callback<List<Topics>> callback) {
+    public void getNodes(Callback<List<Node>> nodes) {
+        TopicsApi api = ApiConfig.getInstance().getApi(TopicsApi.class);
+        Call<List<RespNode>> call = api.getNodes();
+        call.enqueue(new RetrofitCallback<List<RespNode>, List<Node>>(nodes));
+    }
+
+    @Override
+    public void getList(int offset, Callback<List<Topics>> callback, Map<String, Object> params) {
+        String nodeId = String.valueOf(params.get("node_id"));
         getTopics(nodeId, String.valueOf(offset), callback);
     }
 }

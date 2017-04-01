@@ -48,6 +48,7 @@ public class ReplyViewBindingHelper extends AbsEditorDataBindingHelper<EditReque
     public ReplyViewBindingHelper(EditRequester editRequester, ActivityEditorBinding dataBinding) {
         super(editRequester, dataBinding);
         mPresenter = new ReplyPresenter(((EditorContract.View) dataBinding.getRoot().getContext()));
+        mPresenter.init();
     }
 
     @Override
@@ -71,6 +72,11 @@ public class ReplyViewBindingHelper extends AbsEditorDataBindingHelper<EditReque
     protected void send() {
         String replyContent = formatReplyContent();
         mPresenter.send(data.getPaperId(), null, replyContent);
+    }
+
+    @Override
+    protected void handleInitData(Object object) {
+
     }
 
     // 回复的报文是 markdown 格式

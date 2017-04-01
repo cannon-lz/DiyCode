@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
 
 import com.zly.diycode.R;
@@ -47,7 +48,7 @@ public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresente
         setHasOptionsMenu(true);
         ActionBar actionBar = mHostActivity.getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle("Topics");
+            actionBar.setTitle(R.string.title_topics);
             actionBar.setDisplayShowHomeEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -142,6 +143,20 @@ public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresente
     @Override
     public void setFavoriteChecked(boolean checked) {
         mTalFavorite.setChecked(checked);
+    }
+
+    @Override
+    public void showEmptyView() {
+        setLoadMoreComplete();
+        mDataBinding.srlRefreshControl.setRefreshing(false);
+        mDataBinding.tvEnpty.setVisibility(View.VISIBLE);
+        mDataBinding.rcvList.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void loadedComplete() {
+        setLoadMoreComplete();
+        setItemProgress();
     }
 
     @Override

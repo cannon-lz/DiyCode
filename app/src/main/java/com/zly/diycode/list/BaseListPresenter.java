@@ -1,6 +1,6 @@
 package com.zly.diycode.list;
 
-import android.support.v4.util.ArrayMap;
+import android.support.annotation.NonNull;
 
 import com.zly.diycode.data.AbsListData;
 import com.zly.diycode.data.Callback;
@@ -17,38 +17,45 @@ public class BaseListPresenter<T> implements ListPresenter {
     private AbsListData<T> mListData;
     private BaseListView<T> mBaseListView;
     private int mOffset = 0;
-    private Map<String, Object> mParams = new ArrayMap<>();
+    private Map<String, Object> mParams;
 
-    public BaseListPresenter(AbsListData<T> listData, BaseListView<T> baseListView) {
+    public BaseListPresenter(AbsListData<T> listData, BaseListView<T> baseListView, @NonNull Map<String, Object> params) {
         this.mListData = listData;
         this.mBaseListView = baseListView;
+        mParams = params;
     }
 
     @Override
     public void getTopics() {
         mOffset = 0;
-        mListData.getList("", mOffset, new Callback<List<T>>() {
+        mListData.getList(mOffset, new Callback<List<T>>() {
             @Override
             public void onSuccess(List<T> topicses) {
-                mOffset = topicses.size();
-                mBaseListView.showTopics(topicses);
+                int size = topicses.size();
+                if (topicses.isEmpty()) {
+                    mBaseListView.showEmptyView();
+                } else {
+                    mOffset = size + 1;
+                    mBaseListView.showTopics(topicses);
+                }
+
             }
 
             @Override
             public void onError(String messgae) {
                 mBaseListView.showEmptyView();
             }
-        });
+        }, mParams);
     }
 
     @Override
     public void nextPage() {
-        mListData.getList("", mOffset, new Callback<List<T>>() {
+        mListData.getList(mOffset, new Callback<List<T>>() {
             @Override
             public void onSuccess(List<T> topicses) {
                 int size = topicses.size();
                 if (size <= 0) {
-                    mBaseListView.loadMoreError();
+                    mBaseListView.loadMoreComplete();
                 } else {
                     mOffset += size;
                     mBaseListView.addTopics(topicses);
@@ -57,8 +64,8 @@ public class BaseListPresenter<T> implements ListPresenter {
 
             @Override
             public void onError(String messgae) {
-                mBaseListView.loadMoreError();
+                mBaseListView.loadMoreComplete();
             }
-        });
+        }, mParams);
     }
 }

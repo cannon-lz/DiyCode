@@ -1,5 +1,7 @@
 package com.zly.diycode.home;
 
+import android.support.v4.util.ArrayMap;
+
 import com.zly.diycode.common.Navigation;
 import com.zly.diycode.data.topics.TopicsRemoteData;
 import com.zly.diycode.list.BaseListFragment;
@@ -14,7 +16,9 @@ public class TopicsFragment extends BaseListFragment {
 
     @Override
     protected BaseListPresenter createPresenter() {
-        return new BaseListPresenter<>(TopicsRemoteData.getInstance(), this);
+        ArrayMap<String, Object> params = new ArrayMap<>();
+        params.put("node_id", "");
+        return new BaseListPresenter<>(TopicsRemoteData.getInstance(), this, params);
     }
 
     @Override

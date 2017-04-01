@@ -10,10 +10,15 @@ import com.zly.diycode.topics.EntitiesContract;
 
 public class ReplyPresenter implements EditorContract.Presenter {
 
-    private EditorContract.View<EntitiesContract.Reply> mView;
+    private EditorContract.View<Void, EntitiesContract.Reply> mView;
 
-    public ReplyPresenter(EditorContract.View<EntitiesContract.Reply> view) {
+    public ReplyPresenter(EditorContract.View<Void, EntitiesContract.Reply> view) {
         this.mView = view;
+    }
+
+    @Override
+    public void init() {
+
     }
 
     @Override

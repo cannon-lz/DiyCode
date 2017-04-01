@@ -11,11 +11,15 @@ public interface EditorContract {
 
     interface Presenter extends IPresenter {
 
+        void init();
+
         void send(String id, String title, String content);
 
     }
 
-    interface View<Result> extends IView {
+    interface View<InitData, Result> extends IView {
+
+        void setInitData(InitData data);
 
         void success(Result result);
     }

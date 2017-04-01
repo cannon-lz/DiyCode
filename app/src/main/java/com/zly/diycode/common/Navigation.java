@@ -12,6 +12,7 @@ import com.zly.diycode.editor.EditRequester;
 import com.zly.diycode.topics.EntitiesContract;
 import com.zly.diycode.topics.TopicsDetailsActivity;
 import com.zly.diycode.user.LoginActivity;
+import com.zly.diycode.user.MeListActivity;
 import com.zly.diycode.web.WebActivity;
 
 /**
@@ -80,6 +81,27 @@ public class Navigation {
     public void openEditor(Fragment context, EditRequester message) {
         Intent intent = new Intent(context.getActivity(), EditorActivity.class);
         intent.putExtra("requester", message);
+        context.startActivity(intent);
+    }
+
+    public void openMeTopics(Context context, String loginName) {
+        Intent intent = new Intent(context, MeListActivity.class);
+        intent.putExtra("openType", MeListActivity.TOPICS);
+        intent.putExtra("loginName", loginName);
+        context.startActivity(intent);
+    }
+
+    public void openMeFavorites(Context context, String loginName) {
+        Intent intent = new Intent(context, MeListActivity.class);
+        intent.putExtra("openType", MeListActivity.FAVORITES);
+        intent.putExtra("loginName", loginName);
+        context.startActivity(intent);
+    }
+
+    public void openMeReplies(Context context, String loginName) {
+        Intent intent = new Intent(context, MeListActivity.class);
+        intent.putExtra("openType", MeListActivity.REPLIES);
+        intent.putExtra("loginName", loginName);
         context.startActivity(intent);
     }
 
