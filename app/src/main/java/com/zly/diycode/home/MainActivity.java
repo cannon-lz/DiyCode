@@ -24,6 +24,7 @@ import com.zly.diycode.data.user.UserRemoteData;
 import com.zly.diycode.databinding.ActivityMainBinding;
 import com.zly.diycode.databinding.NavHeaderDrawerBinding;
 import com.zly.diycode.editor.EditRequester;
+import com.zly.diycode.editor.ReplyDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,6 +89,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            ReplyDialog replyDialog = new ReplyDialog(this);
+            replyDialog.show();
             return true;
         }
 
