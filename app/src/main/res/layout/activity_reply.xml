@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="reply"
+            type="com.zly.diycode.topics.EntitiesContract.Reply" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+
+        <TextView
+            android:id="@+id/tv_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@{reply.photo}"
+            android:gravity="center"
+            android:text="@{reply.username}"
+            android:textColor="@color/textColorPowerful"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="8dp"
+            android:text="@{reply.publishDate}"
+            android:textColor="@color/textColorFeeble"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_user"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_user" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="8dp"
+            android:lineSpacingExtra="8dp"
+            android:text="@{reply.content}"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_user"
+            app:layout_constraintRight_toRightOf="@+id/tv_date"
+            app:layout_constraintTop_toBottomOf="@+id/tv_user" />
+
+        <EditText
+            android:id="@+id/et_reply_to_content"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/shape_gray_circular"
+            android:ems="10"
+            android:gravity="start"
+            android:inputType="textPersonName"
+            android:padding="16dp"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintLeft_toLeftOf="@+id/textView4"
+            app:layout_constraintRight_toRightOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="45dp"
+            android:layout_height="23dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/reply"
+            app:layout_constraintRight_toRightOf="@+id/et_reply_to_content"
+            app:layout_constraintTop_toBottomOf="@+id/et_reply_to_content" />
+    </android.support.constraint.ConstraintLayout>
+
+
+</layout>
