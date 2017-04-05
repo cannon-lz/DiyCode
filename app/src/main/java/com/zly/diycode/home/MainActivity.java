@@ -89,8 +89,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            ReplyDialog replyDialog = new ReplyDialog(this);
-            replyDialog.show();
             return true;
         }
 

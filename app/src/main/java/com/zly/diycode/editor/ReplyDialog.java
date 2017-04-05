@@ -7,10 +7,14 @@ import android.databinding.DataBindingComponent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.zly.diycode.R;
 import com.zly.diycode.databinding.ActivityReplyBinding;
+import com.zly.diycode.databinding.DialogTestBinding;
 import com.zly.diycode.topics.EntitiesContract;
 
 /**
@@ -19,21 +23,27 @@ import com.zly.diycode.topics.EntitiesContract;
 
 public class ReplyDialog extends Dialog {
 
+    private EntitiesContract.Topics mReplay;
 
-    public ReplyDialog(@NonNull Context context) {
+    public ReplyDialog(@NonNull Context context, EntitiesContract.Topics reply) {
         super(context, R.style.DialogNoTitle);
+        mReplay = reply;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityReplyBinding inflate = ActivityReplyBinding.inflate(LayoutInflater.from(getContext()));
+        ActivityReplyBinding inflate = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.activity_reply, null, false);
         setContentView(inflate.getRoot());
-        EntitiesContract.Reply reply = new EntitiesContract.Reply();
-        reply.setUsername("ZTE_CODEr");
-        reply.setPhoto("https://diycode.b0.upaiyun.com/user/avatar/2571_1491357330.jpg");
-        reply.setContent("技术人赚钱的机会真的非常多，聊聊那些年我实践过和见过的各种赚钱方式");
+        inflate.setReply(mReplay);
 
-        inflate.setReply(reply);
+        final Window window = getWindow();
+        final WindowManager.LayoutParams attributes = window.getAttributes();
+        attributes.width = 500;
+        Log.i("ReplyDialog", String.format("window width %s", attributes.width));
+    }
+
+    public void reply() {
+
     }
 }

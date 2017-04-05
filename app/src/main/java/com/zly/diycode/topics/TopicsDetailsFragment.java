@@ -18,6 +18,7 @@ import com.zly.diycode.common.adapter.BaseAdapter;
 import com.zly.diycode.common.adapter.DataBindingViewHolder;
 import com.zly.diycode.common.adapter.Item;
 import com.zly.diycode.databinding.ItemTopicsDetailBinding;
+import com.zly.diycode.editor.ReplyDialog;
 import com.zly.diycode.list.AppListFragment;
 import com.zly.diycode.editor.EditRequester;
 import com.zly.diycode.widget.AppWebView;
@@ -177,7 +178,10 @@ public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresente
             editRequester.setPaperId(topics.getId());
             editRequester.setFloor(String.valueOf(position));
             editRequester.setLoginName(reply.getLoginName());
-            Navigation.getInstance().openEditor(this, editRequester);
+            //Navigation.getInstance().openEditor(this, editRequester);
+
+            final ReplyDialog replyDialog = new ReplyDialog(getActivity(), topics);
+            replyDialog.show();
         }
     }
 

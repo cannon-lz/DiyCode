@@ -7,11 +7,14 @@
 
         <variable
             name="reply"
-            type="com.zly.diycode.topics.EntitiesContract.Reply" />
+            type="com.zly.diycode.topics.EntitiesContract.Topics" />
+        <variable
+            name="presenter"
+            type="com.zly.diycode.editor.ReplyDialog"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">
 
@@ -20,7 +23,7 @@
             android:id="@+id/tv_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@{reply.photo}"
+            android:drawableLeft="@{reply.userPhoto}"
             android:gravity="center"
             android:text="@{reply.username}"
             android:textColor="@color/textColorPowerful"
@@ -49,7 +52,7 @@
             android:layout_marginRight="0dp"
             android:layout_marginTop="8dp"
             android:lineSpacingExtra="8dp"
-            android:text="@{reply.content}"
+            android:text="@{reply.title}"
             app:layout_constraintLeft_toLeftOf="@+id/tv_user"
             app:layout_constraintRight_toRightOf="@+id/tv_date"
             app:layout_constraintTop_toBottomOf="@+id/tv_user" />
@@ -76,6 +79,7 @@
             android:layout_marginRight="0dp"
             android:layout_marginTop="16dp"
             android:text="@string/reply"
+            android:onClick="@{() -> presenter.reply()}"
             app:layout_constraintRight_toRightOf="@+id/et_reply_to_content"
             app:layout_constraintTop_toBottomOf="@+id/et_reply_to_content" />
     </android.support.constraint.ConstraintLayout>
