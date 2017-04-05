@@ -43,8 +43,6 @@ public class MeRepliesFragment extends BaseListFragment {
     @Override
     protected void initView(View root, @Nullable Bundle savedInstanceState) {
         super.initView(root, savedInstanceState);
-        mDataBinding.rcvList.removeItemDecoration(getDefaultDividerItemDecoration());
-        mDataBinding.rcvList.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         ActionBar actionBar = mHostActivity.getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(R.string.title_me_replies);

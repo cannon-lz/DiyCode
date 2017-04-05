@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:visibility="visible"
                     app:adapter="@{adapter}"
-                    app:layoutManager="@{layoutManager}" />
+                    app:layoutManager="@{layoutManager}"/>
 
                 <TextView
                     android:id="@+id/tv_enpty"

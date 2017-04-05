@@ -8,7 +8,7 @@
     <color name="textColorPrimary">@color/colorPrimaryDark</color>
     <color name="textColorFeeble">#666666</color>
     <color name="textColorPowerful">#000000</color>
-    <color name="itemPressedColor">#66000000</color>
+    <color name="itemPressedColor">@color/gray_light</color>
     <color name="gray">#CCCCCC</color>
     <color name="gray_light">#E9E9E9</color>
 </resources>

@@ -37,8 +37,6 @@ public class AppListFragment<Presenter extends IPresenter> extends BaseFragment<
     @Override
     protected void initView(View root, @Nullable Bundle savedInstanceState) {
         mItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
-        mItemDecoration.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.item_margin));
-        mDataBinding.rcvList.addItemDecoration(mItemDecoration);
         mDataBinding.setLayoutManager(new LinearLayoutManager(getActivity()));
         EntitiesContract.ItemProgress itemProgress = new EntitiesContract.ItemProgress();
         itemProgress.setStatus(EntitiesContract.ItemProgress.STATUS_LOADING);

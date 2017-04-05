@@ -52,8 +52,6 @@ public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresente
             actionBar.setDisplayShowHomeEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        mDataBinding.rcvList.removeItemDecoration(getDefaultDividerItemDecoration());
-        mDataBinding.rcvList.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         mAdapter.addConverter(R.layout.item_topics_detail, new TopicsDetailsConverter());
         mAdapter.addConverter(R.layout.item_reply, new RepliesConverter());
         onRefresh();

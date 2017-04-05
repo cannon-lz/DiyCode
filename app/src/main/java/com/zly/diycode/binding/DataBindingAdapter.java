@@ -15,10 +15,12 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.text.style.URLSpan;
 import android.text.util.Linkify;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.BitmapTypeRequest;
 import com.bumptech.glide.DrawableTypeRequest;
@@ -92,17 +94,18 @@ public class DataBindingAdapter {
                 return urlDrawable;
             }
         }, null);
-        final String link = HtmlUtils.findHttpLinkBySpan(spanned);
-        if (link != null) {
-            textView.setAutoLinkMask(Linkify.WEB_URLS);
+        final URLSpan[] urlSpans = spanned.getSpans(0, spanned.length(), URLSpan.class);
+        for (final URLSpan urlSpan : urlSpans) {
             spanned.setSpan(new ClickableSpan() {
                 @Override
                 public void onClick(View widget) {
-                    Navigation.getInstance().openWebBrowser(widget.getContext(), link);
+                    Navigation.getInstance().openWebBrowser(widget.getContext(), urlSpan.getURL());
                 }
-            }, spanned.toString().lastIndexOf(link), spanned.toString().lastIndexOf(link) + link.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-            textView.setMovementMethod(LinkMovementMethod.getInstance());
+            }, spanned.getSpanStart(urlSpan), spanned.getSpanEnd(urlSpan), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spanned.removeSpan(urlSpan);
         }
+
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
         textView.setText(spanned);
     }
 
