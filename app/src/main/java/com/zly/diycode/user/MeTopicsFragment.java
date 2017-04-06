@@ -19,7 +19,7 @@ import java.util.Map;
  * Created by zhangluya on 2017/4/1.
  */
 
-public class MeTopicsFragment extends BaseListFragment {
+public class MeTopicsFragment extends BaseListFragment<EntitiesContract.Topics> {
 
     @Override
     protected BaseListPresenter createPresenter() {

@@ -116,6 +116,24 @@ public class TopicsDetailsPresenter implements TopicsDetailsContract.Presenter {
         });
     }
 
+    @Override
+    public void reply(String body) {
+        mView.showLoading();
+        mData.addReplies(mTopicsId, body, new Callback<EntitiesContract.Reply>() {
+            @Override
+            public void onSuccess(EntitiesContract.Reply reply) {
+                mView.dismissLoading();
+                mView.showNewReply(reply);
+            }
+
+            @Override
+            public void onError(String messgae) {
+                mView.dismissLoading();
+                mView.toast("网络错误");
+            }
+        });
+    }
+
     private void getDetails() {
         mData.getById(mTopicsId, new Callback<EntitiesContract.Topics>() {
             @Override

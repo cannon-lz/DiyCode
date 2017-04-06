@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="java.lang.String" />
+
+        <variable
+            name="item"
+            type="com.zly.diycode.data.project.Project" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        style="@style/ItemCardStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+
+            <TextView
+                android:id="@+id/tv_project_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="0dp"
+                android:text="@{item.name}"
+                android:textColor="@color/textColorPowerful"
+                app:layout_constraintLeft_toRightOf="@+id/iv_user_photo"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_project_desc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{item.description}"
+                app:layout_constraintHorizontal_bias="0.504"
+                app:layout_constraintLeft_toLeftOf="@+id/tv_project_name"
+                app:layout_constraintRight_toLeftOf="@+id/tv_start"
+                app:layout_constraintTop_toBottomOf="@+id/tv_project_name" />
+
+            <TextView
+                android:id="@+id/tv_project_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="8dp"
+                android:text="@{item.category.name + item.subCategory.name}"
+                android:textSize="10sp"
+                app:layout_constraintLeft_toLeftOf="@+id/tv_project_desc"
+                app:layout_constraintTop_toBottomOf="@+id/tv_project_desc" />
+
+            <ImageView
+                android:id="@+id/iv_user_photo"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                app:imageUrl="@{item.projectCoverUrl}"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_project_desc"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_project_name"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <TextView
+                android:id="@+id/tv_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/shape_gray_oval"
+                android:gravity="center"
+                android:paddingBottom="4dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="4dp"
+                android:text="@{String.valueOf(item.star)}"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+</layout>

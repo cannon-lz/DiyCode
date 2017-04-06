@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 
 import com.zly.diycode.editor.EditorActivity;
 import com.zly.diycode.editor.EditRequester;
+import com.zly.diycode.editor.NewTopicsActivity;
 import com.zly.diycode.topics.EntitiesContract;
 import com.zly.diycode.topics.TopicsDetailsActivity;
 import com.zly.diycode.user.LoginActivity;
@@ -46,20 +47,6 @@ public class Navigation {
         context.startActivity(intent);
     }
 
-    public void openAddReply(@NonNull Context context, @NonNull EditRequester editRequester) {
-        Intent intent = new Intent(context, EditorActivity.class);
-        intent.putExtra("editRequester", editRequester);
-        if (context instanceof Activity) {
-            ((Activity) context).startActivityForResult(intent, REQ_CODE_ADD_REPLY);
-        }
-    }
-
-    public void openAddReply(@NonNull Fragment fragment, @NonNull EditRequester editRequester) {
-        Intent intent = new Intent(fragment.getActivity(), EditorActivity.class);
-        intent.putExtra("editRequester", editRequester);
-        fragment.startActivityForResult(intent, REQ_CODE_ADD_REPLY);
-    }
-
     public void openLogin(@NonNull Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
         if (context instanceof Activity) {
@@ -70,18 +57,6 @@ public class Navigation {
     public void openLogin(@NonNull Fragment fragment) {
         Intent intent = new Intent(fragment.getActivity(), LoginActivity.class);
         fragment.startActivityForResult(intent, REQ_CODE_LOGIN);
-    }
-
-    public void openEditor(Context context, EditRequester message) {
-        Intent intent = new Intent(context, EditorActivity.class);
-        intent.putExtra("requester", message);
-        context.startActivity(intent);
-    }
-
-    public void openEditor(Fragment context, EditRequester message) {
-        Intent intent = new Intent(context.getActivity(), EditorActivity.class);
-        intent.putExtra("requester", message);
-        context.startActivity(intent);
     }
 
     public void openMeTopics(Context context, String loginName) {
@@ -102,6 +77,11 @@ public class Navigation {
         Intent intent = new Intent(context, MeListActivity.class);
         intent.putExtra("openType", MeListActivity.REPLIES);
         intent.putExtra("loginName", loginName);
+        context.startActivity(intent);
+    }
+
+    public void openCreateTopic(Context context) {
+        Intent intent = new Intent(context, NewTopicsActivity.class);
         context.startActivity(intent);
     }
 

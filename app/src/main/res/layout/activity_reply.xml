@@ -8,9 +8,10 @@
         <variable
             name="reply"
             type="com.zly.diycode.topics.EntitiesContract.Topics" />
+
         <variable
             name="presenter"
-            type="com.zly.diycode.editor.ReplyDialog"/>
+            type="com.zly.diycode.editor.ReplyDialog" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -24,10 +25,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableLeft="@{reply.userPhoto}"
+            android:drawablePadding="8dp"
             android:gravity="center"
             android:text="@{reply.username}"
             android:textColor="@color/textColorPowerful"
-            android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +46,7 @@
             app:layout_constraintTop_toTopOf="@+id/tv_user" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tv_reply_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
@@ -67,10 +68,11 @@
             android:gravity="start"
             android:inputType="textPersonName"
             android:padding="16dp"
+            android:textSize="12sp"
             app:layout_constraintHorizontal_bias="0.504"
-            app:layout_constraintLeft_toLeftOf="@+id/textView4"
-            app:layout_constraintRight_toRightOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintLeft_toLeftOf="@+id/tv_reply_title"
+            app:layout_constraintRight_toRightOf="@+id/tv_reply_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_reply_title" />
 
         <Button
             android:id="@+id/button"
@@ -78,8 +80,8 @@
             android:layout_height="23dp"
             android:layout_marginRight="0dp"
             android:layout_marginTop="16dp"
-            android:text="@string/reply"
             android:onClick="@{() -> presenter.reply()}"
+            android:text="@string/reply"
             app:layout_constraintRight_toRightOf="@+id/et_reply_to_content"
             app:layout_constraintTop_toBottomOf="@+id/et_reply_to_content" />
     </android.support.constraint.ConstraintLayout>

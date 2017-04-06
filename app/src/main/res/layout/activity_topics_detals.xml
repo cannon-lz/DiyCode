@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,7 +9,8 @@
             type="com.zly.diycode.topics.TopicsDetailsActivity" />
     </data>
 
-    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -23,9 +25,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
-            android:src="@android:drawable/ic_dialog_email"
             android:onClick="@{() -> presenter.newReply()}"
+            android:src="@android:drawable/ic_dialog_email"
             app:layout_behavior="com.zly.diycode.widget.FABScrollBehavior" />
 
     </android.support.design.widget.CoordinatorLayout>
+
+
 </layout>

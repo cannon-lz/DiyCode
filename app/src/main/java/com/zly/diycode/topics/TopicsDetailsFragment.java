@@ -159,6 +159,11 @@ public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresente
     }
 
     @Override
+    public void showNewReply(EntitiesContract.Reply reply) {
+        mAdapter.add(reply);
+    }
+
+    @Override
     public void onRefresh() {
         mPresenter.getDetailsAndReplies();
     }
@@ -169,18 +174,16 @@ public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresente
      * @param reply
      */
     public void reply(EntitiesContract.Reply reply, int position) {
-        Log.i("Reply", "click reply");
         if (checkLogin(null)) {
             EntitiesContract.Topics topics = mAdapter.getItemByType(R.layout.item_topics_detail, 0);
-            EditRequester editRequester = new EditRequester();
-            editRequester.setType(EditRequester.TYPE_REPLY);
-            editRequester.setPaperTitle(topics.getTitle());
-            editRequester.setPaperId(topics.getId());
-            editRequester.setFloor(String.valueOf(position));
-            editRequester.setLoginName(reply.getLoginName());
-            //Navigation.getInstance().openEditor(this, editRequester);
-
-            final ReplyDialog replyDialog = new ReplyDialog(getActivity(), topics);
+            final ReplyDialog replyDialog = new ReplyDialog(getActivity(), topics, String.valueOf(position), reply.getLoginName());
+            replyDialog.setOnReplayClickListener(new ReplyDialog.OnReplyClickListener() {
+                @Override
+                public void onClickReply(String body) {
+                    replyDialog.dismiss();
+                    mPresenter.reply(body);
+                }
+            });
             replyDialog.show();
         }
     }

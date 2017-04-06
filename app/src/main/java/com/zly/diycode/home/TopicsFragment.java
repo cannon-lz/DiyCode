@@ -12,7 +12,7 @@ import com.zly.diycode.topics.EntitiesContract;
  * Created by zhangluya on 2017/3/31.
  */
 
-public class TopicsFragment extends BaseListFragment {
+public class TopicsFragment extends BaseListFragment<EntitiesContract.Topics> {
 
     @Override
     protected BaseListPresenter createPresenter() {

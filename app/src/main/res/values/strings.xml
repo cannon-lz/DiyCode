@@ -26,4 +26,7 @@
     <string name="title_me_replies">我的评论</string>
     <string name="title_topics">社区</string>
     <string name="reply">回复</string>
+    <string name="publish">发布</string>
+    <string name="pulish_paper">发表文章</string>
+    <string name="choose_node">选择节点</string>
 </resources>

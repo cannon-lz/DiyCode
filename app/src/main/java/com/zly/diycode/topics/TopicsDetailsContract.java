@@ -25,6 +25,8 @@ public interface TopicsDetailsContract {
 
         void unFavorite();
 
+        void reply(String body);
+
     }
 
     interface View extends IView {
@@ -38,5 +40,7 @@ public interface TopicsDetailsContract {
         void showEmptyView();
 
         void loadedComplete();
+
+        void showNewReply(EntitiesContract.Reply reply);
     }
 }

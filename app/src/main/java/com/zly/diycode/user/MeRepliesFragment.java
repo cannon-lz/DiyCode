@@ -21,7 +21,7 @@ import java.util.Map;
  * Created by zhangluya on 2017/4/1.
  */
 
-public class MeRepliesFragment extends BaseListFragment {
+public class MeRepliesFragment extends BaseListFragment<EntitiesContract.Topics> {
 
     @Override
     protected BaseListPresenter createPresenter() {

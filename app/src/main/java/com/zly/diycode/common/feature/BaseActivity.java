@@ -38,13 +38,11 @@ public class BaseActivity<DB extends ViewDataBinding, P extends IPresenter> exte
     @Override
     public void startActivityForResult(Intent intent, int requestCode) {
         super.startActivityForResult(intent, requestCode);
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     @Override

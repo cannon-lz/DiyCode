@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.zly.diycode.R;
 import com.zly.diycode.common.adapter.BaseAdapter;
+import com.zly.diycode.common.adapter.Item;
 import com.zly.diycode.topics.EntitiesContract;
 
 import java.util.List;
@@ -14,8 +15,8 @@ import java.util.List;
  * Created by zhangly on 2017/3/18.
  */
 
-public class BaseListFragment extends AppListFragment<BaseListPresenter>
-        implements BaseListView<EntitiesContract.Topics>, BaseAdapter.Presenter {
+public class BaseListFragment<DataType extends Item> extends AppListFragment<BaseListPresenter>
+        implements BaseListView<DataType>, BaseAdapter.Presenter {
 
     @Override
     protected void initView(View root, @Nullable Bundle savedInstanceState) {
@@ -24,7 +25,7 @@ public class BaseListFragment extends AppListFragment<BaseListPresenter>
     }
 
     @Override
-    public void showTopics(List<EntitiesContract.Topics> datas) {
+    public void showTopics(List<DataType> datas) {
         mDataBinding.rcvList.setVisibility(View.VISIBLE);
         mDataBinding.tvEnpty.setVisibility(View.GONE);
         mDataBinding.srlRefreshControl.setRefreshing(false);
@@ -33,7 +34,7 @@ public class BaseListFragment extends AppListFragment<BaseListPresenter>
     }
 
     @Override
-    public void addTopics(List<EntitiesContract.Topics> datas) {
+    public void addTopics(List<DataType> datas) {
         mDataBinding.srlRefreshControl.setRefreshing(false);
         setLoadMoreComplete();
         mAdapter.addAll(datas);

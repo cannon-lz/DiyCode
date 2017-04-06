@@ -1,5 +1,6 @@
 package com.zly.diycode.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -24,7 +25,9 @@ import com.zly.diycode.data.user.UserRemoteData;
 import com.zly.diycode.databinding.ActivityMainBinding;
 import com.zly.diycode.databinding.NavHeaderDrawerBinding;
 import com.zly.diycode.editor.EditRequester;
+import com.zly.diycode.editor.NewTopicsActivity;
 import com.zly.diycode.editor.ReplyDialog;
+import com.zly.diycode.project.ProjectFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,9 +129,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
     }
 
     public void createPaper() {
-        EditRequester editRequester = new EditRequester();
-        editRequester.setType(EditRequester.TYPE_CREATE_PAPER);
-        Navigation.getInstance().openEditor(this, editRequester);
+        Navigation.getInstance().openCreateTopic(this);
     }
 
     private void getMeInfo() {
@@ -154,7 +155,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
         {
             mFragments.add(new Content("社区", new TopicsFragment()));
             mFragments.add(new Content("新闻", new NewsFragment()));
-            mFragments.add(new Content("酷站", new TopicsFragment()));
+            mFragments.add(new Content("项目", new ProjectFragment()));
         }
 
         ContentPagerAdapter(FragmentManager fm) {

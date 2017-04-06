@@ -1,13 +1,19 @@
 package com.zly.diycode.editor;
 
-import com.google.gson.annotations.SerializedName;
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
+
+import com.zly.diycode.BR;
+import com.zly.diycode.R;
 import com.zly.diycode.common.adapter.Item;
+
+import java.util.Objects;
 
 /**
  * Created by zhangluya on 2017/4/1.
  */
 
-public class Node implements Item {
+public class Node extends BaseObservable implements Item {
 
     private int id;
     private String name;
@@ -17,6 +23,15 @@ public class Node implements Item {
     private int sort;
     private String sectionName;
     private String updatedAt;
+    private boolean isParent;
+
+    public boolean isParent() {
+        return isParent;
+    }
+
+    public void setParent(boolean parent) {
+        isParent = parent;
+    }
 
     public int getId() {
         return id;
@@ -26,12 +41,14 @@ public class Node implements Item {
         this.id = id;
     }
 
+    @Bindable
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+        notifyPropertyChanged(BR.name);
     }
 
     public int getTopicsCount() {
@@ -66,12 +83,14 @@ public class Node implements Item {
         this.sort = sort;
     }
 
+    @Bindable
     public String getSectionName() {
         return sectionName;
     }
 
     public void setSectionName(String sectionName) {
         this.sectionName = sectionName;
+        notifyPropertyChanged(BR.sectionName);
     }
 
     public String getUpdatedAt() {
@@ -84,6 +103,30 @@ public class Node implements Item {
 
     @Override
     public int getItemViewType() {
-        return 0;
+        return R.layout.item_node;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof Node)) {
+
+            return false;
+        }
+
+        Node node = (Node) obj;
+        return node.getSectionId() == getSectionId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getSectionId(), getSectionName());
     }
 }

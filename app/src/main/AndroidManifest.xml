@@ -35,6 +35,10 @@
             android:name=".user.MeListActivity"
             android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".editor.NewTopicsActivity"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

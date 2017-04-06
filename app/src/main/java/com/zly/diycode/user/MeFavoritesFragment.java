@@ -19,7 +19,7 @@ import java.util.Map;
  * Created by zhangluya on 2017/4/1.
  */
 
-public class MeFavoritesFragment extends BaseListFragment {
+public class MeFavoritesFragment extends BaseListFragment<EntitiesContract.Topics> {
 
     @Override
     protected BaseListPresenter createPresenter() {
