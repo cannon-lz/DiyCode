@@ -7,15 +7,15 @@
 
         <variable
             name="clickHandler"
-            type="com.zly.diycode.editor.NewTopicsActivity" />
+            type="com.zly.diycode.reply.NewTopicsActivity" />
 
         <variable
             name="parentNode"
-            type="com.zly.diycode.editor.Node" />
+            type="com.zly.diycode.reply.Node" />
 
         <variable
             name="childNode"
-            type="com.zly.diycode.editor.Node" />
+            type="com.zly.diycode.reply.Node" />
     </data>
 
     <android.support.constraint.ConstraintLayout

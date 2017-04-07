@@ -1,4 +1,4 @@
-package com.zly.diycode.editor;
+package com.zly.diycode.reply;
 
 import android.support.v4.util.ArrayMap;
 import android.text.TextUtils;
@@ -7,14 +7,10 @@ import com.zly.diycode.data.Callback;
 import com.zly.diycode.data.topics.TopicsData;
 import com.zly.diycode.data.topics.TopicsRemoteData;
 import com.zly.diycode.topics.EntitiesContract;
-import com.zly.diycode.topics.TopicsDetailsContract;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by zhangluya on 2017/4/6.

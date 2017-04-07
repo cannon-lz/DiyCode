@@ -1,6 +1,5 @@
 package com.zly.diycode.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -24,9 +23,6 @@ import com.zly.diycode.data.Callback;
 import com.zly.diycode.data.user.UserRemoteData;
 import com.zly.diycode.databinding.ActivityMainBinding;
 import com.zly.diycode.databinding.NavHeaderDrawerBinding;
-import com.zly.diycode.editor.EditRequester;
-import com.zly.diycode.editor.NewTopicsActivity;
-import com.zly.diycode.editor.ReplyDialog;
 import com.zly.diycode.project.ProjectFragment;
 
 import java.util.ArrayList;

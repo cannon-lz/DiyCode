@@ -4,7 +4,7 @@ import android.support.v4.util.ArrayMap;
 
 import com.zly.diycode.data.AbsListData;
 import com.zly.diycode.data.Callback;
-import com.zly.diycode.editor.Node;
+import com.zly.diycode.reply.Node;
 import com.zly.diycode.http.ApiConfig;
 import com.zly.diycode.http.RetrofitCallback;
 import com.zly.diycode.http.TopicsApi;
@@ -12,7 +12,6 @@ import com.zly.diycode.http.entities.RespNode;
 import com.zly.diycode.http.entities.RespPaper;
 import com.zly.diycode.http.entities.RespReply;
 import com.zly.diycode.http.entities.RespResult;
-import com.zly.diycode.topics.EntitiesContract;
 
 import java.util.List;
 import java.util.Map;

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="project"
+            type="com.zly.diycode.data.project.Project" />
+
+        <variable
+            name="clickHandler"
+            type="com.zly.diycode.project.ProjectDetailsActivity" />
+
+        <import type="java.lang.String" />
+    </data>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/grayF9F9F9"
+                android:padding="16dp">
+
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="0dp"
+                    android:text="@{project.name}"
+                    android:textColor="@color/textColorPowerful"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toRightOf="@+id/imageView2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    style="@style/ProjectMenuStyle"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="8dp"
+                    android:onClick="@{() -> clickHandler.follow()}"
+                    android:text="@string/follow"
+                    app:layout_constraintLeft_toLeftOf="@+id/textView2"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:drawablePadding="3dp"
+                    android:gravity="center"
+                    android:text="@{String.format(@string/project_node, project.category.name, project.subCategory.name)}"
+                    android:textColor="@color/linkColor"
+                    app:layout_constraintLeft_toLeftOf="@+id/textView3"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="0dp"
+                    app:imageUrl="@{project.projectCoverUrl}"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView4"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView2"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    style="@style/ProjectMenuStyle"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="0dp"
+                    android:onClick="@{() -> clickHandler.imUsed()}"
+                    android:text="@string/used"
+                    app:layout_constraintBottom_toTopOf="@+id/textView4"
+                    app:layout_constraintLeft_toRightOf="@+id/textView3"
+                    app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView5"
+                    app:layout_constraintLeft_toRightOf="@+id/textView5"
+                    app:layout_constraintTop_toTopOf="@+id/textView5" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="16dp"
+                    android:lineSpacingExtra="1dp"
+                    android:text="@{project.description}"
+                    android:textColor="@color/textColorPowerful"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    style="@style/ProjectLabelMenuStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:drawableLeft="@drawable/github"
+                    android:onClick="@{() -> clickHandler.browser(project.github)}"
+                    android:text="@string/github"
+                    android:visibility="@{TextUtils.isEmpty(project.github) ? View.GONE : View.VISIBLE}"
+                    app:layout_constraintLeft_toLeftOf="@+id/textView7"
+                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    style="@style/ProjectLabelMenuStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:drawableLeft="@drawable/download"
+                    android:onClick="@{() -> clickHandler.download()}"
+                    android:text="@string/download"
+                    android:visibility="@{TextUtils.isEmpty(project.download) ? View.GONE : View.VISIBLE}"
+                    app:layout_constraintLeft_toRightOf="@+id/textView8"
+                    app:layout_constraintTop_toTopOf="@+id/textView8"
+                    android:layout_marginTop="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView8"
+                    android:layout_marginBottom="0dp" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    style="@style/ProjectLabelMenuStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="16dp"
+                    android:drawableLeft="@drawable/ic_website"
+                    android:onClick="@{() -> clickHandler.browser(project.website)}"
+                    android:text="@string/website"
+                    android:visibility="@{TextUtils.isEmpty(project.website) ? View.GONE : View.VISIBLE}"
+                    app:layout_constraintLeft_toRightOf="@+id/textView9"
+                    app:layout_constraintTop_toTopOf="@+id/textView9"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView9"
+                    android:layout_marginBottom="0dp" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:drawableLeft="@drawable/ic_watch"
+                    android:drawablePadding="3dp"
+                    android:gravity="center"
+                    android:text="@{String.valueOf(project.watch)}"
+                    android:textColor="@color/textColorFeeble"
+                    android:textSize="13sp"
+                    app:layout_constraintLeft_toLeftOf="@+id/textView8"
+                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:drawableLeft="@drawable/ic_star"
+                    android:drawablePadding="3dp"
+                    android:gravity="center"
+                    android:text="@{String.valueOf(project.star)}"
+                    android:textColor="@color/textColorFeeble"
+                    android:textSize="13sp"
+                    app:layout_constraintLeft_toRightOf="@+id/textView11"
+                    app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:drawableLeft="@drawable/ic_fork"
+                    android:drawablePadding="3dp"
+                    android:gravity="center"
+                    android:text="@{String.valueOf(project.fork)}"
+                    android:textColor="@color/textColorFeeble"
+                    android:textSize="13sp"
+                    app:layout_constraintLeft_toRightOf="@+id/textView12"
+                    app:layout_constraintTop_toTopOf="@+id/textView12" />
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:text="@{project.lastUpdatedAt}"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView13"
+                    app:layout_constraintLeft_toRightOf="@+id/textView13"
+                    app:layout_constraintTop_toTopOf="@+id/textView13" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    style="@style/ProjectLabelMenuStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="0dp"
+                    android:drawableLeft="@drawable/sync"
+                    android:onClick="@{() -> clickHandler.sync()}"
+                    android:text="@string/sync"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView10"
+                    app:layout_constraintLeft_toRightOf="@+id/textView10"
+                    app:layout_constraintTop_toTopOf="@+id/textView10" />
+
+
+            </android.support.constraint.ConstraintLayout>
+
+            <com.zly.diycode.widget.AppWebView
+                android:id="@+id/wv_readme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</layout>

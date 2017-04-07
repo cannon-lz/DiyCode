@@ -35,7 +35,7 @@
     </style>
 
     <style name="DialogNoTitle">
-        <item name="android:windowBackground">@drawable/shape_circre</item>
+        <item name="android:windowBackground">@drawable/shape_white_circular</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
@@ -54,7 +54,21 @@
         <item name="android:clickable">true</item>
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
         <item name="cardCornerRadius">8dp</item>
-        <item name="contentPadding">8dp</item>
+        <item name="contentPadding">12dp</item>
+    </style>
+
+    <style name="ProjectMenuStyle">
+        <item name="android:background">@drawable/selector_white_stroke</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="ProjectLabelMenuStyle">
+        <item name="android:layout_height">20dp</item>
+        <item name="android:drawablePadding">3dp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/linkColor</item>
     </style>
 
 </resources>

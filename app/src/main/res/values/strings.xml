@@ -29,4 +29,11 @@
     <string name="publish">发布</string>
     <string name="pulish_paper">发表文章</string>
     <string name="choose_node">选择节点</string>
+    <string name="project_node" formatted="false">%s - %s</string>
+    <string name="follow">收藏</string>
+    <string name="used">我在用</string>
+    <string name="sync">同步</string>
+    <string name="website">官网</string>
+    <string name="github">github</string>
+    <string name="download">下载</string>
 </resources>

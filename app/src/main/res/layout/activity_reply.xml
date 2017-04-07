@@ -11,7 +11,7 @@
 
         <variable
             name="presenter"
-            type="com.zly.diycode.editor.ReplyDialog" />
+            type="com.zly.diycode.topics.ReplyDialog" />
     </data>
 
     <android.support.constraint.ConstraintLayout

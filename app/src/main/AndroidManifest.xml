@@ -29,14 +29,17 @@
         <activity
             android:name=".web.WebActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".editor.EditorActivity" />
         <activity android:name=".topics.TopicsDetailsActivity" />
         <activity
             android:name=".user.MeListActivity"
             android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".editor.NewTopicsActivity"
+            android:name=".reply.NewTopicsActivity"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".project.ProjectDetailsActivity"
             android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

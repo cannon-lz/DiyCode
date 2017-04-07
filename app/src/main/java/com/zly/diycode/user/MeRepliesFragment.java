@@ -4,12 +4,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.util.ArrayMap;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.DividerItemDecoration;
 import android.view.View;
 
 import com.zly.diycode.R;
 import com.zly.diycode.common.Navigation;
-import com.zly.diycode.data.user.ListDataContract;
+import com.zly.diycode.data.ListDataContract;
 import com.zly.diycode.list.BaseListFragment;
 import com.zly.diycode.list.BaseListPresenter;
 import com.zly.diycode.topics.EntitiesContract;
@@ -52,15 +51,15 @@ public class MeRepliesFragment extends BaseListFragment<EntitiesContract.Topics>
     }
 
     @Override
-    public void showTopics(List<EntitiesContract.Topics> datas) {
+    public void show(List<EntitiesContract.Topics> datas) {
         fullItemLayout(datas);
-        super.showTopics(datas);
+        super.show(datas);
     }
 
     @Override
-    public void addTopics(List<EntitiesContract.Topics> datas) {
+    public void add(List<EntitiesContract.Topics> datas) {
         fullItemLayout(datas);
-        super.addTopics(datas);
+        super.add(datas);
     }
 
     private void fullItemLayout(List<EntitiesContract.Topics> datas) {

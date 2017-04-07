@@ -3,8 +3,8 @@ package com.zly.diycode.topics;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.util.ArrayMap;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.DividerItemDecoration;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,18 +13,18 @@ import android.view.View;
 import android.webkit.WebView;
 
 import com.zly.diycode.R;
+import com.zly.diycode.common.HtmlUtils;
 import com.zly.diycode.common.Navigation;
 import com.zly.diycode.common.adapter.BaseAdapter;
 import com.zly.diycode.common.adapter.DataBindingViewHolder;
-import com.zly.diycode.common.adapter.Item;
+import com.zly.diycode.data.ListDataContract;
 import com.zly.diycode.databinding.ItemTopicsDetailBinding;
-import com.zly.diycode.editor.ReplyDialog;
-import com.zly.diycode.list.AppListFragment;
-import com.zly.diycode.editor.EditRequester;
+import com.zly.diycode.list.BaseListFragment;
 import com.zly.diycode.widget.AppWebView;
 import com.zly.diycode.widget.ToggleActionLayout;
 
 import java.util.List;
+import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -32,7 +32,7 @@ import static android.app.Activity.RESULT_OK;
  * Created by zhangluya on 2017/3/23.
  */
 
-public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresenter>
+public class TopicsDetailsFragment extends BaseListFragment<EntitiesContract.Reply>
         implements TopicsDetailsContract.View, BaseAdapter.Presenter {
 
     private ToggleActionLayout mTalFollow;
@@ -40,12 +40,15 @@ public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresente
 
     @Override
     protected TopicsDetailsPresenter createPresenter() {
-        return new TopicsDetailsPresenter(this, Navigation.IntentReceiver.getInstance().getNewsId((TopicsDetailsActivity) getActivity()));
+        Map<String, Object> params = new ArrayMap<>();
+        params.put("id", Navigation.IntentReceiver.getInstance().getNewsId((TopicsDetailsActivity) getActivity()));
+        return new TopicsDetailsPresenter(new ListDataContract.RepliesGetter(), this, params, String.valueOf(params.get("id")));
     }
 
     @Override
     protected void initView(android.view.View root, @Nullable Bundle savedInstanceState) {
         super.initView(root, savedInstanceState);
+        mDataBinding.srlRefreshControl.setEnabled(false);
         setHasOptionsMenu(true);
         ActionBar actionBar = mHostActivity.getSupportActionBar();
         if (actionBar != null) {
@@ -55,7 +58,7 @@ public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresente
         }
         mAdapter.addConverter(R.layout.item_topics_detail, new TopicsDetailsConverter());
         mAdapter.addConverter(R.layout.item_reply, new RepliesConverter());
-        onRefresh();
+        ((TopicsDetailsPresenter) mPresenter).getDetails();
     }
 
     @Override
@@ -77,7 +80,7 @@ public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresente
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         int size = menu.size();
-        mTalFollow = (ToggleActionLayout) menu.findItem(R.id.action_follow).getActionView();
+        //mTalFollow = (ToggleActionLayout) menu.findItem(R.id.action_follow).getActionView();
         mTalFavorite = (ToggleActionLayout) menu.findItem(R.id.action_favorite).getActionView();
         for (int i = 0; i < size; i++) {
             final MenuItem menuItem = menu.getItem(i);
@@ -100,21 +103,21 @@ public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresente
         if (!checkLogin(null)) {
             return super.onOptionsItemSelected(item);
         }
-        if (itemId == R.id.action_follow) {
+        /*if (itemId == R.id.action_follow) {
             if (mTalFollow.isChecked()) {
-                mPresenter.unFollow();
+                ((TopicsDetailsPresenter) mPresenter).unFollow();
             } else {
-                mPresenter.follow();
+                ((TopicsDetailsPresenter) mPresenter).follow();
 
             }
             return true;
-        }
+        }*/
 
         if (itemId == R.id.action_favorite) {
             if (mTalFavorite.isChecked()) {
-                mPresenter.unFavorite();
+                ((TopicsDetailsPresenter) mPresenter).unFavorite();
             } else {
-                mPresenter.favorite();
+                ((TopicsDetailsPresenter) mPresenter).favorite();
             }
             return true;
         }
@@ -123,20 +126,35 @@ public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresente
     }
 
     @Override
-    public void showDetails(List<Item> datas, boolean isHeaderLoadComplete) {
+    public void showDetails(EntitiesContract.Topics topics) {
         mDataBinding.srlRefreshControl.setRefreshing(false);
-        mAdapter.setDataList(datas);
+        mAdapter.add(0, topics);
         setItemProgress();
-        EntitiesContract.Topics topics = mAdapter.getItemByType(R.layout.item_topics_detail, 0);
         if (topics != null) {
             mTalFavorite.setChecked(topics.isFavorited());
-            mTalFollow.setChecked(topics.isFollowed());
+            //mTalFollow.setChecked(topics.isFollowed());
         }
     }
 
     @Override
+    public void show(List<EntitiesContract.Reply> datas) {
+        mDataBinding.rcvList.setVisibility(View.VISIBLE);
+        mDataBinding.tvEnpty.setVisibility(View.GONE);
+        mDataBinding.srlRefreshControl.setRefreshing(false);
+        mAdapter.addAll(datas);
+        loadMoreComplete();
+    }
+
+    @Override
+    public void showEmptyView() {
+
+
+        // super.showEmptyView();
+    }
+
+    @Override
     public void setFollowChecked(boolean isFollow) {
-        mTalFollow.setChecked(isFollow);
+        //mTalFollow.setChecked(isFollow);
     }
 
     @Override
@@ -145,27 +163,8 @@ public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresente
     }
 
     @Override
-    public void showEmptyView() {
-        setLoadMoreComplete();
-        mDataBinding.srlRefreshControl.setRefreshing(false);
-        mDataBinding.tvEnpty.setVisibility(View.VISIBLE);
-        mDataBinding.rcvList.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void loadedComplete() {
-        setLoadMoreComplete();
-        setItemProgress();
-    }
-
-    @Override
     public void showNewReply(EntitiesContract.Reply reply) {
         mAdapter.add(reply);
-    }
-
-    @Override
-    public void onRefresh() {
-        mPresenter.getDetailsAndReplies();
     }
 
     /**
@@ -181,7 +180,7 @@ public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresente
                 @Override
                 public void onClickReply(String body) {
                     replyDialog.dismiss();
-                    mPresenter.reply(body);
+                    ((TopicsDetailsPresenter) mPresenter).reply(body);
                 }
             });
             replyDialog.show();
@@ -211,7 +210,7 @@ public class TopicsDetailsFragment extends AppListFragment<TopicsDetailsPresente
             Log.i("BaseAdapterType", String.format("details position %s", position));
             ItemTopicsDetailBinding binding = adapter.getDataBindingByItemType(R.layout.item_topics_detail);
             AppWebView webView = binding.webView;
-            webView.loadDataWithBaseURL(null, webView.addStyleAndHeader(item.getContent(), null), "text/html", "utf-8", null);
+            webView.loadDataWithBaseURL(null, HtmlUtils.addStyleAndHeader(item.getContent()), "text/html", "utf-8", null);
             webView.setWebViewClient(new AppWebView.AppWebViewClient() {
                 @Override
                 public boolean shouldOverrideUrlLoading(WebView view, String url) {

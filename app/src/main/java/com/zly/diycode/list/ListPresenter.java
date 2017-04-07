@@ -11,4 +11,6 @@ public interface ListPresenter extends IPresenter {
     void getTopics();
 
     void nextPage();
+
+    int getOffset();
 }

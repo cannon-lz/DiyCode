@@ -2,7 +2,7 @@ package com.zly.diycode.http.entities;
 
 import com.google.gson.annotations.SerializedName;
 import com.zly.diycode.data.Mapper;
-import com.zly.diycode.editor.Node;
+import com.zly.diycode.reply.Node;
 
 /**
  * Created by zhangluya on 2017/4/1.

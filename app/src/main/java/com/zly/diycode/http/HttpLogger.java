@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -50,7 +51,12 @@ class HttpLogger implements HttpLoggingInterceptor.Logger {
             new JSONObject(message);
             isJson = true;
         } catch (JSONException e) {
-            isJson = false;
+            try {
+                new JSONArray(message);
+                isJson = true;
+            } catch (JSONException e1) {
+                isJson = false;
+            }
         }
         return isJson;
     }

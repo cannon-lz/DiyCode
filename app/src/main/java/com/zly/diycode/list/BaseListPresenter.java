@@ -36,7 +36,7 @@ public class BaseListPresenter<T> implements ListPresenter {
                     mBaseListView.showEmptyView();
                 } else {
                     mOffset = size + 1;
-                    mBaseListView.showTopics(topicses);
+                    mBaseListView.show(topicses);
                 }
 
             }
@@ -58,7 +58,7 @@ public class BaseListPresenter<T> implements ListPresenter {
                     mBaseListView.loadMoreComplete();
                 } else {
                     mOffset += size;
-                    mBaseListView.addTopics(topicses);
+                    mBaseListView.add(topicses);
                 }
             }
 
@@ -67,5 +67,14 @@ public class BaseListPresenter<T> implements ListPresenter {
                 mBaseListView.loadMoreComplete();
             }
         }, mParams);
+    }
+
+    @Override
+    public int getOffset() {
+        return mOffset;
+    }
+
+    public <R extends BaseListView<T>> R getView(Class<R> clazz) {
+        return clazz.cast(mBaseListView);
     }
 }

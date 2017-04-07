@@ -1,5 +1,8 @@
 package com.zly.diycode.data.project;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 import com.zly.diycode.R;
 import com.zly.diycode.common.adapter.Item;
@@ -9,7 +12,7 @@ import com.zly.diycode.http.entities.RespProject;
  * Created by zhangluya on 2017/4/6.
  */
 
-public class Project implements Item {
+public class Project implements Item , Parcelable {
 
     private int id;
     private String name;
@@ -30,6 +33,63 @@ public class Project implements Item {
     private SubCategory subCategory;
     @SerializedName("last_updated_at")
     private String lastUpdatedAt;
+
+    public Project() {
+    }
+
+    protected Project(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        description = in.readString();
+        readme = in.readString();
+        github = in.readString();
+        website = in.readString();
+        download = in.readString();
+        star = in.readInt();
+        fork = in.readInt();
+        watch = in.readInt();
+        projectCoverUrl = in.readString();
+        labelStr = in.readString();
+        category = in.readParcelable(Category.class.getClassLoader());
+        subCategory = in.readParcelable(SubCategory.class.getClassLoader());
+        lastUpdatedAt = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeString(description);
+        dest.writeString(readme);
+        dest.writeString(github);
+        dest.writeString(website);
+        dest.writeString(download);
+        dest.writeInt(star);
+        dest.writeInt(fork);
+        dest.writeInt(watch);
+        dest.writeString(projectCoverUrl);
+        dest.writeString(labelStr);
+        dest.writeParcelable(category, flags);
+        dest.writeParcelable(subCategory, flags);
+        dest.writeString(lastUpdatedAt);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Project> CREATOR = new Creator<Project>() {
+        @Override
+        public Project createFromParcel(Parcel in) {
+            return new Project(in);
+        }
+
+        @Override
+        public Project[] newArray(int size) {
+            return new Project[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -156,7 +216,7 @@ public class Project implements Item {
         return R.layout.item_project;
     }
 
-    public static class Category {
+    public static class Category implements Parcelable {
         /**
          * name : Android
          * id : 1
@@ -164,6 +224,37 @@ public class Project implements Item {
 
         private String name;
         private int id;
+
+        public Category() {
+        }
+
+        protected Category(Parcel in) {
+            name = in.readString();
+            id = in.readInt();
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(name);
+            dest.writeInt(id);
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        public static final Creator<Category> CREATOR = new Creator<Category>() {
+            @Override
+            public Category createFromParcel(Parcel in) {
+                return new Category(in);
+            }
+
+            @Override
+            public Category[] newArray(int size) {
+                return new Category[size];
+            }
+        };
 
         public String getName() {
             return name;
@@ -182,7 +273,7 @@ public class Project implements Item {
         }
     }
 
-    public static class SubCategory {
+    public static class SubCategory implements Parcelable {
         /**
          * name : 其他(other)
          * id : 23
@@ -190,6 +281,37 @@ public class Project implements Item {
 
         private String name;
         private int id;
+
+        public SubCategory() {
+        }
+
+        protected SubCategory(Parcel in) {
+            name = in.readString();
+            id = in.readInt();
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(name);
+            dest.writeInt(id);
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        public static final Creator<SubCategory> CREATOR = new Creator<SubCategory>() {
+            @Override
+            public SubCategory createFromParcel(Parcel in) {
+                return new SubCategory(in);
+            }
+
+            @Override
+            public SubCategory[] newArray(int size) {
+                return new SubCategory[size];
+            }
+        };
 
         public String getName() {
             return name;

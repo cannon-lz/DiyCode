@@ -20,7 +20,7 @@ public class RespProject implements Mapper<Project> {
      * github : https://github.com/steelkiwi/cropiwa
      * website : http://steelkiwi.com/
      * download : https://api.github.com/repos/steelkiwi/cropiwa/zipball
-     * star : 403
+     * ic_star : 403
      * fork : 38
      * watch : 14
      * project_cover_url : https://diycode.b0.upaiyun.com/developer_organization/avatar/3119_1491443524.jpg

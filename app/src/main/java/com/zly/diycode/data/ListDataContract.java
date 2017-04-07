@@ -1,7 +1,9 @@
-package com.zly.diycode.data.user;
+package com.zly.diycode.data;
 
 import com.zly.diycode.data.AbsListData;
 import com.zly.diycode.data.Callback;
+import com.zly.diycode.data.topics.TopicsRemoteData;
+import com.zly.diycode.data.user.UserRemoteData;
 import com.zly.diycode.topics.EntitiesContract;
 
 import java.util.List;
@@ -39,6 +41,15 @@ public interface ListDataContract {
             String order = String.valueOf(params.get("order"));
             String login = String.valueOf(params.get("login"));
             UserRemoteData.getInstance().replies(login, order, String.valueOf(offset), callback);
+        }
+    }
+
+    class RepliesGetter implements AbsListData<EntitiesContract.Reply> {
+
+        @Override
+        public void getList(int offset, Callback<List<EntitiesContract.Reply>> callback, Map<String, Object> params) {
+            String id = String.valueOf(params.get("id"));
+            TopicsRemoteData.getInstance().getReplies(id, offset, callback);
         }
     }
 }

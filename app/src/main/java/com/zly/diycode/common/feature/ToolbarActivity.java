@@ -28,6 +28,7 @@ public class ToolbarActivity<DB extends ViewDataBinding> extends AppCompatActivi
         }
         if (isNeedInsertToolbar()) {
             mToolbarHelper = ToolbarHelper.insert(this, ((ViewGroup) getWindow().getDecorView()).getChildAt(0));
+            getSupportActionBar().setTitle("");
         }
         initData(savedInstanceState);
         initView(savedInstanceState);

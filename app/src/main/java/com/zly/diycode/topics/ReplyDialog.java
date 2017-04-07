@@ -1,11 +1,10 @@
-package com.zly.diycode.editor;
+package com.zly.diycode.topics;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -15,8 +14,6 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.zly.diycode.R;
-import com.zly.diycode.data.Callback;
-import com.zly.diycode.data.topics.TopicsRemoteData;
 import com.zly.diycode.databinding.ActivityReplyBinding;
 import com.zly.diycode.topics.EntitiesContract;
 

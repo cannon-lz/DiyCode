@@ -4,5 +4,7 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    app:titleTextColor="@color/textColorFeeble"
-    app:layout_scrollFlags="scroll|enterAlways" />
+    android:title="@null"
+    app:layout_scrollFlags="scroll|enterAlways"
+    app:title="@null"
+    app:titleTextColor="@color/textColorFeeble" />

@@ -7,6 +7,7 @@ import android.view.View;
 import com.zly.diycode.R;
 import com.zly.diycode.common.adapter.BaseAdapter;
 import com.zly.diycode.common.adapter.Item;
+import com.zly.diycode.http.Config;
 import com.zly.diycode.topics.EntitiesContract;
 
 import java.util.List;
@@ -25,20 +26,18 @@ public class BaseListFragment<DataType extends Item> extends AppListFragment<Bas
     }
 
     @Override
-    public void showTopics(List<DataType> datas) {
+    public void show(List<DataType> datas) {
         mDataBinding.rcvList.setVisibility(View.VISIBLE);
         mDataBinding.tvEnpty.setVisibility(View.GONE);
         mDataBinding.srlRefreshControl.setRefreshing(false);
         mAdapter.setDataList(datas);
-        loadMoreComplete();
     }
 
     @Override
-    public void addTopics(List<DataType> datas) {
+    public void add(List<DataType> datas) {
         mDataBinding.srlRefreshControl.setRefreshing(false);
         setLoadMoreComplete();
         mAdapter.addAll(datas);
-        loadMoreComplete();
     }
 
     @Override
@@ -64,6 +63,9 @@ public class BaseListFragment<DataType extends Item> extends AppListFragment<Bas
 
     @Override
     protected void onDragBottom() {
+        if ((mPresenter.getOffset() - 1) % Config.PAGE_COUNT != 0) {
+            return;
+        }
         int lastPosition = mAdapter.getItemCount() - 1;
         EntitiesContract.ItemProgress itemProgress = mAdapter.getItemByType(R.layout.item_progress, lastPosition);
         if (itemProgress.isLoadComplete()) {
@@ -78,6 +80,6 @@ public class BaseListFragment<DataType extends Item> extends AppListFragment<Bas
         return this;
     }
 
-    public void onItemClick(EntitiesContract.Topics topics, int position) {
+    public void onItemClick(DataType data, int position) {
     }
 }

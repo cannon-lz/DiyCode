@@ -84,7 +84,7 @@
                 android:layout_marginLeft="0dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/gray_light"
+                android:background="@color/grayLight"
                 android:padding="8dp"
                 android:text="@{item.topicsTitle}"
                 android:textColor="@color/textColorFeeble"

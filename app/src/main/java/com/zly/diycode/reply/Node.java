@@ -1,4 +1,4 @@
-package com.zly.diycode.editor;
+package com.zly.diycode.reply;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;

@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface BaseListView<T> extends IView {
 
-    void showTopics(List<T> datas);
+    void show(List<T> datas);
 
-    void addTopics(List<T> datas);
+    void add(List<T> datas);
 
     void showEmptyView();
 

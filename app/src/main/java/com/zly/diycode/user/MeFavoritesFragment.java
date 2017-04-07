@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.zly.diycode.R;
 import com.zly.diycode.common.Navigation;
-import com.zly.diycode.data.user.ListDataContract;
+import com.zly.diycode.data.ListDataContract;
 import com.zly.diycode.list.BaseListFragment;
 import com.zly.diycode.list.BaseListPresenter;
 import com.zly.diycode.topics.EntitiesContract;

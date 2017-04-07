@@ -7,9 +7,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-import com.zly.diycode.editor.EditorActivity;
-import com.zly.diycode.editor.EditRequester;
-import com.zly.diycode.editor.NewTopicsActivity;
+import com.zly.diycode.data.project.Project;
+import com.zly.diycode.project.ProjectDetailsActivity;
+import com.zly.diycode.reply.NewTopicsActivity;
 import com.zly.diycode.topics.EntitiesContract;
 import com.zly.diycode.topics.TopicsDetailsActivity;
 import com.zly.diycode.user.LoginActivity;
@@ -85,6 +85,12 @@ public class Navigation {
         context.startActivity(intent);
     }
 
+    public void openProjectDetails(Context context, Project project) {
+        Intent intent = new Intent(context, ProjectDetailsActivity.class);
+        intent.putExtra("project", project);
+        context.startActivity(intent);
+    }
+
     public static class IntentReceiver {
 
         private static final IntentReceiver INSTANCE = new IntentReceiver();
@@ -110,30 +116,10 @@ public class Navigation {
             return activity.getIntent().getStringExtra("url");
         }
 
-        public
-        @Nullable
-        String getTitle(@NonNull EditorActivity activity) {
-            return activity.getIntent().getStringExtra("title");
-        }
-
-        public
-        @Nullable
-        EditRequester getCreateReplyMessage(@NonNull EditorActivity activity) {
-            return activity.getIntent().getParcelableExtra("replyMessage");
-        }
-
-        public void setReplyResult(@NonNull EditorActivity context, EntitiesContract.Reply topics) {
-            Intent intent = new Intent();
-            intent.putExtra("replyResult", topics);
-            context.setResult(Activity.RESULT_OK, intent);
-        }
 
         public EntitiesContract.Reply getReplyResult(@NonNull Intent intent) {
             return intent.getParcelableExtra("replyResult");
         }
 
-        public EditRequester getEditorType(EditorActivity intent) {
-            return intent.getIntent().getParcelableExtra("requester");
-        }
     }
 }

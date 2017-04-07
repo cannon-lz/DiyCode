@@ -2,7 +2,7 @@ package com.zly.diycode.data.topics;
 
 
 import com.zly.diycode.data.Callback;
-import com.zly.diycode.editor.Node;
+import com.zly.diycode.reply.Node;
 
 import java.util.List;
 import java.util.Map;

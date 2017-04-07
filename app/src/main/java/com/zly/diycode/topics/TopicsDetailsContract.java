@@ -3,6 +3,8 @@ package com.zly.diycode.topics;
 import com.zly.diycode.common.adapter.Item;
 import com.zly.diycode.common.feature.IPresenter;
 import com.zly.diycode.common.feature.IView;
+import com.zly.diycode.list.BaseListView;
+import com.zly.diycode.list.ListPresenter;
 import com.zly.diycode.topics.EntitiesContract;
 
 import java.util.List;
@@ -13,9 +15,9 @@ import java.util.List;
 
 public interface TopicsDetailsContract {
 
-    interface Presenter extends IPresenter {
+    interface Presenter extends ListPresenter {
 
-        void getDetailsAndReplies();
+        void getDetails();
 
         void follow();
 
@@ -29,17 +31,13 @@ public interface TopicsDetailsContract {
 
     }
 
-    interface View extends IView {
+    interface View extends BaseListView<EntitiesContract.Reply> {
 
-        void showDetails(List<Item> datas, boolean isHeaderLoadComplete);
+        void showDetails(EntitiesContract.Topics topics);
 
         void setFollowChecked(boolean checked);
 
         void setFavoriteChecked(boolean checked);
-
-        void showEmptyView();
-
-        void loadedComplete();
 
         void showNewReply(EntitiesContract.Reply reply);
     }
