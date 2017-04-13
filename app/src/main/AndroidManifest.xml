@@ -32,15 +32,15 @@
         <activity android:name=".topics.TopicsDetailsActivity" />
         <activity
             android:name=".user.MeListActivity"
-            android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".reply.NewTopicsActivity"
-            android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".project.ProjectDetailsActivity"
-            android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".user.MeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

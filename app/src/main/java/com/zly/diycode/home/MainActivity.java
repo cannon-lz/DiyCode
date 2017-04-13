@@ -1,5 +1,6 @@
 package com.zly.diycode.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -24,6 +25,7 @@ import com.zly.diycode.data.user.UserRemoteData;
 import com.zly.diycode.databinding.ActivityMainBinding;
 import com.zly.diycode.databinding.NavHeaderDrawerBinding;
 import com.zly.diycode.project.ProjectFragment;
+import com.zly.diycode.user.MeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,12 +130,18 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, VoidPresente
         Navigation.getInstance().openCreateTopic(this);
     }
 
+    public void openMeInfo(MeModel me) {
+        Intent intent = MeActivity.getIntent(this, me);
+        startActivity(intent);
+    }
+
     private void getMeInfo() {
         if (UserManager.getInstance().isLogin()) {
             UserRemoteData.getInstance().getMeInfo(new Callback<MeModel>() {
                 @Override
                 public void onSuccess(MeModel meModel) {
                     mNavHeaderDrawerBinding.setMe(meModel);
+                    mNavHeaderDrawerBinding.setClickHandler(MainActivity.this);
                 }
 
                 @Override

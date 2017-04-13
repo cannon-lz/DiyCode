@@ -228,6 +228,7 @@ public class RespMe implements Mapper<MeModel> {
         final MeModel meModel = new MeModel();
         meModel.setAvatarUrl(avatarUrl);
         meModel.setEmail(email);
+        meModel.setName(name);
         meModel.setLogin(login);
         meModel.setBio(bio);
         meModel.setCompany(company);

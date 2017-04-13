@@ -1,12 +1,15 @@
 package com.zly.diycode.home;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by zhangly on 2017/3/31.
  */
 
-public class MeModel {
+public class MeModel implements Parcelable {
 
     private int id;
     private String login;
@@ -28,6 +31,59 @@ public class MeModel {
     private int favoritesCount;
     private String level;
     private String levelName;
+
+    public MeModel() {
+    }
+
+    protected MeModel(Parcel in) {
+        id = in.readInt();
+        login = in.readString();
+        name = in.readString();
+        avatarUrl = in.readString();
+        createdAt = in.readString();
+        email = in.readString();
+        topicsCount = in.readInt();
+        repliesCount = in.readInt();
+        followingCount = in.readInt();
+        followersCount = in.readInt();
+        favoritesCount = in.readInt();
+        level = in.readString();
+        levelName = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(login);
+        dest.writeString(name);
+        dest.writeString(avatarUrl);
+        dest.writeString(createdAt);
+        dest.writeString(email);
+        dest.writeInt(topicsCount);
+        dest.writeInt(repliesCount);
+        dest.writeInt(followingCount);
+        dest.writeInt(followersCount);
+        dest.writeInt(favoritesCount);
+        dest.writeString(level);
+        dest.writeString(levelName);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<MeModel> CREATOR = new Creator<MeModel>() {
+        @Override
+        public MeModel createFromParcel(Parcel in) {
+            return new MeModel(in);
+        }
+
+        @Override
+        public MeModel[] newArray(int size) {
+            return new MeModel[size];
+        }
+    };
 
     public int getId() {
         return id;

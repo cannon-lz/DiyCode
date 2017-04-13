@@ -6,6 +6,9 @@
         <variable
             name="me"
             type="com.zly.diycode.home.MeModel" />
+        <variable
+            name="clickHandler"
+            type="com.zly.diycode.home.MainActivity"/>
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,7 +22,8 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:onClick="@{() -> clickHandler.openMeInfo(me)}">
 
         <ImageView
             android:id="@+id/imageView"

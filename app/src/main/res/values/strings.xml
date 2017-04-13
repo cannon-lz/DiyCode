@@ -36,4 +36,7 @@
     <string name="website">官网</string>
     <string name="github">github</string>
     <string name="download">下载</string>
+    <string name="me_menu_topics_count" formatted="false">帖子\n%s</string>
+    <string name="me_menu_favorite_count" formatted="false">收藏\n%s</string>
+    <string name="me_menu_follow_count" formatted="false">关注\n%s</string>
 </resources>

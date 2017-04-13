@@ -7,6 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.Spannable;
@@ -67,8 +69,24 @@ public class DataBindingAdapter {
     }
 
     @BindingAdapter({"imageUrl"})
-    public static void setImageUrl(ImageView imageView, String url) {
+    public static void setImageUrl(final ImageView imageView, String url) {
         Glide.with(imageView.getContext()).load(url).into(imageView);
+    }
+
+    @BindingAdapter({"imageUrl", "isCircular"})
+    public static void setImageUrl(final ImageView imageView, String url, final boolean isCircular) {
+        Glide.with(imageView.getContext()).load(url).asBitmap().into(new SimpleTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                if (isCircular) {
+                    RoundedBitmapDrawable roundedDrawable = RoundedBitmapDrawableFactory.create(imageView.getResources(), resource);
+                    roundedDrawable.setCircular(true);
+                    imageView.setImageDrawable(roundedDrawable);
+                } else {
+                    imageView.setImageBitmap(resource);
+                }
+            }
+        });
     }
 
     @BindingAdapter({"html"})
